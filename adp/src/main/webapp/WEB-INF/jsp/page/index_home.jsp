@@ -103,7 +103,7 @@
             var downDirs = "D:\\";
             $.ajaxFileUpload({
                 //处理文件上传操作的服务器端地址
-                url:G_CTX_PATH +"/wa/WaCompanyInfo/downFtpFile/"+val+"/"+downDirs,
+                url:G_CTX_PATH +"/wa/WaCompanyInfo/downLoadFile/"+val, //+"/"+downDirs,
                 secureuri: false, //是否需要安全协议，一般设置为false
                 fileElementId: 'uploadFile', //文件上传域的ID
                 dataType: 'json', //返回值类型 一般设置为json

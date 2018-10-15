@@ -4,6 +4,7 @@ import com.hongguaninfo.hgdf.core.utils.logging.Log;
 import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPClientConfig;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.*;
@@ -260,4 +261,39 @@ public class FtpUtil {
         return remoteDir;
     }
 
+    /**
+     * 下载文件
+     * 返回byte[]
+     * @param fileName 需要下载的文件名
+     * @return
+     * @throws Exception
+     */
+    public byte[] downFileByte(String fileName){
+        byte[] return_arraybyte=null;
+        if(ftpClient!=null){
+            try{
+                FTPFile[] files= ftpClient.listFiles();
+                for(FTPFile file:files){
+                    if(file.getName().equals(fileName)){
+                        InputStream ins=ftpClient.retrieveFileStream(file.getName());
+                        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+                        byte[] buf = new byte[204800];
+                        int bufsize = 0;
+                        while ((bufsize = ins.read(buf, 0, buf.length)) != -1) {
+                            byteOut.write(buf, 0, bufsize);
+                        }
+                        return_arraybyte = byteOut.toByteArray();
+                        byteOut.close();
+                        ins.close();
+                        break;
+                    }
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }finally{
+//                closeConnect();
+            }
+        }
+        return return_arraybyte;
+    }
 }

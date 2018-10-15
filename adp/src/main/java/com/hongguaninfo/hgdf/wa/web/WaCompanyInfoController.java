@@ -17,7 +17,6 @@ import com.hongguaninfo.hgdf.adp.core.templete.HttpTemplete;
 import com.hongguaninfo.hgdf.adp.core.templete.OperateTemplete;
 import com.hongguaninfo.hgdf.adp.core.utils.ResponseUtils;
 import com.hongguaninfo.hgdf.adp.service.sys.SysDatadicItemService;
-import com.hongguaninfo.hgdf.core.utils.FTPClientHelper;
 import com.hongguaninfo.hgdf.core.utils.FtpUtil;
 import com.hongguaninfo.hgdf.core.utils.Identities;
 import com.hongguaninfo.hgdf.core.utils.exception.BaseException;
@@ -544,30 +543,43 @@ public class WaCompanyInfoController {
     @RequestMapping("/downLoadFile/{fileName}")
     @UserLog(code = "downLoadFile", name = "downLoadFile", remarkClass = WaCompanyInfoController.class)
     public void downLoadFile(String remoteFile,String fileName,HttpServletRequest request,HttpServletResponse response) throws IOException {
-        // 以流的形式下载文件。
-        //Ftp_client test=new Ftp_client();
-        FTPClientHelper ftpClient=new FTPClientHelper(remoteFile);
-        //test.closeConnect();//关闭连接
-        byte[] buffer=null;
+        Map resultMap = new HashMap();
+        OutputStream os = null;
         try {
-            buffer = ftpClient.downFileByte(fileName);//根据文件名下载FTP服务器上的文件
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        // 清空response
-        response.reset();
-        response.setContentType("text/html;charset=UTF-8");
-        // 设置response的Header
-        //        response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes("UTF-8"),"ISO-8859-1"));
-        response.addHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes(),"ISO-8859-1"));
-        //response.addHeader("Content-Length", "" + fis.length());
-        OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
-        response.setContentType("application/octet-stream");
-        toClient.write(buffer);
-        toClient.flush();
-        toClient.close();
+            //读取配置文件参数
+            Properties pro = new Properties();
+            pro.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("env.properties"));
+            FtpUtil ftputil = new FtpUtil(
+                    pro.getProperty("ftp.hostname"),
+                    Integer.parseInt(pro.getProperty("ftp.port")),
+                    pro.getProperty("ftp.username"),
+                    pro.getProperty("ftp.password"), null);
+            //开始ftp操作
+            ftputil.login();
 
+            os = response.getOutputStream();
+            //弹框保存begin
+            response.setContentType("application/vnd.ms-excel; charset=utf-8");
+            response.setHeader("Content-Disposition","attachment;filename=" + new String((fileName).getBytes("utf-8"),"iso8859-1"));
+            response.setCharacterEncoding("utf-8");
+            //弹框保存end
+           /* String remoteDir = "" + fileName;
+            String itemStream = downDirs + "\\" + fileName;
+            File file = new File(fileName);
+*/
+            byte[] buffer = ftputil.downFileByte(fileName);//根据文件名下载FTP服务器上的文件
+            os.write(buffer);
+            os.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMap.put("result", "上传失败");
+        }finally {
+            if(os != null) {
+                os.close();
+            }
+
+        }
+        ResponseUtils.renderHtml(response, JSON.toJSONString(resultMap), "encoding:utf-8");
     }
 
 
