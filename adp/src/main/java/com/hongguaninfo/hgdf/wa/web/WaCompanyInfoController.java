@@ -542,7 +542,7 @@ public class WaCompanyInfoController {
 
     @RequestMapping("/downLoadFile/{fileName}")
     @UserLog(code = "downLoadFile", name = "downLoadFile", remarkClass = WaCompanyInfoController.class)
-    public void downLoadFile(String remoteFile,String fileName,HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public void downLoadFile(@PathVariable String fileName,HttpServletRequest request,HttpServletResponse response) throws IOException {
         Map resultMap = new HashMap();
         OutputStream os = null;
         try {

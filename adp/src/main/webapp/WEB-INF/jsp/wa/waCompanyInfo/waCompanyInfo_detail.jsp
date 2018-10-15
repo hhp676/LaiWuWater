@@ -101,7 +101,7 @@
                     <%--<option value="${isImportItem.value}" <c:if test="${waCompanyInfo.isImport==isImportItem.value}">selected</c:if>>${isImportItem.key}</option>--%>
                     <tr id="file${uploadFileListItem.fileid}">
                         <td> 附件：</td>
-                        <td> ${uploadFileListItem.fileName}</td>
+                        <td> <a href='#' onclick=downFile("${uploadFileListItem.fileName}")> ${uploadFileListItem.fileName} </a></td>
                         <td><a href="#" onclick=delFile("${uploadFileListItem.fileid}")>删除</a></td>
                     </tr>
                 </c:forEach>

@@ -95,11 +95,9 @@ $('input:not([autocomplete]),textarea:not([autocomplete]),select:not([autocomple
  * @param fileName
  */
 function downFile(fileName) {
-    var downDir = "F:\\";
-
     $.ajaxFileUpload({
         //处理文件上传操作的服务器端地址
-        url:G_CTX_PATH +"/wa/WaCompanyInfo/downFtpFile/"+fileName+"/"+downDir,
+        url:G_CTX_PATH +"/wa/WaCompanyInfo/downLoadFile/"+fileName,
         secureuri: false, //是否需要安全协议，一般设置为false
         fileElementId: 'uploadFile', //文件上传域的ID
         dataType: 'json', //返回值类型 一般设置为json
