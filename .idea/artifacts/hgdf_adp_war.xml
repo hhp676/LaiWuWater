@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="hgdf-adp:war">
+    <output-path>$PROJECT_DIR$/adp/target</output-path>
+    <root id="archive" name="hgdf-adp.war">
+      <element id="artifact" artifact-name="hgdf-adp:war exploded" />
+    </root>
+  </artifact>
+</component>

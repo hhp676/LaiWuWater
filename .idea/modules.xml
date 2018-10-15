@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/adp/hgdf-adp.iml" filepath="$PROJECT_DIR$/adp/hgdf-adp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/hgdf-core.iml" filepath="$PROJECT_DIR$/core/hgdf-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/utils/hgdf-core-utils.iml" filepath="$PROJECT_DIR$/core/utils/hgdf-core-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eai/hgdf-eai.iml" filepath="$PROJECT_DIR$/eai/hgdf-eai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/generator/hgdf-generator.iml" filepath="$PROJECT_DIR$/generator/hgdf-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/hgdf-parent.iml" filepath="$PROJECT_DIR$/parent/hgdf-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hgdf-project.iml" filepath="$PROJECT_DIR$/hgdf-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tss/hgdf-tss.iml" filepath="$PROJECT_DIR$/tss/hgdf-tss.iml" />
+    </modules>
+  </component>
+</project>
