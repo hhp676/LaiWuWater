@@ -11,6 +11,7 @@
         <module name="hgdf-eai" />
         <module name="hgdf-generator" />
         <module name="hgdf-tss" />
+        <module name="hgdf-wadp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +23,7 @@
       <module name="hgdf-parent" target="1.8" />
       <module name="hgdf-project" target="1.8" />
       <module name="hgdf-tss" target="1.7" />
+      <module name="hgdf-wadp" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

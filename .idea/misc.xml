@@ -4,11 +4,19 @@
     <file type="web" url="file://$PROJECT_DIR$/adp" />
     <file type="web" url="file://$PROJECT_DIR$/eai" />
     <file type="web" url="file://$PROJECT_DIR$/generator" />
+    <file type="web" url="file://$PROJECT_DIR$/wadp" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/wadp/pom.xml" />
+        <option value="$PROJECT_DIR$/tss/pom.xml" />
+        <option value="$PROJECT_DIR$/parent/pom.xml" />
+        <option value="$PROJECT_DIR$/generator/pom.xml" />
+        <option value="$PROJECT_DIR$/eai/pom.xml" />
+        <option value="$PROJECT_DIR$/core/pom.xml" />
+        <option value="$PROJECT_DIR$/adp/pom.xml" />
       </list>
     </option>
   </component>

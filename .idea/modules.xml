@@ -8,8 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/eai/hgdf-eai.iml" filepath="$PROJECT_DIR$/eai/hgdf-eai.iml" />
       <module fileurl="file://$PROJECT_DIR$/generator/hgdf-generator.iml" filepath="$PROJECT_DIR$/generator/hgdf-generator.iml" />
       <module fileurl="file://$PROJECT_DIR$/parent/hgdf-parent.iml" filepath="$PROJECT_DIR$/parent/hgdf-parent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hgdf-project.iml" filepath="$PROJECT_DIR$/hgdf-project.iml" />
       <module fileurl="file://$PROJECT_DIR$/tss/hgdf-tss.iml" filepath="$PROJECT_DIR$/tss/hgdf-tss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wadp/hgdf-wadp.iml" filepath="$PROJECT_DIR$/wadp/hgdf-wadp.iml" />
     </modules>
   </component>
 </project>
