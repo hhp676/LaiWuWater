@@ -543,8 +543,8 @@ public class WaCompanyInfoController {
     @RequestMapping("/downLoadFile/{fileName}")
     @UserLog(code = "downLoadFile", name = "downLoadFile", remarkClass = WaCompanyInfoController.class)
     public void downLoadFile(@PathVariable String fileName,HttpServletRequest request,HttpServletResponse response) throws IOException {
-        Map resultMap = new HashMap();
         OutputStream os = null;
+        Map resultMap = new HashMap();
         try {
             //读取配置文件参数
             Properties pro = new Properties();
