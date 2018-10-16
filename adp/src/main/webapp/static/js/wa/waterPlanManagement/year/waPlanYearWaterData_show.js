@@ -4,7 +4,9 @@ var waPlanYearWaterDataGrid =  {
 //----需要悬浮提示的单元格
 waPlanYearWaterDataGrid.tipCells = ["descr"];
 
+
 waPlanYearWaterDataGrid.initPlanYearWaterData = function(){
+
     Hg.fixTableHeight("waPlanYearWaterData_datagrid",true);
     //----------------------------------查询-----------------------------------------------------
     $("#waPlanYearWaterData_toolbar [tag='search']").click(function(){
@@ -135,6 +137,8 @@ waPlanYearWaterDataGrid.initPlanYearWaterData = function(){
         var waYearWaterDataWin = new HgWin({id:"waYearWaterDataWin",title:"批量导入",width:500,height:180,iconCls:iconCls,url:url});
 
     });
+
+    // $("#waPlanYearWaterData_datagrid").datagrid("collapseGroup", "false");
 }
 
 waPlanYearWaterDataGrid.initPlanYearWaterData();

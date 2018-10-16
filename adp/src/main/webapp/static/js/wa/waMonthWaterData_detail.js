@@ -59,7 +59,7 @@ waMonthWaterDatagrid.initwaMonthWaterData = function(monthWaterId) {
             } else {
                 $.messager.ok("保存数据成功!",function(){
                     $("#waMonthWaterData_layout").parent().window("close");
-                    $('#waMonthWaterData_datagrid').datagrid("reload");
+                    $('#waMonthWaterData_datagrid_overPlan').datagrid("reload");
                 });
             }
         });

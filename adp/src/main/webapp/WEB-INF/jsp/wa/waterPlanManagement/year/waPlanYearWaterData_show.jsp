@@ -15,9 +15,13 @@
 				singleSelect:true,
 				collapsible:true,
 				view:groupview,
+				remoteSort:false,
 				groupField:'companyName',
 				groupFormatter:function(value,rows){
 					return '<b>'+value + '</b>';  <%--' - ' + rows.length + ' 条--%>
+				},
+				onLoadSuccess:function(data){   <%--默认折叠--%>
+    				$('#waPlanYearWaterData_datagrid').datagrid('collapseGroup');
 				}
 			"
 			pagination="true"

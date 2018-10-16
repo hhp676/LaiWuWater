@@ -131,7 +131,7 @@
         </if>
         <if test="orderStr == null or orderStr.length() == 0">
             ORDER BY
-                wpywd.PLAN_YEAR_ desc
+                wpywd.COMPANY_ID_ desc
         </if>
     </select>
 

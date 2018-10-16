@@ -172,9 +172,9 @@ public class WaMonthWaterDataService {
 	 * @return
 	 */
 	public WaMonthWaterData getEntityByFee(WaMonthWaterData waMonthWaterData){
-		int planWaterAmount = Integer.valueOf(StringUtil.isEmpty(waMonthWaterData.getPlanMonthWater())? "0": waMonthWaterData.getPlanMonthWater());
-		int actWaterAmount = Integer.valueOf(StringUtil.isEmpty(waMonthWaterData.getActMonthWater())? "0": waMonthWaterData.getActMonthWater());
-		int beyondAmount = actWaterAmount - planWaterAmount;
+		float planWaterAmount = Integer.valueOf(StringUtil.isEmpty(waMonthWaterData.getPlanMonthWater())? "0": waMonthWaterData.getPlanMonthWater());
+		float actWaterAmount = Integer.valueOf(StringUtil.isEmpty(waMonthWaterData.getActMonthWater())? "0": waMonthWaterData.getActMonthWater());
+		float beyondAmount = actWaterAmount - planWaterAmount;
 		String beyondResult = beyondAmount<0? "0" : String.valueOf(beyondAmount);
 		waMonthWaterData.setBeyondAmount(beyondResult);
 		if (beyondAmount > 0){  //计划<实际则超标
@@ -184,10 +184,10 @@ public class WaMonthWaterDataService {
 		return waMonthWaterData;
 	}
 
-	public String getBeyondFee(int actWaterAmount, int planWaterAmount){
+	public String getBeyondFee(float actWaterAmount, float planWaterAmount){
 		DecimalFormat df=new DecimalFormat("0.00");
 		String result = "";
-		int beyondAmount = actWaterAmount - planWaterAmount;
+		float beyondAmount = actWaterAmount - planWaterAmount;
 		float beyondRate = (float) beyondAmount/planWaterAmount;
 		if (actWaterAmount == 0 || StringUtil.isNull(actWaterAmount)){  //实际用水未生成情况下
 			return "";
@@ -231,9 +231,9 @@ public class WaMonthWaterDataService {
 
  		waMonthWaterData.setUpdTime(new Date());
 		waMonthWaterData.setIsOverroof("0");
-		int planWaterAmount = Integer.valueOf(StringUtil.isEmpty(waMonthWaterData.getPlanMonthWater())? "0": waMonthWaterData.getPlanMonthWater());
-		int actWaterAmount = Integer.valueOf(StringUtil.isEmpty(waMonthWaterData.getActMonthWater())? "0": waMonthWaterData.getActMonthWater());
-		int beyondAmount = actWaterAmount - planWaterAmount;
+		float planWaterAmount = Float.parseFloat(StringUtil.isEmpty(waMonthWaterData.getPlanMonthWater())? "0": waMonthWaterData.getPlanMonthWater());
+		float actWaterAmount = Float.parseFloat(StringUtil.isEmpty(waMonthWaterData.getActMonthWater())? "0": waMonthWaterData.getActMonthWater());
+		float beyondAmount = actWaterAmount - planWaterAmount;
 		String beyondResult = beyondAmount<0 ? "0" : String.valueOf(beyondAmount);
 		waMonthWaterData.setBeyondAmount(beyondResult);
 		if (beyondAmount > 0){  //计划<实际则超标
@@ -336,10 +336,10 @@ public class WaMonthWaterDataService {
 		}
 	}
 
-	public WaMonthWaterData getTagFile(MultipartFile file){
+	public List<WaMonthWaterData> getTagFile(MultipartFile file){
 		try {
-			WaMonthWaterData resultEntity = getXlsContnet(file.getInputStream());
-			return resultEntity;
+			List<WaMonthWaterData> resultEntityList = getXlsContnetList(file.getInputStream());
+			return resultEntityList;
 		}catch (Exception e){
 			LOG.error("获取数据出错", e);
 		}
@@ -352,12 +352,14 @@ public class WaMonthWaterDataService {
 	 * @return
 	 * @throws Exception
 	 */
-	public WaMonthWaterData getXlsContnet(InputStream is) throws Exception{
+	public List<WaMonthWaterData> getXlsContnetList(InputStream is) throws Exception{
 		try {
 			HSSFWorkbook workBook = new HSSFWorkbook(is);
 			HSSFSheet sheet = workBook.getSheetAt(0);
-			WaMonthWaterData waMonthWaterEntity = new WaMonthWaterData();
+
+			List<WaMonthWaterData> waMonthWaterDataList = new ArrayList<>();
 			for (int rowNum = 1;rowNum <= sheet.getLastRowNum();rowNum++) {
+				WaMonthWaterData waMonthWaterEntity = new WaMonthWaterData();
 				HSSFRow row = sheet.getRow(rowNum);
 				if (row != null) {
 					if(StringUtil.isEmpty(ExcelUtil.getCellValue(row.getCell(0)))){
@@ -369,11 +371,12 @@ public class WaMonthWaterDataService {
 					//根据code获取id后存入mysql
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setMonthDate(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setPlanMonthWater(ExcelUtil.getCellValue(row.getCell(3)));
+					waMonthWaterEntity.setPlanMonthWater((row.getCell(3).toString()));
 					waMonthWaterEntity.setIsDelte(0);
+					waMonthWaterDataList.add(waMonthWaterEntity);
 				}
 			}
-			return waMonthWaterEntity;
+			return waMonthWaterDataList;
 		}catch (Exception e){
 			return null;
 		}

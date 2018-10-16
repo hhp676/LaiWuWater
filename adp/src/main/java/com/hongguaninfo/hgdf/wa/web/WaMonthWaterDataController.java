@@ -544,19 +544,22 @@ public class WaMonthWaterDataController {
                     continue;
                 }
 
-                WaMonthWaterData resEntity = waMonthWaterDataService.getTagFile(file);
-                if (null != resEntity){ //获取到的非空对象
-                    WaMonthWaterData checkData = waMonthWaterDataService.getWaMonthWaterDataById(resEntity);
-                    if(null != checkData){ //判断数据库是否存在此对象
-                        resEntity.setMonthWaterId(checkData.getMonthWaterId());
-                        resEntity.setActMonthWater(checkData.getActMonthWater());
-                        //存在情况下更新
-                        waMonthWaterDataService.updateWaMonthWaterData(resEntity, "");
-                    }else {
-                        //不存在情况下新增
-                        waMonthWaterDataService.addWaMonthWaterData(resEntity, "");
+                List<WaMonthWaterData> resEntityList = waMonthWaterDataService.getTagFile(file);
+                for (WaMonthWaterData resEntity : resEntityList){
+                    if (null != resEntity){ //获取到的非空对象
+                        WaMonthWaterData checkData = waMonthWaterDataService.getWaMonthWaterDataById(resEntity);
+                        if(null != checkData){ //判断数据库是否存在此对象
+                            resEntity.setMonthWaterId(checkData.getMonthWaterId());
+                            resEntity.setActMonthWater(checkData.getActMonthWater());
+                            //存在情况下更新
+                            waMonthWaterDataService.updateWaMonthWaterData(resEntity, "");
+                        }else {
+                            //不存在情况下新增
+                            waMonthWaterDataService.addWaMonthWaterData(resEntity, "");
+                        }
                     }
                 }
+
             }
 
             if (errList.size()>0){

@@ -223,11 +223,11 @@ public class WaPlanYearWaterDataController {
                 List<WaPlanYearWaterData> yearList = new ArrayList<>();
                 yearList = waPlanYearWaterDataService.getYearWaterList(waPlanYearWaterDataService.getPlanWaterList(yearWater));
 
-                Long avgData = 0L;
+                float avgData = 0L;
                 if(yearList.size()>0){
-                    Long sumData = 0L;
+                    float sumData = 0L;
                     for (WaPlanYearWaterData wa: yearList){
-                        sumData += Long.parseLong(wa.getPlanYearAvgWater());
+                        sumData += Float.parseFloat(wa.getPlanYearAvgWater());
                     }
                     avgData = sumData/yearList.size();
                 }

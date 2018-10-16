@@ -194,7 +194,7 @@ public class WaPlanYearWaterDataService {
 					//根据code获取id后存入mysql
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setPlanYear(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setPlanYearAvgWater(ExcelUtil.getCellValue(row.getCell(3)));
+					waMonthWaterEntity.setPlanYearAvgWater((row.getCell(3).toString()));
 					planWaterList.add(waMonthWaterEntity);
 				}
 			}

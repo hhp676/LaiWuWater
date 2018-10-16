@@ -37,7 +37,7 @@
 							<td width="60px" align="right"><span>单位名称:</span></td>
 							<td width="50px;"><input style="width: 120px" name="month_companyNameMonth_plan"></td>
 							<td width="60px" align="right"><span>年份:</span></td>
-							<td width="50px;"><input style="width: 50px;" name="month_waYear"_plan id="month_waYear_plan"></td>
+							<td width="50px;"><input style="width: 50px;" name="month_waYear_plan" id="month_waYear_plan"></td>
 							<td width="30px" align="right"><span>月份:</span></td>
 							<td width="40px;"><input style="width: 50px;"  name="month_waMonth_plan"></td>
 							<td width="80px" align="right"><span>重点用户:</span></td>
