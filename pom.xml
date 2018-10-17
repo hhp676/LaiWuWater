@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.hongguaninfo.hgdf</groupId>
+	<artifactId>hgdf-project</artifactId>
+	<version>2.0.1.rc1</version>
+	<name>HGDF</name>
+	<packaging>pom</packaging>
+
+	<description>HGDF is a Framework based JavaEE application reference architecture. </description>
+	<url>http://hgdf.hongguaninfo.com/</url>
+	<inceptionYear>2013-2018</inceptionYear>
+	<organization>
+		<name>Shanghai Hongguan Information Technology Co., Ltd.</name>
+		<url>http://www.hongguaninfo.com</url>
+	</organization>
+
+	<scm>
+		<connection>scm:svn:https://192.168.2.5:8443/svn/HGDF/develop/sourcecode/develop/trunk/</connection>
+		<developerConnection>scm:svn:https://192.168.2.5:8443/svn/HGDF/develop/sourcecode/develop/trunk/</developerConnection>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>henry</id>
+			<name>Henry Sui</name>
+			<email>suiguangshuai@hongguaninfo.com</email>
+			<organization>cc</organization>
+			<roles>
+				<role>Project leader</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+		<developer>
+			<id>yuyanlin</id>
+			<name>Yuyanlin</name>
+			<email>yuyanlin@hongguaninfo.com</email>
+			<organization>cc</organization>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+		<developer>
+			<id>zhajian</id>
+			<name>zhajian</name>
+			<email>zhajian@hongguaninfo.com</email>
+			<organization>cc</organization>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+		<developer>
+			<id>yinyafei</id>
+			<name>yinyafei</name>
+			<email>yinyafei@hongguaninfo.com</email>
+			<organization>mss</organization>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+
+	<modules>
+		<!-- 核心包 -->
+		<module>parent</module>
+		<module>core</module>
+		<module>adp</module>
+		<module>generator</module>
+		<module>eai</module>  <module>tss</module>
+		<!-- <module>wadp</module>
+			<module>rs</module> <module>bmp</module> <module>soa</module> <module>dts</module> 
+			<module>maf</module> -->
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<tagBase>https://192.168.2.5:8443/svn/HGDF/develop/sourcecode/develop/tags/</tagBase>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
