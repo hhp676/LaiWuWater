@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="hgdf-wadp:war">
-    <output-path>$PROJECT_DIR$/wadp/target</output-path>
-    <root id="archive" name="hgdf-wadp.war">
-      <element id="artifact" artifact-name="hgdf-wadp:war exploded" />
-    </root>
-  </artifact>
-</component>

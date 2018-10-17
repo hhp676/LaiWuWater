@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="hgdf-eai:war">
-    <output-path>$PROJECT_DIR$/eai/target</output-path>
-    <root id="archive" name="hgdf-eai.war">
-      <element id="artifact" artifact-name="hgdf-eai:war exploded" />
-    </root>
-  </artifact>
-</component>
