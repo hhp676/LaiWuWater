@@ -14,7 +14,7 @@
 	    </div>
 		<div data-options="region:'center'">
 	      	<div id="tab" class="easyui-tabs" data-options="fit:true,border:false,plain:true,tools:'#tab-tools'">
-				<div title="首页" id="homeTab" data-options="href:'${ctx}/indexHome',tools:'#p-tools',iconCls:'acc_icon_world',tabWidth:80" style="padding:5px"></div>
+				<div title="首页" id="homeTab" data-options="href:'${ctx}/main/indexHome',tools:'#p-tools',iconCls:'acc_icon_world',tabWidth:80" style="padding:5px"></div>
 			</div>
 
 		</div>

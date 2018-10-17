@@ -47,6 +47,8 @@
 		<property name="unauthorizedUrl" value="/login" />
 		<property name="filterChainDefinitions">
 			<value>
+				/main/** = user
+				/main/** = authc
 				/login = authc
 				/logout = logout
 				/sys/** = user

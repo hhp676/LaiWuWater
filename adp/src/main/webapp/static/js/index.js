@@ -93,7 +93,7 @@ function showUserCenterWin() {
 		width : 850,
 		height : 550,
 		iconCls : "m-icon-personal",
-		url : "/personalCenter"
+		url : "/main/personalCenter"
 	});
 }
 
@@ -153,7 +153,7 @@ function G_chkPassword(shouldChangePassword){
 			width : 550,
 			height : 300,
 			iconCls : "m-icon-personal",
-			url : "/showChangePersonalPwd"
+			url : "/main/showChangePersonalPwd"
 		});
 		$("#showChangePersonalPwdWin").prev(".panel-header").find(".panel-tool-close").hide();
 		

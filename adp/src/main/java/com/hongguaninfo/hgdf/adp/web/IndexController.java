@@ -170,7 +170,7 @@ public class IndexController extends BaseController {
      * @Description: 首页内嵌页
      * @since 1.0.0
      */
-    @RequestMapping(value = "indexCenter")
+    @RequestMapping(value = "main/indexCenter")
     public String indexCenter(HttpServletRequest request, HttpServletResponse response, Model model) {
         return "page/index_center";
     }
@@ -180,7 +180,7 @@ public class IndexController extends BaseController {
      * @Description: 首页内嵌页
      * @since 1.0.0
      */
-    @RequestMapping(value = "indexMap")
+    @RequestMapping(value = "main/indexMap")
     public String indexMap(HttpServletRequest request, HttpServletResponse response, Model model) {
         return "map";
     }
@@ -190,7 +190,7 @@ public class IndexController extends BaseController {
      * @Description: 首页内嵌home页
      * @since 1.0.0
      */
-    @RequestMapping(value = "indexHome")
+    @RequestMapping(value = "main/indexHome")
     public String indexHome(HttpServletRequest request, HttpServletResponse response, Model model) {
         return "page/index_home";  //"page/index_home"
     }
@@ -199,7 +199,7 @@ public class IndexController extends BaseController {
      * @Title:
      * @Description: 加载单位信息管理
      */
-    @RequestMapping(value = "indexCompanyCenter")
+    @RequestMapping(value = "main/indexCompanyCenter")
     public String indexCompanyCenter(HttpServletRequest request, HttpServletResponse response, Model model) {
         model = getCommonModel(model);
         return "wa/home/index_company_center";
@@ -209,7 +209,7 @@ public class IndexController extends BaseController {
      * @Title:
      * @Description: 加载单位信息管理
      */
-    @RequestMapping(value = "indexCompanyHome")
+    @RequestMapping(value = "main/indexCompanyHome")
     public String indexCompanyHome(HttpServletRequest request, HttpServletResponse response, Model model) {
         return "wa/home/index_company_home";
     }
@@ -218,7 +218,7 @@ public class IndexController extends BaseController {
      * @Title:
      * @Description: 加载计划用水管理
      */
-    @RequestMapping(value = "indexPlanWaterCenter")
+    @RequestMapping(value = "main/indexPlanWaterCenter")
     public String indexPlanWaterCenter(HttpServletRequest request, HttpServletResponse response, Model model) {
         model = getCommonModel(model);
         return "wa/home/index_planWater_center";
@@ -228,7 +228,7 @@ public class IndexController extends BaseController {
      * @Title:
      * @Description: 加载计划用水管理
      */
-    @RequestMapping(value = "indexPlanWaterHome")
+    @RequestMapping(value = "main/indexPlanWaterHome")
     public String indexPlanWaterHome(HttpServletRequest request, HttpServletResponse response, Model model) {
         return "wa/home/index_planWater_home";
     }
@@ -237,7 +237,7 @@ public class IndexController extends BaseController {
      * @Title:
      * @Description: 加载用水数据管理
      */
-    @RequestMapping(value = "indexDataManagementCenter")
+    @RequestMapping(value = "main/indexDataManagementCenter")
     public String indexDataManagementCenter(HttpServletRequest request, HttpServletResponse response, Model model) {
         model = getCommonModel(model);
         return "wa/home/index_dataManagement_center";
@@ -247,7 +247,7 @@ public class IndexController extends BaseController {
      * @Title:
      * @Description: 加载用水数据管理
      */
-    @RequestMapping(value = "indexDataManagementHome")
+    @RequestMapping(value = "main/indexDataManagementHome")
     public String indexDataManagementHome(HttpServletRequest request, HttpServletResponse response, Model model) {
         return "wa/home/index_dataManagement_home";
     }
@@ -290,7 +290,7 @@ public class IndexController extends BaseController {
      * @Description: 首页内嵌Keyboard页
      * @since 1.0.0
      */
-    @RequestMapping(value = "indexKeyboard")
+    @RequestMapping(value = "main/indexKeyboard")
     public String indexKeyboard(HttpServletRequest request, HttpServletResponse response, Model model) {
         return "page/index_keyboard";
     }
@@ -301,7 +301,7 @@ public class IndexController extends BaseController {
      * @Description: 个人中心页
      * @since 1.0.0
      */
-    @RequestMapping(value = "personalCenter")
+    @RequestMapping(value = "main/personalCenter")
     public String personalCenter(HttpServletRequest request, HttpServletResponse response, Model model)
             throws BizException {
         model.addAttribute("user", sysUserService.getLoginUser());
@@ -492,7 +492,7 @@ public class IndexController extends BaseController {
      * @return
      * @throws BizException
      */
-    @RequestMapping(value = "/showChangePersonalPwd")
+    @RequestMapping(value = "/main/showChangePersonalPwd")
     public String showChangePersonalPwd(HttpServletRequest request, HttpServletResponse response,final Model model) throws BizException {
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BaseException {

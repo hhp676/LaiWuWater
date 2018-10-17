@@ -177,7 +177,7 @@
 	</div>
 
 	<div id="center"   style="overflow:hidden;margin:0px;padding:0px;"
-		data-options="region:'center',href:'${ctx}/indexCenter',border:false">
+		data-options="region:'center',href:'${ctx}/main/indexCenter',border:false">
 	</div>
 	<div region="south" split="false" id="indexSouth"> 
 		<div class="footer">  </div>

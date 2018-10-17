@@ -14,7 +14,7 @@
 	    </div>
 		<div data-options="region:'center'">
 	      <div id="tab" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
-				<div title="首页"  data-options="href:'${ctx}/indexHome'" style="padding:5px"></div>
+				<div title="首页"  data-options="href:'${ctx}/main/indexHome'" style="padding:5px"></div>
 			</div>
 	    </div>
 	</div>

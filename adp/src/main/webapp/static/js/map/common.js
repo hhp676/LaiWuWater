@@ -31,15 +31,15 @@ $(document).ready(function(){
     })
 
     $("#info_bt").click(function(){
-        window.location = G_CTX_PATH + "/indexCompanyCenter";
+        window.location = G_CTX_PATH + "/main/indexCompanyCenter";
     })
 
     $("#ysjh_bt").click(function(){
-        window.location = G_CTX_PATH + "/indexPlanWaterCenter";
+        window.location = G_CTX_PATH + "/main/indexPlanWaterCenter";
     })
 
     $("#ysgl_bt").click(function(){
-        window.location = G_CTX_PATH + "/indexDataManagementCenter";
+        window.location = G_CTX_PATH + "/main/indexDataManagementCenter";
     })
 
 });
