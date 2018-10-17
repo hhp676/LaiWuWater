@@ -10,13 +10,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/wadp/pom.xml" />
-        <option value="$PROJECT_DIR$/tss/pom.xml" />
-        <option value="$PROJECT_DIR$/parent/pom.xml" />
-        <option value="$PROJECT_DIR$/generator/pom.xml" />
-        <option value="$PROJECT_DIR$/eai/pom.xml" />
         <option value="$PROJECT_DIR$/core/pom.xml" />
-        <option value="$PROJECT_DIR$/adp/pom.xml" />
       </list>
     </option>
   </component>

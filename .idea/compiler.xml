@@ -6,12 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="hgdf-adp" />
         <module name="hgdf-core-utils" />
-        <module name="hgdf-eai" />
-        <module name="hgdf-generator" />
-        <module name="hgdf-tss" />
-        <module name="hgdf-wadp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

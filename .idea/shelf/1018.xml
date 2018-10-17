@@ -1,0 +1,14 @@
+<changelist name="1018" date="1539763626986" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/1018/shelved.patch" />
+  <option name="DESCRIPTION" value="搁置争议1018" />
+  <binary>
+    <option name="BEFORE_PATH" value="core/utils/target/classes/com/hongguaninfo/hgdf/core/utils/FtpUtil.class" />
+    <option name="AFTER_PATH" value="core/utils/target/classes/com/hongguaninfo/hgdf/core/utils/FtpUtil.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/1018/FtpUtil.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="adp/src/main/webapp/WEB-INF/classes/com/hongguaninfo/hgdf/adp/web/IndexController.class" />
+    <option name="AFTER_PATH" value="adp/src/main/webapp/WEB-INF/classes/com/hongguaninfo/hgdf/adp/web/IndexController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/1018/IndexController.class" />
+  </binary>
+</changelist>
