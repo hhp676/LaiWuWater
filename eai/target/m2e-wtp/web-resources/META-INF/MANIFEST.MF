@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Project-name: HGDF :: EAI
+svn-status: 
+Build-os-name: Windows 10
+Built-By: hhp
+Specification-Title: HGDF :: EAI
+Implementation-Vendor-Id: com.hongguaninfo.hgdf
+Build-java-home: C:\Program Files\Java\jdk1.8.0_101\jre
+svn-committedRevision: 
+Mode: development
+DisableIBMJAXWSEngine: true
+svn-committedDate: 
+svn-specialStatus: 
+Implementation-Title: HGDF :: EAI
+Build-basedir: C:\Users\HHP\workspace\hgdf\eai
+Implementation-Version: 2.0.1.rc1
+Build-Timestamp: 2018-09-10T00:46:16Z
+Build-directory: C:\Users\HHP\workspace\hgdf\eai\target
+Project-Version: 2.0.1.rc1
+Build-os-arch: amd64
+Build-M2_HOME: 
+svn-mixedRevisions: 
+Url: 
+SCM-Revision: 
+svn-repository: 
+Build-os-version: 10.0
+Build-Jdk: 1.8.0_101
+Specification-Version: 2.0.1.rc1
+Created-By: Maven Integration for Eclipse
+Build-localRepository: D:\Program Files\maven_repository
+svn-Revision: 
+
