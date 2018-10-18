@@ -89,22 +89,22 @@ waMonthWaterDatagrid.initwaMonthWaterData = function(){
 
 	//-------------------------------------------删除---------------------------------------------------
 	$("#waMonthWaterData_toolbar_overPlan [tag='del']").click(function(){
-		var row = $("#waMonthWaterData_datagrid_overPlan").datagrid("getSelected");
-		if (!row) {
+		var rows = $("#waMonthWaterData_datagrid_overPlan").datagrid("getSelections");
+		if (rows.length<1) {
 			$.messager.alert("提示","请选择一条数据","warning");
 			return;
 		}
-		if (row.isFinal == 1) {
-			$.messager.alert("提示","此条数据不可被修改","warning");
-			return;
-		}
+        var monthWaterIds = new Array();
+        for(var i=0; i<rows.length; i++){
+            monthWaterIds[i] = rows[i].monthWaterId;
+        }
+debugger
 		$.messager.confirm("删除确认", "确认删除此条数据?", function(r){
 			if (r){
-				var monthWaterId = row.monthWaterId;
-				Hg.getJson("/wa/WaMonthWaterData/delete",{monthWaterId: monthWaterId},function(data){
+				Hg.getJson("/wa/WaMonthWaterData/delete",{monthWaterIds:  JSON.stringify(monthWaterIds)},function(data){
 					if (data.success) {
 						$.messager.ok("删除成功!",function(){
-							$('#waMonthWaterData_datagrid').datagrid("reload");
+							$('#waMonthWaterData_datagrid_overPlan').datagrid("reload");
 						});							
 					} else {
 						$.messager.alert("删除失败!",data.data);

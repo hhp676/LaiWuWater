@@ -9,6 +9,8 @@
 package com.hongguaninfo.hgdf.wa.web;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.hongguaninfo.hgdf.adp.core.aop.log.UserLog;
 import com.hongguaninfo.hgdf.adp.core.base.BasePage;
 import com.hongguaninfo.hgdf.adp.core.exception.BizException;
@@ -316,11 +318,15 @@ public class WaMonthWaterDataController {
     @RequestMapping("/delete")
     @ResponseBody
     @UserLog(code = "deleteWaMonthWaterData", name = "删除用水信息", remarkClass = WaMonthWaterDataController.class)
-    public Map deleteWaMonthWaterData (final Integer monthWaterId, HttpServletResponse response,
+    public Map deleteWaMonthWaterData (final String monthWaterIds, HttpServletResponse response,
             final HttpServletRequest request) {
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BizException {
-            	waMonthWaterDataService.deleteWaMonthWaterDataLogic(monthWaterId, "");
+                JSONArray waterIdArray = JSONObject.parseArray(monthWaterIds);
+                for (Object monthWaterId: waterIdArray){
+                    waMonthWaterDataService.deleteWaMonthWaterDataLogic(Integer.parseInt(monthWaterId.toString()), "");
+                }
+
             }
         };
         return templete.operate();
@@ -334,11 +340,15 @@ public class WaMonthWaterDataController {
     @RequestMapping("/planDelete")
     @ResponseBody
     @UserLog(code = "deleteWaMonthWaterPlanData", name = "删除月计划用水信息", remarkClass = WaMonthWaterDataController.class)
-    public Map deleteWaMonthWaterPlanData (final Integer monthWaterId, HttpServletResponse response,
+    public Map deleteWaMonthWaterPlanData (final String monthWaterIds, HttpServletResponse response,
                                        final HttpServletRequest request) {
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BizException {
-                waMonthWaterDataService.deleteWaMonthWaterDataLogic(monthWaterId, "plan");
+                JSONArray waterIdArray = JSONObject.parseArray(monthWaterIds);
+                for (Object monthWaterId: waterIdArray){
+                    waMonthWaterDataService.deleteWaMonthWaterDataLogic(Integer.parseInt(monthWaterId.toString()), "plan");
+                }
+
             }
         };
         return templete.operate();
@@ -352,11 +362,15 @@ public class WaMonthWaterDataController {
     @RequestMapping("/actDelete")
     @ResponseBody
     @UserLog(code = "deleteWaMonthWaterActData", name = "删除月实际用水信息", remarkClass = WaMonthWaterDataController.class)
-    public Map deleteWaMonthWaterActData (final Integer monthWaterId, HttpServletResponse response,
+    public Map deleteWaMonthWaterActData (final String monthWaterIds, HttpServletResponse response,
                                        final HttpServletRequest request) {
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BizException {
-                waMonthWaterDataService.deleteWaMonthWaterDataLogic(monthWaterId, "act");
+                JSONArray waterIdArray = JSONObject.parseArray(monthWaterIds);
+                for (Object monthWaterId: waterIdArray){
+                    waMonthWaterDataService.deleteWaMonthWaterDataLogic(Integer.parseInt(monthWaterId.toString()), "act");
+                }
+
             }
         };
         return templete.operate();

@@ -107,7 +107,7 @@ public class IndexController extends BaseController {
      * @Description: 首页跳转
      * @since 1.0.0
      */
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/main/index")
     public String oldhome(HttpServletRequest request, HttpServletResponse response, Model model) throws BizException {
         model.addAttribute("loginUserId", SessionUtils.getUserId());
         RSAPublicKey publicKey = RSAUtil.getDefaultPublicKey();

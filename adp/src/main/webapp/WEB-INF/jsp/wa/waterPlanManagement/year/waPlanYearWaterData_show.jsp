@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div title="列表">
-		<table  id="waPlanYearWaterData_datagrid" singleSelect=true  fitColumns=true  toolbar='#waPlanYearWaterData_toolbar'
+		<table  id="waPlanYearWaterData_datagrid" singleSelect=false  fitColumns=true  toolbar='#waPlanYearWaterData_toolbar'
 			class="easyui-datagrid" data-options="
 				url: '${ctx}/wa/WaPlanYearWaterData/list',
 				singleSelect:true,
@@ -29,8 +29,7 @@
 			pageList="${defaultPageList}">
 			<thead>
 			<tr>
-			   <%-- <th style="display: none" data-options="field:'companyCode',width:0" editor="{type:'textbox'}"></th>--%>
-				<%--<th style="display: none" data-options="field:'companyName',width:0" editor="{type:'textbox'}"></th>--%>
+				<th data-options="field:'ck',checkbox:true"></th>
 				<th data-options="field:'planYear',width:150" editor="{type:'textbox'}"><b>计划的年份时间</b></th>
 				<th data-options="field:'planYearAvgWater',width:150" editor="{type:'textbox'}"><b>计划的年份用水量</b></th>
 				<%--<th data-options="field:'planYearEditWater',width:150" editor="{type:'textbox'}"><b>单位上报用水量</b></th>

@@ -7,13 +7,14 @@
 </head>
 <body>
 	<div >
- 		<table id="waMonthWaterData_datagrid_overPlan" singleSelect=true  fitColumns=true  toolbar='#waMonthWaterData_toolbar_overPlan'
+ 		<table id="waMonthWaterData_datagrid_overPlan" singleSelect=false  fitColumns=true  toolbar='#waMonthWaterData_toolbar_overPlan'
  		    class="easyui-datagrid" data-options="url:'${ctx}/wa/WaMonthWaterData/list'"
 			pagination="true" 
 			pageSize="${defaultPageSize}" 
 			pageList="${defaultPageList}">
        	 	<thead>
             <tr>
+				<th data-options="field:'ck',checkbox:true"></th>
 				<th data-options="field:'monthWaterId',width:0, hidden:true" editor="{type:'hidden', options:{required:true,missingMessage:'此输入项为必填项'}}"><b></b></th>
 				<th data-options="field:'companyCode',width:80, formatter: function(value,row,index){return row.waCompanyInfo.companyCode;}" editor="{type:'textbox'}"><b>节水代码</b></th>
 				<th data-options="field:'companyName',width:150, formatter: function(value,row,index){return row.waCompanyInfo.companyName;}" editor="{type:'textbox'}"><b>单位名称</b></th>

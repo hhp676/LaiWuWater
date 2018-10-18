@@ -71,19 +71,18 @@ waPlanYearWaterDataGrid.initPlanYearWaterData = function(){
 
     //-------------------------------------------删除---------------------------------------------------
     $("#waPlanYearWaterData_toolbar [tag='del']").click(function(){
-        var row = $("#waPlanYearWaterData_datagrid").datagrid("getSelected");
-        if (!row) {
+        var rows = $("#waPlanYearWaterData_datagrid").datagrid("getSelections");
+        if (rows.length<1) {
             $.messager.alert("提示","请选择一条数据","warning");
             return;
         }
-        if (row.isFinal == 1) {
-            $.messager.alert("提示","此条数据不可被修改","warning");
-            return;
+        var planWaterIds = new Array();
+        for(var i=0; i<rows.length; i++){
+            planWaterIds[i] = rows[i].planWaterId;
         }
         $.messager.confirm("删除确认", "确认删除此条数据?", function(r){
             if (r){
-                var planWaterId = row.planWaterId;
-                Hg.getJson("/wa/WaPlanYearWaterData/delete",{planWaterId: planWaterId},function(data){
+                Hg.getJson("/wa/WaPlanYearWaterData/delete",{planWaterIds: JSON.stringify(planWaterIds)},function(data){
                     if (data.success) {
                         $.messager.ok("删除成功!",function(){
                             $('#waPlanYearWaterData_datagrid').datagrid("reload");

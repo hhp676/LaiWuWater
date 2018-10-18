@@ -75,19 +75,22 @@ waCompanyInfoDatagrid.initwaCompanyInfo = function(){
 
 	//-------------------------------------------删除---------------------------------------------------
 	$("#waCompanyInfo_toolbar_edit [tag='del'],#waCompanyInfo_contextMenu_edit [tag='del']").click(function(){
-		var row = $("#waCompanyInfo_datagrid_edit").datagrid("getSelected");
-		if (!row) {
+		//获取选中的多条
+		var rows = $("#waCompanyInfo_datagrid_edit").datagrid("getSelections");
+
+		if (rows.length<1) {
 			$.messager.alert("提示","请选择一条数据","warning");
 			return;
 		}
-		if (row.isFinal == 1) {
-			$.messager.alert("提示","此条数据不可被修改","warning");
-			return;
-		}
-		$.messager.confirm("删除确认", "确认删除此条数据?", function(r){
+
+        var companyIds = new Array();
+        for(var i=0; i<rows.length; i++){
+            companyIds[i] = rows[i].companyId;
+        }
+
+        $.messager.confirm("删除确认", "确认删除数据?", function(r){
 			if (r){
-				var companyId = row.companyId;
-				Hg.getJson("/wa/WaCompanyInfo/delete",{companyId:companyId},function(data){
+				Hg.getJson("/wa/WaCompanyInfo/delete",{companyIds: JSON.stringify(companyIds)},function(data){
 					if (data.success) {
 						$.messager.ok("删除成功!",function(){
 							$('#waCompanyInfo_datagrid_edit').datagrid("reload");

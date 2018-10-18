@@ -9,6 +9,8 @@
 package com.hongguaninfo.hgdf.wa.web;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.hongguaninfo.hgdf.adp.core.aop.log.UserLog;
 import com.hongguaninfo.hgdf.adp.core.base.BasePage;
 import com.hongguaninfo.hgdf.adp.core.exception.BizException;
@@ -141,11 +143,15 @@ public class WaPlanYearWaterDataController {
     @RequestMapping("/delete")
     @ResponseBody
     @UserLog(code = "delete", name = "删除年计划用水信息", remarkClass = WaPlanYearWaterDataController.class)
-    public Map deleteWaPlanYearWaterData (final Integer planWaterId, HttpServletResponse response,
+    public Map deleteWaPlanYearWaterData (final String planWaterIds, HttpServletResponse response,
             final HttpServletRequest request) {
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BizException {
-            	waPlanYearWaterDataService.deleteWaPlanYearWaterDataLogic(planWaterId);
+                JSONArray waterIdArray = JSONObject.parseArray(planWaterIds);
+                for (Object planWaterId: waterIdArray){
+                    waPlanYearWaterDataService.deleteWaPlanYearWaterDataLogic(Integer.parseInt(planWaterId.toString()));
+                }
+
             }
         };
         return templete.operate();

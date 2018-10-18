@@ -9,6 +9,8 @@
 package com.hongguaninfo.hgdf.wa.web;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.hongguaninfo.hgdf.adp.core.aop.log.UserLog;
 import com.hongguaninfo.hgdf.adp.core.base.BasePage;
 import com.hongguaninfo.hgdf.adp.core.exception.BizException;
@@ -48,7 +50,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -235,11 +240,15 @@ public class WaCompanyInfoController {
     @RequestMapping("/delete")
     @ResponseBody
     @UserLog(code = "deleteWaCompanyInfo", name = "删除单位信息操作", remarkClass = Integer.class)
-    public Map deleteWaCompanyInfo (final Integer companyId, HttpServletResponse response,
-            final HttpServletRequest request) {
+    public Map deleteWaCompanyInfo (final String companyIds, HttpServletResponse response,
+                                    final HttpServletRequest request) {
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BizException {
-            	waCompanyInfoService.deleteWaCompanyInfoLogic(companyId);
+                JSONArray idArray = JSONObject.parseArray(companyIds);
+                for (Object id: idArray){
+                    waCompanyInfoService.deleteWaCompanyInfoLogic(Integer.parseInt(id.toString()));
+                }
+
             }
         };
         return templete.operate();

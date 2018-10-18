@@ -9,13 +9,14 @@
 </head>
 <body>
  <div title="列表">
- 		<table  id="waCompanyInfo_datagrid_edit" singleSelect=true  fitColumns=true  toolbar='#waCompanyInfo_toolbar_edit'
+ 		<table  id="waCompanyInfo_datagrid_edit" singleSelect=false  fitColumns=true  toolbar='#waCompanyInfo_toolbar_edit'
  		    class="easyui-datagrid" data-options="url:'${ctx}/wa/WaCompanyInfo/list'"
 			pagination="true" 
-			pageSize="${defaultPageSize}" 
+			pageSize="${defaultPageSize}"
 			pageList="${defaultPageList}">
        	 	<thead>
             <tr>
+				<th data-options="field:'ck',checkbox:true"></th>
 				<th data-options="field:'companyCode',width:150" editor="{type:'textbox'}"><b>节水代码</b></th>
                 <th data-options="field:'companyName',width:250" editor="{type:'textbox'}"><b>单位名称</b></th>
                 <th data-options="field:'contactNum',width:180" editor="{type:'textbox'}"><b>联系电话</b></th>

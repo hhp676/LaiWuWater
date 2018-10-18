@@ -27,7 +27,7 @@ $(document).ready(function(){
 	})
 
     $("#home_bt").click(function(){
-        window.location = G_CTX_PATH + "/index";
+        window.location = G_CTX_PATH + "/main/index";
     })
 
     $("#info_bt").click(function(){
