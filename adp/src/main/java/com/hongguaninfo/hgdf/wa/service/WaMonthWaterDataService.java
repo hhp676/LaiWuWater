@@ -20,6 +20,7 @@ import com.hongguaninfo.hgdf.wa.dao.WaMonthWaterDataDao;
 import com.hongguaninfo.hgdf.wa.entity.WaCompanyInfo;
 import com.hongguaninfo.hgdf.wa.entity.WaMonthWaterData;
 import com.hongguaninfo.hgdf.wa.utils.ExcelUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -314,7 +315,7 @@ public class WaMonthWaterDataService {
 					//根据code获取id后存入mysql
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setMonthDate(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setActMonthWater(df.format(Float.parseFloat(row.getCell(3).toString())));
+					waMonthWaterEntity.setActMonthWater(df.format(Float.parseFloat((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString()))); //df.format(Float.parseFloat(
 					monthWaterList.add(waMonthWaterEntity);
 				}
 			}
@@ -375,7 +376,7 @@ public class WaMonthWaterDataService {
 
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setMonthDate(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setPlanMonthWater(df.format(Float.parseFloat(row.getCell(3).toString())));
+					waMonthWaterEntity.setPlanMonthWater(df.format(Float.parseFloat((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString())));
 					waMonthWaterEntity.setIsDelte(0);
 					waMonthWaterDataList.add(waMonthWaterEntity);
 				}

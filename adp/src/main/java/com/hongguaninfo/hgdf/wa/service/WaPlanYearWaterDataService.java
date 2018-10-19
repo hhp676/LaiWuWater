@@ -18,6 +18,7 @@ import com.hongguaninfo.hgdf.wa.dao.WaPlanYearWaterDataDao;
 import com.hongguaninfo.hgdf.wa.entity.WaCompanyInfo;
 import com.hongguaninfo.hgdf.wa.entity.WaPlanYearWaterData;
 import com.hongguaninfo.hgdf.wa.utils.ExcelUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -198,7 +199,7 @@ public class WaPlanYearWaterDataService {
 					//根据code获取id后存入mysql
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setPlanYear(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setPlanYearAvgWater(df.format(Float.parseFloat(row.getCell(3).toString())));
+					waMonthWaterEntity.setPlanYearAvgWater(df.format((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString()));
 					planWaterList.add(waMonthWaterEntity);
 				}
 			}

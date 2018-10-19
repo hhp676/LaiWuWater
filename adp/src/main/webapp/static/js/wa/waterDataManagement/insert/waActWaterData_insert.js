@@ -136,8 +136,8 @@ waMonthWaterDatagrid.initwaMonthWaterData = function(){
 	$("#waMonthWaterData_toolbar_actInsert [tag='import']").click(function(){
             waMonthWaterDatagrid.mode = "import";
         var iconCls = $(this).attr("iconCls");
-        var url = "/wa/WaMonthWaterData/showImportExcel/";
-        var waMonthWaterDataWin = new HgWin({id:"waMonthWaterDataWin",title:"批量导入",width:500,height:180,iconCls:iconCls,url:url});
+        var url = "/wa/WaMonthWaterData/showActImportExcel/";
+        var waActWaterDataWin = new HgWin({id:"waActWaterDataWin",title:"批量导入",width:500,height:180,iconCls:iconCls,url:url});
 
     });
 
