@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -47,6 +48,9 @@ public class WaPlanYearWaterDataService {
 
 	@Autowired
 	private WaCompanyInfoDao waCompanyInfoDao;
+
+	private DecimalFormat df = new DecimalFormat("#.##");
+
 	/**
 	 * REMARK
 	 * 分页查询
@@ -194,7 +198,7 @@ public class WaPlanYearWaterDataService {
 					//根据code获取id后存入mysql
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setPlanYear(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setPlanYearAvgWater((row.getCell(3).toString()));
+					waMonthWaterEntity.setPlanYearAvgWater(df.format(Float.parseFloat(row.getCell(3).toString())));
 					planWaterList.add(waMonthWaterEntity);
 				}
 			}

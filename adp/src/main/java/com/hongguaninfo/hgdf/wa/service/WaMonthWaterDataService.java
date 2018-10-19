@@ -54,6 +54,8 @@ public class WaMonthWaterDataService {
 	private WaCompanyInfoDao waCompanyInfoDao;
 
 	private static final Log LOG = LogFactory.getLog(WaMonthWaterDataService.class);
+
+	private DecimalFormat df = new DecimalFormat("#.##");
 	/**
 	 * REMARK
 	 * 分页查询
@@ -172,8 +174,8 @@ public class WaMonthWaterDataService {
 	 * @return
 	 */
 	public WaMonthWaterData getEntityByFee(WaMonthWaterData waMonthWaterData){
-		float planWaterAmount = Integer.valueOf(StringUtil.isEmpty(waMonthWaterData.getPlanMonthWater())? "0": waMonthWaterData.getPlanMonthWater());
-		float actWaterAmount = Integer.valueOf(StringUtil.isEmpty(waMonthWaterData.getActMonthWater())? "0": waMonthWaterData.getActMonthWater());
+		float planWaterAmount = Float.valueOf(StringUtil.isEmpty(waMonthWaterData.getPlanMonthWater())? "0": waMonthWaterData.getPlanMonthWater());
+		float actWaterAmount = Float.valueOf(StringUtil.isEmpty(waMonthWaterData.getActMonthWater())? "0": waMonthWaterData.getActMonthWater());
 		float beyondAmount = actWaterAmount - planWaterAmount;
 		String beyondResult = beyondAmount<0? "0" : String.valueOf(beyondAmount);
 		waMonthWaterData.setBeyondAmount(beyondResult);
@@ -312,7 +314,7 @@ public class WaMonthWaterDataService {
 					//根据code获取id后存入mysql
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setMonthDate(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setActMonthWater(ExcelUtil.getCellValue(row.getCell(3)));
+					waMonthWaterEntity.setActMonthWater(df.format(Float.parseFloat(row.getCell(3).toString())));
 					monthWaterList.add(waMonthWaterEntity);
 				}
 			}
@@ -369,9 +371,11 @@ public class WaMonthWaterDataService {
 					com.setCompanyCode(ExcelUtil.getCellValue(row.getCell(0)));
 					WaCompanyInfo resultCom = waCompanyInfoDao.getEntityByCode(com);
 					//根据code获取id后存入mysql
+
+
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setMonthDate(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setPlanMonthWater((row.getCell(3).toString()));
+					waMonthWaterEntity.setPlanMonthWater(df.format(Float.parseFloat(row.getCell(3).toString())));
 					waMonthWaterEntity.setIsDelte(0);
 					waMonthWaterDataList.add(waMonthWaterEntity);
 				}
