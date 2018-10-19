@@ -13,7 +13,7 @@ $(function() {
 	});
 
     $("#backToMap").click(function() {
-        window.location = G_CTX_PATH + "/";
+        window.location = G_CTX_PATH + "/main/map";
     });
 
     G_chkPassword(shouldChangePassword);

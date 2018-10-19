@@ -65,7 +65,7 @@ function initialMap(){
             return false;
         });
         map.addLayers([TianDi_Map,TianDi_img_Map, TianDi_Map_CHLabels]);
-        map.setCenter(new OpenLayers.LonLat(116.386, 37.410), 11);
+        map.setCenter(new OpenLayers.LonLat(116.661,36.928), 11);
         point_layer = new OpenLayers.Layer.Vector('点图层', { styleMap: new OpenLayers.StyleMap({
             "default": {
                 externalGraphic: '${noselect}',
