@@ -32,7 +32,8 @@ function initialMap(){
             matrixIds: matrixIds,
             format: "tiles",
             style: "_null",
-            opacity: 0.7
+            opacity: 0.7,
+            visibility:false
         });
 		 var TianDi_img_Map = new OpenLayers.Layer.WMTS({
             name: "遥感影像图",
@@ -43,7 +44,7 @@ function initialMap(){
             format: "tiles",
             style: "_null",
             opacity: 0.7,
-			visibility:false
+			visibility:true
         });
         var TianDi_Map_CHLabels = new OpenLayers.Layer.WMTS({
             name: "TianDi_Map_CHLabels",
@@ -65,7 +66,7 @@ function initialMap(){
             return false;
         });
         map.addLayers([TianDi_Map,TianDi_img_Map, TianDi_Map_CHLabels]);
-        map.setCenter(new OpenLayers.LonLat(116.386, 37.410), 11);
+        map.setCenter(new OpenLayers.LonLat(116.014,36.471), 11);
         point_layer = new OpenLayers.Layer.Vector('点图层', { styleMap: new OpenLayers.StyleMap({
             "default": {
                 externalGraphic: '${noselect}',
