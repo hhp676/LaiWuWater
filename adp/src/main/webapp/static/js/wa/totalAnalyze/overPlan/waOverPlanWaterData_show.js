@@ -98,7 +98,6 @@ waMonthWaterDatagrid.initwaMonthWaterData = function(){
         for(var i=0; i<rows.length; i++){
             monthWaterIds[i] = rows[i].monthWaterId;
         }
-debugger
 		$.messager.confirm("删除确认", "确认删除此条数据?", function(r){
 			if (r){
 				Hg.getJson("/wa/WaMonthWaterData/delete",{monthWaterIds:  JSON.stringify(monthWaterIds)},function(data){
