@@ -7,7 +7,7 @@
 			import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
 	<%@ page import="org.apache.shiro.authc.ExcessiveAttemptsException"%>
 	<%@ page import="org.apache.shiro.authc.IncorrectCredentialsException"%>
-	<title>莱芜市节水信息化管理平台</title>
+	<title>德州市节水信息化管理平台</title>
 	<style>
 		::-ms-clear, ::-ms-reveal{display: none;}
 		input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px white inset;}
@@ -80,7 +80,7 @@
 <body>
 <!--头部-->
 <div class="header">
-	<p>莱芜市节水信息化管理平台</p>
+	<p>德州市节水信息化管理平台</p>
 </div>
 <!--中间-->
 <div class="contant">

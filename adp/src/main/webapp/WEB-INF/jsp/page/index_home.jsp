@@ -33,8 +33,8 @@
 					</div>--%>
 					<div style="width: 43%;">
 						<div title="公告" iconCls="acc_icon_photos" collapsible="true" id="noticeDiv"
-							closable="false" style="padding: 5px;height:80px;" >
-							<div style="text-align:center; line-height: 80px; font-size: 30px"> 欢迎 <shiro:principal />，进入莱芜市节水信息化管理平台  </div>
+							closable="false" style="padding: 5px;height:80px; background: url(${ctx}/static/images/map/dezhou.png) " >
+							<div style="text-align:center; color: #fdfdfd; line-height: 80px; font-size: 30px"> 欢迎 <shiro:principal />，进入德州市节水信息化管理平台  </div>
 
 						</div>
 						<div title="天气预报" iconCls="m-icon-weather" collapsible="true"
