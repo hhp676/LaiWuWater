@@ -484,6 +484,24 @@ public class WaMonthWaterDataController {
     }
 
     /**
+     * Act批量导入页面展示
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/showActImportExcel")
+    public String showActImportExcel(HttpServletRequest request,
+                                  HttpServletResponse response, Model model) {
+        OperateTemplete templete = new HttpTemplete(request) {
+            protected void doSomething() throws BaseException {
+                str = "wa/waterDataManagement/insert/waActWaterData_import";
+            }
+        };
+        return templete.operateModel();
+    }
+
+    /**
      * excel批量导入数据
      * @param request
      * @param response

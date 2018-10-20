@@ -59,8 +59,8 @@
                 $.messager.progress("close");
                 if (data.result == "success") {
                     $.messager.ok("上传数据成功!",function(){
-                        $("#waCompanyInfoWin").window("close");
-                        $('#waCompanyInfo_datagrid').datagrid("reload");
+                        $("#waMonthWaterDataWin").window("close");
+                        $('#waMonthWaterData_datagrid_plan').datagrid("reload");
                     });
                 }else {
                     $.messager.alert("提示",data.result);

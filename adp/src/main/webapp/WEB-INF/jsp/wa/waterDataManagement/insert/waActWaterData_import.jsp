@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-    <title>下月计划用水批量导入</title>
+    <title>批量导入</title>
 </head>
 <body>
 <div style="padding-top: 20px;">
@@ -12,9 +12,9 @@
             <tr>
                 <td align="center">选择导入文件<font>*</font>:
                 </td>
-                <td align="left" ><input name="excelFile" type="file"  class="form-input"  id="monthWaterDataFile" multiple="multiple" /></td>
-                <td><input name="import" type="button" value="导&nbsp;&nbsp;入" onclick="sumExcelUpload()"/>&nbsp;
-                    <a href="${ctx}/static/template/下月用水计划表.xls" target="_blank">下月用水模板</a>
+                <td align="left" ><input name="excelFile" type="file"  class="form-input"  id="monthWaterDataFile" /></td>
+                <td><input name="import" type="button" value="导&nbsp;&nbsp;入" onclick="userAjaxFileUpload()"/>&nbsp;
+                    <a href="${ctx}/static/template/当月实际用水情况表.xls" target="_blank">模板下载</a>
                 </td>
             </tr>
             <tr>
@@ -24,7 +24,7 @@
             </tr>
             <tr align="center" style="display: none" id="loadingExcel">
                 <td colspan="3">正在导入，请等待 ...<br>
-                    <%--<img src="${ctx}/images/loadingExcel.gif">--%>
+
                 </td>
             </tr>
         </table>
@@ -44,7 +44,7 @@
         }
     });
 
-    function sumExcelUpload(){
+    function userAjaxFileUpload(){
         if(!$('#monthWaterDataExcel').validate().form()) return false;
         $.messager.progress({
             title:"稍等",
@@ -52,20 +52,18 @@
         });
         $.ajaxFileUpload({
             //处理文件上传操作的服务器端地址
-            url:"${ctx}/wa/WaMonthWaterData/getSumExcel",
+            url:"${ctx}/wa/WaMonthWaterData/importExcel",
             fileElementId:'monthWaterDataFile',           //文件选择框的id属性
             dataType:'json',                       //服务器返回的格式,可以是json或xml等
-            success:function(data, status, XMLHttpRequest){ //, status
+            success:function(data, status){
+                $.messager.progress("close");
                 if (data.result == "success") {
                     $.messager.ok("上传数据成功!",function(){
-                        $("#wasumExcelWin").window("close");
-                        $('#waMonthWaterData_datagrid_plan').datagrid("reload");
+                        $("#waActWaterDataWin").window("close");
+                        $('#waMonthWaterData_datagrid_actInsert').datagrid("reload");
                     });
-                    $.messager.progress("close");
                 }else {
                     $.messager.alert("提示",data.result);
-                    $("#wasumExcelWin").window("close");
-                    $.messager.progress("close");
                 }
             },
             error:function(data, status, e){ //服务器响应失败时的处理函数
