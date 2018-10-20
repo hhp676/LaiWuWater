@@ -20,6 +20,7 @@ import com.hongguaninfo.hgdf.wa.dao.WaMonthWaterDataDao;
 import com.hongguaninfo.hgdf.wa.entity.WaCompanyInfo;
 import com.hongguaninfo.hgdf.wa.entity.WaMonthWaterData;
 import com.hongguaninfo.hgdf.wa.utils.ExcelUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -54,6 +55,8 @@ public class WaMonthWaterDataService {
 	private WaCompanyInfoDao waCompanyInfoDao;
 
 	private static final Log LOG = LogFactory.getLog(WaMonthWaterDataService.class);
+
+	private DecimalFormat df = new DecimalFormat("#.##");
 	/**
 	 * REMARK
 	 * 分页查询
@@ -163,7 +166,7 @@ public class WaMonthWaterDataService {
 		waMonthWaterData.setIsDelte(0);
         waMonthWaterData.setCrtTime(new Date());
         waMonthWaterData.setUpdTime(new Date());
-		waMonthWaterDataDao.save(getEntityByFee(waMonthWaterData));
+		waMonthWaterDataDao.save((waMonthWaterData));
 	}
 
 	/**
@@ -172,8 +175,8 @@ public class WaMonthWaterDataService {
 	 * @return
 	 */
 	public WaMonthWaterData getEntityByFee(WaMonthWaterData waMonthWaterData){
-		float planWaterAmount = Integer.valueOf(StringUtil.isEmpty(waMonthWaterData.getPlanMonthWater())? "0": waMonthWaterData.getPlanMonthWater());
-		float actWaterAmount = Integer.valueOf(StringUtil.isEmpty(waMonthWaterData.getActMonthWater())? "0": waMonthWaterData.getActMonthWater());
+		float planWaterAmount = Float.valueOf(StringUtil.isEmpty(waMonthWaterData.getPlanMonthWater())? "0": waMonthWaterData.getPlanMonthWater());
+		float actWaterAmount = Float.valueOf(StringUtil.isEmpty(waMonthWaterData.getActMonthWater())? "0": waMonthWaterData.getActMonthWater());
 		float beyondAmount = actWaterAmount - planWaterAmount;
 		String beyondResult = beyondAmount<0? "0" : String.valueOf(beyondAmount);
 		waMonthWaterData.setBeyondAmount(beyondResult);
@@ -185,11 +188,10 @@ public class WaMonthWaterDataService {
 	}
 
 	public String getBeyondFee(float actWaterAmount, float planWaterAmount){
-		DecimalFormat df=new DecimalFormat("0.00");
 		String result = "";
 		float beyondAmount = actWaterAmount - planWaterAmount;
 		float beyondRate = (float) beyondAmount/planWaterAmount;
-		if (actWaterAmount == 0 || StringUtil.isNull(actWaterAmount)){  //实际用水未生成情况下
+		if (actWaterAmount == 0 || planWaterAmount == 0){  //实际用水未生成情况下
 			return "";
 		}
 
@@ -270,6 +272,9 @@ public class WaMonthWaterDataService {
 			waMonthWaterData.setIsDelte(1);
 		}
         waMonthWaterData.setMonthWaterId(monthWaterId);
+		waMonthWaterData.setFeeStandard("");
+		waMonthWaterData.setBeyondAmount("");
+		waMonthWaterData.setIsOverroof("0");
         waMonthWaterDataDao.update(waMonthWaterData);
 	}	
 	
@@ -312,7 +317,7 @@ public class WaMonthWaterDataService {
 					//根据code获取id后存入mysql
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setMonthDate(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setActMonthWater(ExcelUtil.getCellValue(row.getCell(3)));
+					waMonthWaterEntity.setActMonthWater(df.format(Float.parseFloat((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString()))); //df.format(Float.parseFloat(
 					monthWaterList.add(waMonthWaterEntity);
 				}
 			}
@@ -325,9 +330,17 @@ public class WaMonthWaterDataService {
 					WaMonthWaterData resultTmp = new WaMonthWaterData();
 					resultTmp = waMonthWaterDataDao.getWaListByEntity(tmp);
 					if(null != resultTmp){  //判断当前单位当月数据是否已存在,存在即先删除在录入
-						waMonthWaterDataDao.delete(resultTmp);
+//						monData.setPlanMonthWater(resultTmp.getPlanMonthWater());   //赋值数据库里面的计划用水信息
+						resultTmp.setActMonthWater(monData.getActMonthWater());
+
+						float planWaterAmount = Float.valueOf(StringUtil.isEmpty(resultTmp.getPlanMonthWater())? "0": resultTmp.getPlanMonthWater());
+						float actWaterAmount = Float.valueOf(StringUtil.isEmpty(resultTmp.getActMonthWater())? "0": resultTmp.getActMonthWater());
+
+						resultTmp.setFeeStandard(getBeyondFee(actWaterAmount, planWaterAmount));  //获取收费标准
+						waMonthWaterDataDao.update(resultTmp);
+						continue;
 					}
-					addWaMonthWaterData(monData, "");
+					addWaMonthWaterData(monData, "plan");
 				}
 			}
 			return result;
@@ -369,9 +382,11 @@ public class WaMonthWaterDataService {
 					com.setCompanyCode(ExcelUtil.getCellValue(row.getCell(0)));
 					WaCompanyInfo resultCom = waCompanyInfoDao.getEntityByCode(com);
 					//根据code获取id后存入mysql
+
+
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setMonthDate(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setPlanMonthWater((row.getCell(3).toString()));
+					waMonthWaterEntity.setPlanMonthWater(df.format(Float.parseFloat((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString())));
 					waMonthWaterEntity.setIsDelte(0);
 					waMonthWaterDataList.add(waMonthWaterEntity);
 				}

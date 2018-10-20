@@ -50,7 +50,7 @@
 <script type="text/javascript">
     var monthWaterId = "${monthWaterId}";
 </script>
-<script type="text/javascript" src="${ctx}/static/js/wa/waMonthWaterData_detail.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/wa/waterDataManagement/search/waActWaterData_detail.js"></script>
 </body>
 
 </html>

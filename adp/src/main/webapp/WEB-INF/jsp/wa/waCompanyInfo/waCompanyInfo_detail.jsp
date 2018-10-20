@@ -132,7 +132,7 @@
 <script type="text/javascript">
     var companyId = "${companyId}";
 </script>
-<script type="text/javascript" src="${ctx}/static/js/wa/waCompanyInfo_detail.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/wa/waCompanyInfo/waCompanyInfo_detail.js"></script>
 </body>
 
 </html>
