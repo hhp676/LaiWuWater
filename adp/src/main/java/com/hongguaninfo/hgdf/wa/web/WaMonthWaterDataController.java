@@ -210,7 +210,7 @@ public class WaMonthWaterDataController {
         OperateTemplete templete = new HttpTemplete(request, result) {
             protected void doSomething() throws BizException {
                 if (doValidate()) {
-                    waMonthWaterDataService.addWaMonthWaterData(vo, "plan");
+                    waMonthWaterDataService.addWaMonthWaterData(vo, "act");
                 }
             }
         };
@@ -286,7 +286,7 @@ public class WaMonthWaterDataController {
         OperateTemplete templete = new HttpTemplete(request, result) {
             protected void doSomething() throws BizException {
                 if (doValidate()) {
-                    waMonthWaterDataService.addWaMonthWaterData(vo, "");
+                    waMonthWaterDataService.addWaMonthWaterData(vo, "plan");
                 }
             }
         };
@@ -305,7 +305,7 @@ public class WaMonthWaterDataController {
             final HttpServletRequest request) {
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BizException {
-				waMonthWaterDataService.updateWaMonthWaterData(vo, "");
+				waMonthWaterDataService.updateWaMonthWaterData(vo, "act");
             }
         };
         return templete.operate();
@@ -334,7 +334,7 @@ public class WaMonthWaterDataController {
 
     /**
      * REMARK
-     * 删除
+     * 删除 月用水计划删除
      * Through the id delete a data
      */
     @RequestMapping("/planDelete")
@@ -502,7 +502,7 @@ public class WaMonthWaterDataController {
     }
 
     /**
-     * excel批量导入数据
+     * excel批量导入数据 实际用水量导入
      * @param request
      * @param response
      * @throws Exception
@@ -557,6 +557,12 @@ public class WaMonthWaterDataController {
     }
 
 
+    /**
+     * 批量导入下月用水计划
+     * @param request
+     * @param response
+     * @throws Exception
+     */
     @RequestMapping("/getSumExcel")
     @UserLog(code = "getSumExcel", name = "导入用水信息", remarkClass = WaMonthWaterDataController.class)
     public void getSumExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {

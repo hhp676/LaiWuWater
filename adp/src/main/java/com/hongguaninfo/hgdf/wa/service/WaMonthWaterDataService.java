@@ -166,7 +166,7 @@ public class WaMonthWaterDataService {
 		waMonthWaterData.setIsDelte(0);
         waMonthWaterData.setCrtTime(new Date());
         waMonthWaterData.setUpdTime(new Date());
-		waMonthWaterDataDao.save(getEntityByFee(waMonthWaterData));
+		waMonthWaterDataDao.save((waMonthWaterData));
 	}
 
 	/**
@@ -188,11 +188,10 @@ public class WaMonthWaterDataService {
 	}
 
 	public String getBeyondFee(float actWaterAmount, float planWaterAmount){
-		DecimalFormat df=new DecimalFormat("0.00");
 		String result = "";
 		float beyondAmount = actWaterAmount - planWaterAmount;
 		float beyondRate = (float) beyondAmount/planWaterAmount;
-		if (actWaterAmount == 0 || StringUtil.isNull(actWaterAmount)){  //实际用水未生成情况下
+		if (actWaterAmount == 0 || planWaterAmount == 0){  //实际用水未生成情况下
 			return "";
 		}
 
@@ -273,6 +272,9 @@ public class WaMonthWaterDataService {
 			waMonthWaterData.setIsDelte(1);
 		}
         waMonthWaterData.setMonthWaterId(monthWaterId);
+		waMonthWaterData.setFeeStandard("");
+		waMonthWaterData.setBeyondAmount("");
+		waMonthWaterData.setIsOverroof("0");
         waMonthWaterDataDao.update(waMonthWaterData);
 	}	
 	
@@ -328,9 +330,17 @@ public class WaMonthWaterDataService {
 					WaMonthWaterData resultTmp = new WaMonthWaterData();
 					resultTmp = waMonthWaterDataDao.getWaListByEntity(tmp);
 					if(null != resultTmp){  //判断当前单位当月数据是否已存在,存在即先删除在录入
-						waMonthWaterDataDao.delete(resultTmp);
+//						monData.setPlanMonthWater(resultTmp.getPlanMonthWater());   //赋值数据库里面的计划用水信息
+						resultTmp.setActMonthWater(monData.getActMonthWater());
+
+						float planWaterAmount = Float.valueOf(StringUtil.isEmpty(resultTmp.getPlanMonthWater())? "0": resultTmp.getPlanMonthWater());
+						float actWaterAmount = Float.valueOf(StringUtil.isEmpty(resultTmp.getActMonthWater())? "0": resultTmp.getActMonthWater());
+
+						resultTmp.setFeeStandard(getBeyondFee(actWaterAmount, planWaterAmount));  //获取收费标准
+						waMonthWaterDataDao.update(resultTmp);
+						continue;
 					}
-					addWaMonthWaterData(monData, "");
+					addWaMonthWaterData(monData, "plan");
 				}
 			}
 			return result;

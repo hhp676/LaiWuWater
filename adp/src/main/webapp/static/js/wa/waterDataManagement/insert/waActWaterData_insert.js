@@ -142,13 +142,13 @@ waMonthWaterDatagrid.initwaMonthWaterData = function(){
     });
 
     //---------------------汇总excel----------------------------------------------------------
-    $("#waMonthWaterData_toolbar_actInsert [tag='sumExcel']").click(function(){
+  /*  $("#waMonthWaterData_toolbar_actInsert [tag='sumExcel']").click(function(){
         waMonthWaterDatagrid.mode = "sumExcel";
         var iconCls = $(this).attr("iconCls");
         var url = "/wa/WaMonthWaterData/showsumExcel/";
         var wasumExcelWin = new HgWin({id:"wasumExcelWin",title:"批量导入",width:500,height:180,iconCls:iconCls,url:url});
 
-    });
+    });*/
 } 
 
 waMonthWaterDatagrid.initwaMonthWaterData();
