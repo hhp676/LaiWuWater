@@ -3,7 +3,7 @@
 <html>
 <%@ include file="/WEB-INF/jsp/common/meta.jsp"%>
 <head>
-<title>禹城市节水信息化管理平台</title>
+<title>枣庄市节水信息化管理平台</title>
 <meta charset="utf-8" /> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,IE=11,IE=10,IE=9,IE=8" />
 <style type="text/css">
@@ -172,7 +172,7 @@
 			style="width: 120px"></select>
 		</span>
 		 <span style="padding-left: 10px; font-size: 16px;font-family: 黑体;font-size: 28px; padding-left: 30px;text-align: left; text-shadow: 0px 0px 6px rgba(0, 0, 0, 1); font-weight:bold;line-height: 55px;">
-			 禹城市节水信息化管理平台
+			 枣庄市节水信息化管理平台
 		 </span>
 	</div>
 

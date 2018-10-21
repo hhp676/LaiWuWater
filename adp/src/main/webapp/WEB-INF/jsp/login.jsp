@@ -7,7 +7,7 @@
     import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
 <%@ page import="org.apache.shiro.authc.ExcessiveAttemptsException"%>
 <%@ page import="org.apache.shiro.authc.IncorrectCredentialsException"%>
-<title>禹城市节水信息化管理平台</title>
+<title>枣庄市节水信息化管理平台</title>
 <style>
  ::-ms-clear, ::-ms-reveal{display: none;}
  input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px white inset;}
@@ -119,7 +119,7 @@ function changeCaptcha() {
 		<tr>
 			<td align="center">
 				<div id="login_lable">
-					<div class="title" style="text-align: center">禹城市节水信息化管理平台</div>
+					<div class="title" style="text-align: center">枣庄市节水信息化管理平台</div>
 					<div class="content">
 						<form id="loginForm" action="${ctx}/login" method="post" onsubmit="return checkAll();">
 						    <input type='hidden' name='submitToken'/>
