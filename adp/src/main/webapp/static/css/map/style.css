@@ -144,13 +144,12 @@ html{overflow:hidden;}
     position: absolute;pointer-events: auto;z-index: 999;
 }
 .thematic-zs {
-    /*display: flex;*/
+    display: flex;
     flex-flow: row nowrap;
     user-select: none;
 }
 .thematic-zs .item {
     position: relative;
-    margin-bottom: 10px;
 }
 .thematic-zs .item .block {
     position: relative;

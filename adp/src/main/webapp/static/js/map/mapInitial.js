@@ -5,84 +5,83 @@ $(document).ready(function(){
 
 //初始化地图
 function initialMap(){
-  
-    var matrixIds = new Array(19);
-        for (var i = 1; i < 19; ++i) {
-            matrixIds[i - 1] = i.toString();
-        }
 
-        map = new OpenLayers.Map("mapWrapper", {
-            maxExtent: new OpenLayers.Bounds(-180, -90, 180, 90),
-            controls: [
-			new OpenLayers.Control.Navigation(),
-			//new OpenLayers.Control.PanZoom(),
-			new OpenLayers.Control.LayerSwitcher(),
-			new OpenLayers.Control.MousePosition({displayClass:"MousePosCtrl", prefix:'经度:', separator:'，纬度:' }) //增加鼠标位置
-			],
-            //预先设置解析度值的数组,一个图层的解析度为[a,b,c],那么缩放级别的0就是a ,1就是b。。。
-            resolutions: [0.703125, 0.3515625, 0.17578125, 0.087890625, 0.0439453125, 0.02197265625, 0.010986328125, 0.0054931640625, 0.00274658203125, 0.001373291015625, 0.0006866455078125, 0.00034332275390625, 0.000171661376953125, 0.0000858306884765625, 0.00004291534423828125, 0.000021457672119140625, 0.000010728836059570312, 0.000005364418029785156],
-            numZoomLevels: 18,
-			allOverlays: true
-        });
-        var TianDi_Map = new OpenLayers.Layer.WMTS({
-            name: "行政区划图",
-            url: "http://t0.tianditu.com/vec_c/wmts/",
-            layer: "vec",
-            matrixSet: "c",
-            matrixIds: matrixIds,
-            format: "tiles",
-            style: "_null",
-            opacity: 0.7,
-            visibility:false
-        });
-		 var TianDi_img_Map = new OpenLayers.Layer.WMTS({
-            name: "遥感影像图",
-            url: "http://t0.tianditu.com/img_c/wmts/",
-            layer: "img",
-            matrixSet: "c",
-            matrixIds: matrixIds,
-            format: "tiles",
-            style: "_null",
-            opacity: 0.7,
-			visibility:true
-        });
-        var TianDi_Map_CHLabels = new OpenLayers.Layer.WMTS({
-            name: "TianDi_Map_CHLabels",
-            url: "http://t0.tianditu.com/cva_c/wmts/",
-            layer: "cva",
-            matrixSet: "c",
-            matrixIds: matrixIds,
-            format: "tiles",
-            style: "_null",
-            isBaseLayer: false,
-			displayInLayerSwitcher:false
-        });
-        TianDi_Map_CHLabels.events.register("tileerror", this, function(evt) {
-            evt.tile.setImgSrc("Src/blank.gif");
-            return false;
-        });
-        TianDi_Map.events.register("tileerror", this, function(evt) {
-            evt.tile.setImgSrc("Src/vec404.png");
-            return false;
-        });
-        map.addLayers([TianDi_Map,TianDi_img_Map, TianDi_Map_CHLabels]);
-        map.setCenter(new OpenLayers.LonLat(116.014,36.471), 11);
-        point_layer = new OpenLayers.Layer.Vector('点图层', { styleMap: new OpenLayers.StyleMap({
-            "default": {
-                externalGraphic: '${noselect}',
-                //graphicWidth: 17,
-                graphicHeight: 35,
-                graphicYOffset: -19
-            },
-            "select": {
-                externalGraphic: '${select}',
-                //graphicWidth: 17,
-                graphicHeight: 35,
-                graphicYOffset: -19
-            }
-        })
-        });
-        map.addLayer(point_layer);
+    var matrixIds = new Array(19);
+    for (var i = 1; i < 19; ++i) {
+        matrixIds[i - 1] = i.toString();
+    }
+
+    map = new OpenLayers.Map("mapWrapper", {
+        maxExtent: new OpenLayers.Bounds(-180, -90, 180, 90),
+        controls: [
+            new OpenLayers.Control.Navigation(),
+            //new OpenLayers.Control.PanZoom(),
+            new OpenLayers.Control.LayerSwitcher(),
+            new OpenLayers.Control.MousePosition({displayClass:"MousePosCtrl", prefix:'经度:', separator:'，纬度:' }) //增加鼠标位置
+        ],
+        //预先设置解析度值的数组,一个图层的解析度为[a,b,c],那么缩放级别的0就是a ,1就是b。。。
+        resolutions: [0.703125, 0.3515625, 0.17578125, 0.087890625, 0.0439453125, 0.02197265625, 0.010986328125, 0.0054931640625, 0.00274658203125, 0.001373291015625, 0.0006866455078125, 0.00034332275390625, 0.000171661376953125, 0.0000858306884765625, 0.00004291534423828125, 0.000021457672119140625, 0.000010728836059570312, 0.000005364418029785156],
+        numZoomLevels: 18,
+        allOverlays: true
+    });
+    var TianDi_Map = new OpenLayers.Layer.WMTS({
+        name: "行政区划图",
+        url: "http://t0.tianditu.com/vec_c/wmts/",
+        layer: "vec",
+        matrixSet: "c",
+        matrixIds: matrixIds,
+        format: "tiles",
+        style: "_null",
+        opacity: 0.7
+    });
+    var TianDi_img_Map = new OpenLayers.Layer.WMTS({
+        name: "遥感影像图",
+        url: "http://t0.tianditu.com/img_c/wmts/",
+        layer: "img",
+        matrixSet: "c",
+        matrixIds: matrixIds,
+        format: "tiles",
+        style: "_null",
+        opacity: 0.7,
+        visibility:false
+    });
+    var TianDi_Map_CHLabels = new OpenLayers.Layer.WMTS({
+        name: "TianDi_Map_CHLabels",
+        url: "http://t0.tianditu.com/cva_c/wmts/",
+        layer: "cva",
+        matrixSet: "c",
+        matrixIds: matrixIds,
+        format: "tiles",
+        style: "_null",
+        isBaseLayer: false,
+        displayInLayerSwitcher:false
+    });
+    TianDi_Map_CHLabels.events.register("tileerror", this, function(evt) {
+        evt.tile.setImgSrc("Src/blank.gif");
+        return false;
+    });
+    TianDi_Map.events.register("tileerror", this, function(evt) {
+        evt.tile.setImgSrc("Src/vec404.png");
+        return false;
+    });
+    map.addLayers([TianDi_Map,TianDi_img_Map, TianDi_Map_CHLabels]);
+    map.setCenter(new OpenLayers.LonLat(116.386, 37.410), 11);
+    point_layer = new OpenLayers.Layer.Vector('点图层', { styleMap: new OpenLayers.StyleMap({
+        "default": {
+            externalGraphic: '${noselect}',
+            //graphicWidth: 17,
+            graphicHeight: 35,
+            graphicYOffset: -19
+        },
+        "select": {
+            externalGraphic: '${select}',
+            //graphicWidth: 17,
+            graphicHeight: 35,
+            graphicYOffset: -19
+        }
+    })
+    });
+    map.addLayer(point_layer);
     //放大、缩小、漫游、查询控件
     xcontrol = {
         zomIn:new OpenLayers.Control.ZoomBox(map),
@@ -94,52 +93,52 @@ function initialMap(){
     }
 
     select_bar = new OpenLayers.Control.SelectFeature(point_layer, { displayClass: "olControlSelectFeature", onSelect: onFeatureInsert, onUnselect: onFeatureUnselect, multiple: false,title:"查看信息" });
-        var panel = new OpenLayers.Control.Panel({ displayClass: 'customEditingToolbar',defaultControl: select_bar });
-		panel.addControls(select_bar);
-        map.addControl(panel);
+    var panel = new OpenLayers.Control.Panel({ displayClass: 'customEditingToolbar',defaultControl: select_bar });
+    panel.addControls(select_bar);
+    map.addControl(panel);
     function onFeatureInsert(feature) {
-            selectedFeature = feature;
-			var fid = selectedFeature.id;
-			var detail = selectedFeature.attributes['detail'];
-            var name = selectedFeature.attributes['name'];
-            var user = selectedFeature.attributes['user'];
-            var num = selectedFeature.attributes['num'];
+        selectedFeature = feature;
+        var fid = selectedFeature.id;
+        var detail = selectedFeature.attributes['detail'];
+        var name = selectedFeature.attributes['name'];
+        var user = selectedFeature.attributes['user'];
+        var num = selectedFeature.attributes['num'];
 
-				/* var div = "<div id='p_popup'><div id='p_title'>" + name + "</div><div id='p_content'><div class='p_row'>单位地址：" + address + "<br></div><div class='p_row'>法人代表：" + lPerson + "<br></div><div class='p_row'>法人代表电话：" + ltel+ "<br></div><div class='p_row'>消防安全负责人：" + sPerson + "<br></div><div class='p_row'>安全负责人电话：" +stel + "<br></div><div class='p_row_ipart' title="+iPart+">重点部位：" +iPart1 + "<br></div><div class='p_row_water' title="+water+">周边水源：" + water1 +"<br></div><div class='p_row'>所属中队：" + sszd +"<br></div><div class='p_row'>建筑类型：" +jzlx +"</div></div></div>";*/
+        /* var div = "<div id='p_popup'><div id='p_title'>" + name + "</div><div id='p_content'><div class='p_row'>单位地址：" + address + "<br></div><div class='p_row'>法人代表：" + lPerson + "<br></div><div class='p_row'>法人代表电话：" + ltel+ "<br></div><div class='p_row'>消防安全负责人：" + sPerson + "<br></div><div class='p_row'>安全负责人电话：" +stel + "<br></div><div class='p_row_ipart' title="+iPart+">重点部位：" +iPart1 + "<br></div><div class='p_row_water' title="+water+">周边水源：" + water1 +"<br></div><div class='p_row'>所属中队：" + sszd +"<br></div><div class='p_row'>建筑类型：" +jzlx +"</div></div></div>";*/
 
 
- var div = "<div id='p_popup'><div id='p_title'>" + name + "</div><div id='content'><div id='content1'class='child_content'><p>节水代码：" + num + "</p><p>单位名称：" + name + "</p><p>用户类别：" + user + "</p><p>单位简介：" + detail + "</p></div>";
-				  
-				
+        var div = "<div id='p_popup'><div id='p_title'>" + name + "</div><div id='content'><div id='content1'class='child_content'><p>节水代码：" + num + "</p><p>单位名称：" + name + "</p><p>用户类别：" + user + "</p><p>单位简介：" + detail + "</p></div>";
 
-            popup = new OpenLayers.Popup.FramedCloud("info",
-	       		feature.geometry.getBounds().getCenterLonLat(),
-               null,
-               div,
-               null,
-               true,
-               onPopupClose);
-	  
-			 popup.setBorder("0px solid #d91f12");
-            feature.popup = popup;
-            map.addPopup(popup);
-            //modify_bar.deactivate();
-        }
-        function onFeatureUnselect(feature) {
-            map.removePopup(feature.popup);
-            feature.popup.destroy();
-            feature.popup = null;
-        }
-		function onPopupClose() {
-           var startLonlat = new OpenLayers.LonLat(selectedFeature.attributes.newsLon, selectedFeature.attributes.newsLat);
-            selectedFeature.move(startLonlat);
-            
-            select_bar.unselect(selectedFeature);
-            select_bar.activate();
-        }
 
-    
-     //测距离一系列函数
+
+        popup = new OpenLayers.Popup.FramedCloud("info",
+            feature.geometry.getBounds().getCenterLonLat(),
+            null,
+            div,
+            null,
+            true,
+            onPopupClose);
+
+        popup.setBorder("0px solid #d91f12");
+        feature.popup = popup;
+        map.addPopup(popup);
+        //modify_bar.deactivate();
+    }
+    function onFeatureUnselect(feature) {
+        map.removePopup(feature.popup);
+        feature.popup.destroy();
+        feature.popup = null;
+    }
+    function onPopupClose() {
+        var startLonlat = new OpenLayers.LonLat(selectedFeature.attributes.newsLon, selectedFeature.attributes.newsLat);
+        selectedFeature.move(startLonlat);
+
+        select_bar.unselect(selectedFeature);
+        select_bar.activate();
+    }
+
+
+    //测距离一系列函数
     OpenLayers.Renderer.symbol.lightning = [0, 0, 15, 0, 15, -15, 15, 15,15,0,30,0 ];
     var sketchSymbolizers = {
         "Point":{
@@ -521,5 +520,5 @@ function initialMap(){
     for (var key in mapControls) {
         map.addControl(mapControls[key]);
     }
-    
+
 }
