@@ -12,6 +12,8 @@ import com.hongguaninfo.hgdf.adp.core.base.BasePage;
 import com.hongguaninfo.hgdf.adp.core.exception.BizException;
 import com.hongguaninfo.hgdf.adp.core.utils.generator.DbIdGenerator;
 import com.hongguaninfo.hgdf.core.utils.StringUtil;
+import com.hongguaninfo.hgdf.core.utils.logging.Log;
+import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
 import com.hongguaninfo.hgdf.core.utils.page.Page;
 import com.hongguaninfo.hgdf.wa.dao.WaCompanyInfoDao;
 import com.hongguaninfo.hgdf.wa.dao.WaPlanYearWaterDataDao;
@@ -52,6 +54,7 @@ public class WaPlanYearWaterDataService {
 
 	private DecimalFormat df = new DecimalFormat("#.##");
 
+	private static final Log LOG = LogFactory.getLog(WaPlanYearWaterDataService.class);
 	/**
 	 * REMARK
 	 * 分页查询
@@ -199,7 +202,7 @@ public class WaPlanYearWaterDataService {
 					//根据code获取id后存入mysql
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setPlanYear(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setPlanYearAvgWater((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString());
+					waMonthWaterEntity.setPlanYearAvgWater(df.format(Float.parseFloat((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString())));
 					planWaterList.add(waMonthWaterEntity);
 				}
 			}
@@ -221,6 +224,7 @@ public class WaPlanYearWaterDataService {
 			}
 			return result;
 		}catch (Exception e){
+			LOG.error("import error---" + e);
 			return false;
 		}
 	}
