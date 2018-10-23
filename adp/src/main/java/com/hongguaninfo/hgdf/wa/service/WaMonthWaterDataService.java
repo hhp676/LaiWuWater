@@ -347,7 +347,6 @@ public class WaMonthWaterDataService {
 					WaMonthWaterData resultTmp = new WaMonthWaterData();
 					resultTmp = waMonthWaterDataDao.getWaListByEntity(tmp);
 					if(null != resultTmp){  //判断当前单位当月数据是否已存在,存在即先删除在录入
-//						monData.setPlanMonthWater(resultTmp.getPlanMonthWater());   //赋值数据库里面的计划用水信息
 						resultTmp.setActMonthWater(monData.getActMonthWater());
 
 						float planWaterAmount = Float.valueOf(StringUtil.isEmpty(resultTmp.getPlanMonthWater())? "0": resultTmp.getPlanMonthWater());
