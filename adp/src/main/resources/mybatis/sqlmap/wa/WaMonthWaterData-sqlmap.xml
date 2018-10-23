@@ -425,5 +425,47 @@
 		WHERE
             MONTH_WATER_ID_ = #{monthWaterId}
 	</delete>
- 
+
+	<update id="updateMonthDataByEntity" parameterType="WaMonthWaterData">
+		UPDATE WA_MONTH_WATER_DATA wmwd
+		<set>
+			<if test="monthWaterId != null">
+				MONTH_WATER_ID_ = #{monthWaterId} ,
+			</if>
+			<if test="companyId != null">
+				COMPANY_ID_ = #{companyId} ,
+			</if>
+			<if test="monthDate != null">
+				MONTH_DATE_ = #{monthDate} ,
+			</if>
+			<if test="planMonthWater != null">
+				PLAN_MONTH_WATER_ = #{planMonthWater} ,
+			</if>
+			<if test="actMonthWater != null">
+				ACT_MONTH_WATER_ = #{actMonthWater} ,
+			</if>
+			<if test="isOverroof != null">
+				IS_OVERROOF_ = #{isOverroof} ,
+			</if>
+			<if test="isDelte != null">
+				IS_DELTE_ = #{isDelte} ,
+			</if>
+			<if test="crtTime != null">
+				CRT_TIME_ = #{crtTime} ,
+			</if>
+			<if test="updTime != null">
+				UPD_TIME_ = #{updTime},
+			</if>
+			<if test="beyondAmount != null">
+				BEYOND_AMOUNT_ = #{beyondAmount},
+			</if>
+			<if test="feeStandard != null">
+				FEE_STANDARD_ = #{feeStandard}
+			</if>
+
+		</set>
+		WHERE
+		wmwd.COMPANY_ID_ = #{companyId}
+	</update>
+
 </mapper>

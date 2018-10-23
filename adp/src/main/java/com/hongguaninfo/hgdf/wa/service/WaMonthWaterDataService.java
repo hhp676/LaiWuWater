@@ -144,29 +144,33 @@ public class WaMonthWaterDataService {
 	 */
 	public void addWaMonthWaterData (WaMonthWaterData waMonthWaterData, String doType) throws BizException{
 		//先判断是否存在该月数据,存在即只更新计划用水操作
-		WaMonthWaterData tmp = new WaMonthWaterData();
-		tmp.setCompanyId(waMonthWaterData.getCompanyId());
-		tmp.setMonthDate(waMonthWaterData.getMonthDate());
-		tmp.setIsDelte(0);
-		WaMonthWaterData resultTmp = new WaMonthWaterData();
-		resultTmp = waMonthWaterDataDao.getWaListByEntity(tmp);
-		if(null != resultTmp){  //判断当前单位当月数据是否已存在,存在即先删除在录入
-			if ("plan".equals(doType)){  //计划用水操作，需要赋值新进的计划用水
-				resultTmp.setPlanMonthWater(waMonthWaterData.getPlanMonthWater());
-			}else if("act".equals(doType)){ //实际用水操作，需要赋值新进来的实际用水
-				resultTmp.setActMonthWater(waMonthWaterData.getActMonthWater());
+		try {
+			WaMonthWaterData tmp = new WaMonthWaterData();
+			tmp.setCompanyId(waMonthWaterData.getCompanyId());
+			tmp.setMonthDate(waMonthWaterData.getMonthDate());
+			tmp.setIsDelte(0);
+			WaMonthWaterData resultTmp = new WaMonthWaterData();
+			resultTmp = waMonthWaterDataDao.getWaListByEntity(tmp);
+			if(null != resultTmp){  //判断当前单位当月数据是否已存在,存在即先删除在录入
+				if ("plan".equals(doType)){  //计划用水操作，需要赋值新进的计划用水
+					resultTmp.setPlanMonthWater(waMonthWaterData.getPlanMonthWater());
+				}else if("act".equals(doType)){ //实际用水操作，需要赋值新进来的实际用水
+					resultTmp.setActMonthWater(waMonthWaterData.getActMonthWater());
+				}
+
+				waMonthWaterDataDao.update(getEntityByFee(resultTmp));
+				return;
 			}
 
-			waMonthWaterDataDao.update(getEntityByFee(resultTmp));
-			return;
+			///新增数据入库
+			waMonthWaterData.setIsOverroof("0");
+			waMonthWaterData.setIsDelte(0);
+			waMonthWaterData.setCrtTime(new Date());
+			waMonthWaterData.setUpdTime(new Date());
+			waMonthWaterDataDao.save((waMonthWaterData));
+		}catch (Exception e){
+			LOG.error("month actwater error=" + e);
 		}
-
-		///新增数据入库
-		waMonthWaterData.setIsOverroof("0");
-		waMonthWaterData.setIsDelte(0);
-        waMonthWaterData.setCrtTime(new Date());
-        waMonthWaterData.setUpdTime(new Date());
-		waMonthWaterDataDao.save((waMonthWaterData));
 	}
 
 	/**
@@ -254,7 +258,20 @@ public class WaMonthWaterDataService {
 	public void deleteWaMonthWaterData(int id) throws BizException{
 		waMonthWaterDataDao.delete(id);
 	}
-	
+
+	/**
+	 * REMARK
+	 * 根据companyid逻辑删除
+	 * Through the id delete a data
+	 */
+	public void updateMonthDataByEntity(int companyId) throws BizException{
+		WaMonthWaterData waMonthWaterData = new WaMonthWaterData();
+		waMonthWaterData.setCompanyId(String.valueOf(companyId));
+		waMonthWaterData.setIsDelte(1);
+		waMonthWaterDataDao.updateMonthDataByEntity(waMonthWaterData);
+	}
+
+
 	/**
 	 * REMARK
 	 * 物理删除
@@ -345,6 +362,7 @@ public class WaMonthWaterDataService {
 			}
 			return result;
 		}catch (Exception e){
+			LOG.error("act water error==" + e);
 			return false;
 		}
 	}
@@ -393,6 +411,7 @@ public class WaMonthWaterDataService {
 			}
 			return waMonthWaterDataList;
 		}catch (Exception e){
+			LOG.error("actwater error>>" + e);
 			return null;
 		}
 	}

@@ -279,4 +279,41 @@
 	</delete>
 
 
+
+	<update id="updatePlanYearDataByEntity" parameterType="WaPlanYearWaterData">
+		UPDATE WA_PLAN_YEAR_WATER_DATA wpywd
+		<set>
+			<if test="planWaterId != null">
+				PLAN_WATER_ID_ = #{planWaterId} ,
+			</if>
+			<if test="planYear != null">
+				PLAN_YEAR_ = #{planYear} ,
+			</if>
+			<if test="planYearAvgWater != null">
+				PLAN_YEAR_AVG_WATER_ = #{planYearAvgWater} ,
+			</if>
+			<if test="planYearEditWater != null">
+				PLAN_YEAR_EDIT_WATER_ = #{planYearEditWater} ,
+			</if>
+			<if test="actYearWater != null">
+				ACT_YEAR_WATER_ = #{actYearWater} ,
+			</if>
+			<if test="isOverproof != null">
+				IS_OVERPROOF_ = #{isOverproof} ,
+			</if>
+			<if test="isDelte != null">
+				IS_DELTE_ = #{isDelte} ,
+			</if>
+			<if test="crtTime != null">
+				CRT_TIME_ = #{crtTime} ,
+			</if>
+			<if test="updTime != null">
+				UPD_TIME_ = #{updTime}
+			</if>
+
+		</set>
+		WHERE
+		wpywd.COMPANY_ID_ = #{companyId}
+	</update>
+
 </mapper>

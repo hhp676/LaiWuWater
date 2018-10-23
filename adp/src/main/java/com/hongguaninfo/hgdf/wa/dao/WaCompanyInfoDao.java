@@ -35,4 +35,5 @@ public class WaCompanyInfoDao extends BaseDao<WaCompanyInfo, WaCompanyInfoMapper
     public WaCompanyInfo getEntityByCode(WaCompanyInfo entity) {
         return getMapperByType(WaCompanyInfoMapper.class).getEntityByCode(entity);
     }
+
 }

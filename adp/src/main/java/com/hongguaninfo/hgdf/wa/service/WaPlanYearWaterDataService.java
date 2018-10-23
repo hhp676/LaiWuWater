@@ -20,7 +20,6 @@ import com.hongguaninfo.hgdf.wa.dao.WaPlanYearWaterDataDao;
 import com.hongguaninfo.hgdf.wa.entity.WaCompanyInfo;
 import com.hongguaninfo.hgdf.wa.entity.WaPlanYearWaterData;
 import com.hongguaninfo.hgdf.wa.utils.ExcelUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -112,7 +111,19 @@ public class WaPlanYearWaterDataService {
 	public void deleteWaPlanYearWaterData(int id) throws BizException{
 		waPlanYearWaterDataDao.delete(id);
 	}
-	
+
+	/**
+	 * 根据companyId逻辑删除
+	 * @param companyId
+	 * @throws BizException
+	 */
+	public void updatePlanYearDataByEntity(int companyId) throws BizException{
+		WaPlanYearWaterData waPlanYearWaterData = new WaPlanYearWaterData();
+		waPlanYearWaterData.setCompanyId(String.valueOf(companyId));
+		waPlanYearWaterData.setIsDelte(1);
+		waPlanYearWaterDataDao.updatePlanYearDataByEntity(waPlanYearWaterData);
+	}
+
 	/**
 	 * REMARK
 	 * 物理删除
@@ -180,14 +191,11 @@ public class WaPlanYearWaterDataService {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean doReadXls(InputStream is) throws Exception{
+	public String doReadXls(InputStream is) throws Exception{
 		try {
+			String resultCon = "success";
 			HSSFWorkbook workBook = new HSSFWorkbook(is);
 			HSSFSheet sheet = workBook.getSheetAt(0);
-			boolean result=true;//返回结果标识
-			boolean cell_0=true,cell_1=true,cell_2=true,cell_3=true,cell_4=true;//单元格校验通过与否的标识
-			boolean cell_5=true,cell_6=true,cell_7=true,cell_8=true,cell_9=true;
-			List<WaPlanYearWaterData> planWaterList = new ArrayList<WaPlanYearWaterData>();//创建list，用做中间变量，暂时存放user
 
 			for (int rowNum = 1;rowNum <= sheet.getLastRowNum();rowNum++) {
 				HSSFRow row = sheet.getRow(rowNum);
@@ -197,35 +205,54 @@ public class WaPlanYearWaterDataService {
 						continue;
 					}
 					WaCompanyInfo com = new WaCompanyInfo();
-					com.setCompanyCode(ExcelUtil.getCellValue(row.getCell(0)));
+					String companyCode = ExcelUtil.getCellValue(row.getCell(0));
+					com.setCompanyCode(companyCode);
 					WaCompanyInfo resultCom = waCompanyInfoDao.getEntityByCode(com);
-					//根据code获取id后存入mysql
+					if (StringUtil.isNull(resultCom)){
+						LOG.error("row is["+rowNum+"], companyCode ["+companyCode+"] is not exit");
+						resultCon = "第" + (rowNum+1) + "行，节水代码为 " + companyCode + " 的单位信息不存在，请修改";
+						return resultCon;
+					}
+
+					//根据code获取id后拼装list
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setPlanYear(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setPlanYearAvgWater(df.format(Float.parseFloat((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString())));
-					planWaterList.add(waMonthWaterEntity);
-				}
-			}
-			if(result){
-				for(WaPlanYearWaterData monData : planWaterList){
-					WaPlanYearWaterData tmp = new WaPlanYearWaterData();
-					tmp.setCompanyId(monData.getCompanyId());
-					tmp.setPlanYear(monData.getPlanYear());
-					tmp.setIsDelte(0);
-					List<WaPlanYearWaterData> resultTmpList = new ArrayList<>();
-					resultTmpList = waPlanYearWaterDataDao.getList(tmp);
-					if(resultTmpList.size()>0){  //判断当前单位当年数据是否已存在,存在即先删除在录入
-						tmp.setPlanWaterId(resultTmpList.get(0).getPlanWaterId());
-						waPlanYearWaterDataDao.update(tmp);
-					}else {
-						addWaPlanYearWaterData(monData);
+
+					try {
+						waMonthWaterEntity.setPlanYearAvgWater(df.format(Float.parseFloat((StringUtil.isNull(row.getCell(3)))? "0": row.getCell(3).toString())));
+					}catch (Exception e){
+						LOG.error("row is["+rowNum+"], companyCode ["+companyCode+"] is not exit");
+						resultCon = "第" + (rowNum+1) + "行，计划用水量有问题，请修改";
+						return resultCon;
 					}
+
+					try {
+						WaPlanYearWaterData tmp = new WaPlanYearWaterData();
+						tmp.setCompanyId(waMonthWaterEntity.getCompanyId());
+						tmp.setPlanYear(waMonthWaterEntity.getPlanYear());
+						tmp.setIsDelte(0);
+
+						//判断当前单位当年数据是否已存在,存在即更新操作，不存在则新增
+						List<WaPlanYearWaterData> resultTmpList= waPlanYearWaterDataDao.getList(tmp);
+						if(resultTmpList.size()>0){
+							tmp.setPlanWaterId(resultTmpList.get(0).getPlanWaterId());
+							tmp.setPlanYearAvgWater(waMonthWaterEntity.getPlanYearAvgWater());
+							waPlanYearWaterDataDao.update(tmp);
+						}else {
+							addWaPlanYearWaterData(waMonthWaterEntity);
+						}
+					}catch (Exception e){
+						LOG.error("import mysql is error" +e);
+						return "录入至系统失败，请检查文件数据";
+					}
+
 				}
 			}
-			return result;
+
+			return resultCon;
 		}catch (Exception e){
 			LOG.error("import error---" + e);
-			return false;
+			return "导入失败，请检查文件数据";
 		}
 	}
 

@@ -342,9 +342,9 @@
 
 	<!-- delete  -->
 	<delete id="delete" parameterType="WaCompanyInfo">
-		DELETE FROM WA_COMPANY_INFO wci
+		DELETE FROM WA_COMPANY_INFO
 		WHERE
-            wci.COMPANY_ID_ = #{companyId}
+            COMPANY_ID_ = #{companyId}
 	</delete>
- 
+
 </mapper>

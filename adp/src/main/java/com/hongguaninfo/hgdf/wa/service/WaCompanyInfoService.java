@@ -15,6 +15,8 @@ import com.hongguaninfo.hgdf.adp.core.exception.BizException;
 import com.hongguaninfo.hgdf.adp.core.utils.generator.DbIdGenerator;
 import com.hongguaninfo.hgdf.adp.service.sys.SysDatadicItemService;
 import com.hongguaninfo.hgdf.core.utils.StringUtil;
+import com.hongguaninfo.hgdf.core.utils.logging.Log;
+import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
 import com.hongguaninfo.hgdf.core.utils.page.Page;
 import com.hongguaninfo.hgdf.wa.dao.WaCompanyInfoDao;
 import com.hongguaninfo.hgdf.wa.entity.WaCompanyInfo;
@@ -46,6 +48,7 @@ public class WaCompanyInfoService {
 	@Autowired
 	private DbIdGenerator dbIdGenerator;
 
+	private static final Log LOG = LogFactory.getLog(WaCompanyInfoService.class);
 	/**
 	 * REMARK
 	 * 分页查询
@@ -82,14 +85,16 @@ public class WaCompanyInfoService {
 		//查证单位名称 节点信息是否存在
 		WaCompanyInfo infoCode = new WaCompanyInfo();
 		infoCode.setCompanyCode(waCompanyInfo.getCompanyCode());
-		if (waCompanyInfoDao.getEntityByCode(infoCode) != null){
+
+
+		if (waCompanyInfoDao.getList(infoCode).size() > 0){
 			throw new BizException(JSON.toJSONString(new CheckFieldResult(
 					"companyCode", "节水代码已经存在")));
 		}
 
 		WaCompanyInfo infoName = new WaCompanyInfo();
-		infoName.setCompanyCode(waCompanyInfo.getCompanyName().trim());
-		if(waCompanyInfoDao.getEntityByCode(infoName) != null){
+		infoName.setCompanyName(waCompanyInfo.getCompanyName().trim());
+		if(waCompanyInfoDao.getList(infoName).size() > 0){
 			throw new BizException(JSON.toJSONString(new CheckFieldResult(
 					"companyName", "单位名称已经存在")));
 		}
@@ -100,23 +105,17 @@ public class WaCompanyInfoService {
 		waCompanyInfoDao.save(waCompanyInfo);
 	}
 
-	public void addWithExcel (WaCompanyInfo waCompanyInfo) throws BizException{
-		//查证单位名称 节点信息是否存在
-		WaCompanyInfo infoCode = new WaCompanyInfo();
-		infoCode.setCompanyCode(waCompanyInfo.getCompanyCode());
-		WaCompanyInfo checkEntity = waCompanyInfoDao.getEntityByCode(infoCode);
-		if (null != checkEntity){
-			/*throw new BizException(JSON.toJSONString(new CheckFieldResult(
-					"companyCode", "节水代码已经存在")));*/
-			infoCode.setCompanyId(checkEntity.getCompanyId());
-			updateWaCompanyInfo(infoCode);
-			return;
+	public void addWithExcel(WaCompanyInfo waCompanyInfo) throws BizException{
+		try {
+			waCompanyInfo.setIsDelete(0);
+			waCompanyInfo.setCrtTime(new Date());
+			waCompanyInfo.setUpdTime(new Date());
+			waCompanyInfoDao.save(waCompanyInfo);
+		}catch (Exception e){
+			LOG.error("import company info error," + e);
+			throw new BizException();
 		}
 
-		waCompanyInfo.setIsDelete(0);
-		waCompanyInfo.setCrtTime(new Date());
-		waCompanyInfo.setUpdTime(new Date());
-		waCompanyInfoDao.save(waCompanyInfo);
 	}
 
 	/**
@@ -136,7 +135,9 @@ public class WaCompanyInfoService {
 	 * Through the id delete a data
 	 */
 	public void deleteWaCompanyInfo(int companyId) throws BizException{
-		waCompanyInfoDao.delete(companyId);
+		WaCompanyInfo waCompanyInfo = new WaCompanyInfo();
+		waCompanyInfo.setCompanyId(companyId);
+		waCompanyInfoDao.delete(waCompanyInfo);
 	}
 	
 	/**
@@ -146,10 +147,10 @@ public class WaCompanyInfoService {
 	 */
 	public void deleteWaCompanyInfoLogic(int companyId) throws BizException{
         WaCompanyInfo waCompanyInfo = new WaCompanyInfo();
-        waCompanyInfo.setUpdTime(new Date());
         waCompanyInfo.setCompanyId(companyId);
         waCompanyInfo.setIsDelete(1);
         waCompanyInfoDao.update(waCompanyInfo);
+
 	}	
 	
 
@@ -176,15 +177,11 @@ public class WaCompanyInfoService {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean doReadXls(InputStream is) throws Exception{
+	public String doReadXls(InputStream is) throws Exception{
 		try {
 			HSSFWorkbook workBook = new HSSFWorkbook(is);
 			HSSFSheet sheet = workBook.getSheetAt(0);
-			boolean result=true;//返回结果标识
-			boolean cell_0=true,cell_1=true,cell_2=true,cell_3=true,cell_4=true;//单元格校验通过与否的标识
-			boolean cell_5=true,cell_6=true,cell_7=true,cell_8=true,cell_9=true;
-			List<WaCompanyInfo> companyList = new ArrayList<WaCompanyInfo>();//创建list，用做中间变量，暂时存放user
-
+			String result = "success";//返回结果标识
 			for (int rowNum = 1;rowNum <= sheet.getLastRowNum();rowNum++) {
 				HSSFRow row = sheet.getRow(rowNum);
 				WaCompanyInfo companyEntity = new WaCompanyInfo();
@@ -223,7 +220,19 @@ public class WaCompanyInfoService {
 					}
 
 					companyEntity.setCompanyCode(ExcelUtil.getCellValue(row.getCell(0)));
+					//判断是否已存在单位信息
+					if(waCompanyInfoDao.getList(companyEntity).size() > 0 ){
+						return  "节水代码为 ["+ companyEntity.getCompanyCode() +"]已经存在，请重新操作";
+					}
+
 					companyEntity.setCompanyName(ExcelUtil.getCellValue(row.getCell(1)));
+					WaCompanyInfo checkEntity = new WaCompanyInfo();
+					checkEntity.setCompanyName(companyEntity.getCompanyName());
+					//判断是否已存在单位信息
+					if(waCompanyInfoDao.getList(checkEntity).size() > 0 ){
+						return  "单位名称 ["+companyEntity.getCompanyName()+"]已经存在，请重新操作";
+					}
+
 					companyEntity.setContactNum(ExcelUtil.getCellValue(row.getCell(2)));
 					companyEntity.setContactMan(ExcelUtil.getCellValue(row.getCell(3)));
 					companyEntity.setDepartment(ExcelUtil.getCellValue(row.getCell(4)));
@@ -237,18 +246,14 @@ public class WaCompanyInfoService {
 					companyEntity.setWaterType(waterTypeVal);
 					companyEntity.setIsImport(isimportVal);
 					companyEntity.setDescr(ExcelUtil.getCellValue(row.getCell(14)));
+					addWithExcel(companyEntity);
+				}
+			}
 
-					companyList.add(companyEntity);
-				}
-			}
-			if(result){
-				for(int i=0;i<companyList.size();i++){
-					addWithExcel(companyList.get(i));
-				}
-			}
 			return result;
 		}catch (Exception e){
-			return false;
+			System.out.println("import company error----" + e);
+			return "单位信息数据导入失败，请从新操作";
 		}
 	}
 
