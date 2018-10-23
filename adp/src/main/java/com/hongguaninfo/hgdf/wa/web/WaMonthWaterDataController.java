@@ -519,12 +519,7 @@ public class WaMonthWaterDataController {
             String suffix = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
             if (".xls".equals(suffix)) {
                 if (!multipartFile.isEmpty()) {
-                    tag = waMonthWaterDataService.doReadXls(multipartFile.getInputStream());
-                    if(tag){
-                        result = "success";
-                    }else{
-                        result = "导入失败，请检查导入文件内容格式是否正确。";
-                    }
+                    result = waMonthWaterDataService.doReadXls(multipartFile.getInputStream());
                 }
             } else {
                 result = "导入失败,请导入xls文件";
@@ -579,33 +574,14 @@ public class WaMonthWaterDataController {
                 String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
                 if (!".xls".equals(suffix)) {
                     errList.add(file.getOriginalFilename()+" 文件格式有误");
-                    continue;
+                    break;
                 }
-
-                List<WaMonthWaterData> resEntityList = waMonthWaterDataService.getTagFile(file);
-                for (WaMonthWaterData resEntity : resEntityList){
-                    if (null != resEntity){ //获取到的非空对象
-                        WaMonthWaterData checkData = waMonthWaterDataService.getWaMonthWaterDataById(resEntity);
-                        if(null != checkData){ //判断数据库是否存在此对象
-                            resEntity.setMonthWaterId(checkData.getMonthWaterId());
-                            resEntity.setActMonthWater(checkData.getActMonthWater());
-                            //存在情况下更新
-                            waMonthWaterDataService.updateWaMonthWaterData(resEntity, "");
-                        }else {
-                            //不存在情况下新增
-                            waMonthWaterDataService.addWaMonthWaterData(resEntity, "");
-                        }
-                    }
-                }
-
+                result = waMonthWaterDataService.getTagFile(file);
             }
-
             if (errList.size()>0){
                 result = errList.toString();
             }
-
         } catch (Exception ex) {
-            result = "导入失败，请检查正确性。";
             ex.printStackTrace();
         }
         Map resultMap = new HashMap();
