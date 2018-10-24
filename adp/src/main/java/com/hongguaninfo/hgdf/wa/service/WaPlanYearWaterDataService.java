@@ -88,7 +88,7 @@ public class WaPlanYearWaterDataService {
 		}
 		waPlanYearWaterData.setCrtTime(new Date());
 		waPlanYearWaterData.setUpdTime(new Date());
-		waPlanYearWaterDataDao.save(waPlanYearWaterData);
+		waPlanYearWaterDataDao.update(waPlanYearWaterData);
 	}
 
 	/**
@@ -199,13 +199,14 @@ public class WaPlanYearWaterDataService {
 
 			for (int rowNum = 1;rowNum <= sheet.getLastRowNum();rowNum++) {
 				HSSFRow row = sheet.getRow(rowNum);
-				WaPlanYearWaterData waMonthWaterEntity = new WaPlanYearWaterData();
+				WaPlanYearWaterData waPlanYearWaterData = new WaPlanYearWaterData();
 				if (row != null) {
-					if(StringUtil.isEmpty(ExcelUtil.getCellValue(row.getCell(0)))){
+					String companyCode = ExcelUtil.getCellValue(row.getCell(0));
+					if(StringUtil.isEmpty(companyCode)){
 						continue;
 					}
 					WaCompanyInfo com = new WaCompanyInfo();
-					String companyCode = ExcelUtil.getCellValue(row.getCell(0));
+
 					com.setCompanyCode(companyCode);
 					WaCompanyInfo resultCom = waCompanyInfoDao.getEntityByCode(com);
 					if (StringUtil.isNull(resultCom)){
@@ -215,11 +216,11 @@ public class WaPlanYearWaterDataService {
 					}
 
 					//根据code获取id后拼装list
-					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
-					waMonthWaterEntity.setPlanYear(ExcelUtil.getCellValue(row.getCell(2)));
-
+					waPlanYearWaterData.setCompanyId(String.valueOf(resultCom.getCompanyId()));
+					waPlanYearWaterData.setPlanYear(ExcelUtil.getCellValue(row.getCell(2)));
+					//判断年计划用水量是否正常
 					try {
-						waMonthWaterEntity.setPlanYearAvgWater(df.format(Float.parseFloat((StringUtil.isNull(row.getCell(3)))? "0": row.getCell(3).toString())));
+						waPlanYearWaterData.setPlanYearAvgWater(df.format(Float.parseFloat((StringUtil.isNull(row.getCell(3)))? "0": row.getCell(3).toString())));
 					}catch (Exception e){
 						LOG.error("row is["+rowNum+"], companyCode ["+companyCode+"] is not exit");
 						resultCon = "第" + (rowNum+1) + "行，计划用水量有问题，请修改";
@@ -228,18 +229,19 @@ public class WaPlanYearWaterDataService {
 
 					try {
 						WaPlanYearWaterData tmp = new WaPlanYearWaterData();
-						tmp.setCompanyId(waMonthWaterEntity.getCompanyId());
-						tmp.setPlanYear(waMonthWaterEntity.getPlanYear());
-						tmp.setIsDelte(0);
-
+						tmp.setCompanyId(waPlanYearWaterData.getCompanyId());
+						tmp.setPlanYear(waPlanYearWaterData.getPlanYear());
+//						tmp.setIsDelte(0);
 						//判断当前单位当年数据是否已存在,存在即更新操作，不存在则新增
 						List<WaPlanYearWaterData> resultTmpList= waPlanYearWaterDataDao.getList(tmp);
 						if(resultTmpList.size()>0){
 							tmp.setPlanWaterId(resultTmpList.get(0).getPlanWaterId());
-							tmp.setPlanYearAvgWater(waMonthWaterEntity.getPlanYearAvgWater());
+							tmp.setPlanYearAvgWater(waPlanYearWaterData.getPlanYearAvgWater());
+							tmp.setIsDelte(0);
 							waPlanYearWaterDataDao.update(tmp);
 						}else {
-							addWaPlanYearWaterData(waMonthWaterEntity);
+							waPlanYearWaterData.setIsDelte(0);
+							addWaPlanYearWaterData(waPlanYearWaterData);
 						}
 					}catch (Exception e){
 						LOG.error("import mysql is error" +e);

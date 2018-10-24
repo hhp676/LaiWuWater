@@ -194,7 +194,7 @@ public class WaMonthWaterDataService {
 		String result = "";
 		float beyondAmount = actWaterAmount - planWaterAmount;
 		float beyondRate = (float) beyondAmount/planWaterAmount;
-		if (actWaterAmount == 0 || planWaterAmount == 0){  //实际用水未生成情况下
+		if (actWaterAmount == 0 || planWaterAmount == 0 || actWaterAmount == 0.0 || planWaterAmount == 0.0){  //实际用水未生成情况下
 			return "";
 		}
 
@@ -239,7 +239,7 @@ public class WaMonthWaterDataService {
 		float planWaterAmount = Float.parseFloat(StringUtil.isEmpty(waMonthWaterData.getPlanMonthWater())? "0": waMonthWaterData.getPlanMonthWater());
 		float actWaterAmount = Float.parseFloat(StringUtil.isEmpty(waMonthWaterData.getActMonthWater())? "0": waMonthWaterData.getActMonthWater());
 		float beyondAmount = actWaterAmount - planWaterAmount;
-		String beyondResult = beyondAmount<0 ? "0" : String.valueOf(beyondAmount);
+		String beyondResult = beyondAmount<0 ? "0" : String.valueOf(df.format(beyondAmount));
 		waMonthWaterData.setBeyondAmount(beyondResult);
 		if (beyondAmount > 0){  //计划<实际则超标
 			waMonthWaterData.setIsOverroof("1");
@@ -356,15 +356,20 @@ public class WaMonthWaterDataService {
 						float planWaterAmount = Float.valueOf(StringUtil.isEmpty(resultTmp.getPlanMonthWater())? "0": resultTmp.getPlanMonthWater());
 						float actWaterAmount = Float.valueOf(StringUtil.isEmpty(resultTmp.getActMonthWater())? "0": resultTmp.getActMonthWater());
 						resultTmp.setFeeStandard(getBeyondFee(actWaterAmount, planWaterAmount));  //获取收费标准
+						String beyondAmount = (actWaterAmount - planWaterAmount)>=0 ? df.format(actWaterAmount - planWaterAmount): "0";
+						String isoverroof = (actWaterAmount - planWaterAmount)>=0 ? "1" : "0";
+						resultTmp.setBeyondAmount(beyondAmount);
+						resultTmp.setIsOverroof(isoverroof);
 						waMonthWaterDataDao.update(resultTmp);
+					}else {
+						//不存在则新增
+						waMonthWaterEntity.setIsOverroof("0");
+						waMonthWaterEntity.setIsDelte(0);
+						waMonthWaterEntity.setCrtTime(new Date());
+						waMonthWaterEntity.setUpdTime(new Date());
+						waMonthWaterDataDao.save(waMonthWaterEntity);
 					}
 
-					//不存在则新增
-					waMonthWaterEntity.setIsOverroof("0");
-					waMonthWaterEntity.setIsDelte(0);
-					waMonthWaterEntity.setCrtTime(new Date());
-					waMonthWaterEntity.setUpdTime(new Date());
-					waMonthWaterDataDao.save(waMonthWaterEntity);
 				}
 			}
 
@@ -375,9 +380,9 @@ public class WaMonthWaterDataService {
 		return result;
 	}
 
-	public String getTagFile(MultipartFile file){
+	public String insertTagFile(MultipartFile file){
 		try {
-			return getXlsContnetList(file.getInputStream());
+			return insertXlsContnetList(file.getInputStream());
 		}catch (Exception e){
 			LOG.error("获取数据出错", e);
 			return "获取数据失败";
@@ -390,7 +395,7 @@ public class WaMonthWaterDataService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String getXlsContnetList(InputStream is) throws Exception{
+	public String insertXlsContnetList(InputStream is) throws Exception{
 		String result = "success";
 		try {
 			HSSFWorkbook workBook = new HSSFWorkbook(is);
@@ -436,7 +441,12 @@ public class WaMonthWaterDataService {
 					}else {
 						//不存在情况下新增
 						waMonthWaterEntity.setPlanMonthWater(planMonthWater);  //读取新增计划用水
-						addWaMonthWaterData(waMonthWaterEntity, "");
+						///新增数据入库
+						waMonthWaterEntity.setIsOverroof("0");
+						waMonthWaterEntity.setIsDelte(0);
+//						waMonthWaterEntity.setCrtTime(new Date());
+//						waMonthWaterEntity.setUpdTime(new Date());
+						waMonthWaterDataDao.save(waMonthWaterEntity);
 					}
 				}
 			}

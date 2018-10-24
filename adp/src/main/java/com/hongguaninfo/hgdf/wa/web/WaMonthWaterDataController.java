@@ -559,8 +559,8 @@ public class WaMonthWaterDataController {
      * @throws Exception
      */
     @RequestMapping("/getSumExcel")
-    @UserLog(code = "getSumExcel", name = "导入用水信息", remarkClass = WaMonthWaterDataController.class)
-    public void getSumExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @UserLog(code = "importSumExcel", name = "导入用水信息", remarkClass = WaMonthWaterDataController.class)
+    public void importSumExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String result = "success";
         boolean tag = true;//doReadXls返回结果的标识
         try {
@@ -576,7 +576,7 @@ public class WaMonthWaterDataController {
                     errList.add(file.getOriginalFilename()+" 文件格式有误");
                     break;
                 }
-                result = waMonthWaterDataService.getTagFile(file);
+                result = waMonthWaterDataService.insertTagFile(file);
             }
             if (errList.size()>0){
                 result = errList.toString();
