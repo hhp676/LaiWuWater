@@ -40,9 +40,9 @@ public class WaPlanYearWaterDataDao extends BaseDao<WaPlanYearWaterData, WaPlanY
 
     }
 
+    @Override
+    public void updatePlanYearDataByEntity(WaPlanYearWaterData waterData) {
+        getMapperByType(WaPlanYearWaterDataMapper.class).updatePlanYearDataByEntity(waterData);
+    }
 
-   /* @Override
-    public List<WaPlanYearWaterData> getPlanWaterList(WaPlanYearWaterData waterData) {
-        return getMapperByType(WaPlanYearWaterDataMapper.class).getPlanWaterList(waterData);
-    }*/
 }

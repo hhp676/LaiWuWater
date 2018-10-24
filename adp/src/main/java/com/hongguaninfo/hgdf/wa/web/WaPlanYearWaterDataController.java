@@ -324,19 +324,19 @@ public class WaPlanYearWaterDataController {
             String suffix = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
             if (".xls".equals(suffix)) {
                 if (!multipartFile.isEmpty()) {
-                    tag = waPlanYearWaterDataService.doReadXls(multipartFile.getInputStream());
-                    if(tag){
+                    result = waPlanYearWaterDataService.doReadXls(multipartFile.getInputStream());
+                    /*if(tag){
                         result = "success";
                     }else{
                         result = "导入失败，请检查导入文件内容格式是否正确。";
-                    }
+                    }*/
                 }
             } else {
                 result = "导入失败,请导入xls文件";
             }
         } catch (Exception ex) {
             result = "导入失败，请检查导入Excel的模板是否符合要求、数据的唯一性是否正确。";
-            ex.printStackTrace();
+           LOG.error("import error ,please check==" +ex);
         }
         Map resultMap = new HashMap();
         resultMap.put("result",result);
