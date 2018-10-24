@@ -54,7 +54,7 @@ public class ExcelUtil {
             return "";
         }
 
-        return strCell;
+        return strCell.trim();
     }
 
     /**

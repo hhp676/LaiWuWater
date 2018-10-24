@@ -30,7 +30,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -144,29 +143,33 @@ public class WaMonthWaterDataService {
 	 */
 	public void addWaMonthWaterData (WaMonthWaterData waMonthWaterData, String doType) throws BizException{
 		//先判断是否存在该月数据,存在即只更新计划用水操作
-		WaMonthWaterData tmp = new WaMonthWaterData();
-		tmp.setCompanyId(waMonthWaterData.getCompanyId());
-		tmp.setMonthDate(waMonthWaterData.getMonthDate());
-		tmp.setIsDelte(0);
-		WaMonthWaterData resultTmp = new WaMonthWaterData();
-		resultTmp = waMonthWaterDataDao.getWaListByEntity(tmp);
-		if(null != resultTmp){  //判断当前单位当月数据是否已存在,存在即先删除在录入
-			if ("plan".equals(doType)){  //计划用水操作，需要赋值新进的计划用水
-				resultTmp.setPlanMonthWater(waMonthWaterData.getPlanMonthWater());
-			}else if("act".equals(doType)){ //实际用水操作，需要赋值新进来的实际用水
-				resultTmp.setActMonthWater(waMonthWaterData.getActMonthWater());
+		try {
+			WaMonthWaterData tmp = new WaMonthWaterData();
+			tmp.setCompanyId(waMonthWaterData.getCompanyId());
+			tmp.setMonthDate(waMonthWaterData.getMonthDate());
+			tmp.setIsDelte(0);
+			WaMonthWaterData resultTmp = new WaMonthWaterData();
+			resultTmp = waMonthWaterDataDao.getWaListByEntity(tmp);
+			if(null != resultTmp){  //判断当前单位当月数据是否已存在,存在即先删除在录入
+				if ("plan".equals(doType)){  //计划用水操作，需要赋值新进的计划用水
+					resultTmp.setPlanMonthWater(waMonthWaterData.getPlanMonthWater());
+				}else if("act".equals(doType)){ //实际用水操作，需要赋值新进来的实际用水
+					resultTmp.setActMonthWater(waMonthWaterData.getActMonthWater());
+				}
+
+				waMonthWaterDataDao.update(getEntityByFee(resultTmp));
+				return;
 			}
 
-			waMonthWaterDataDao.update(getEntityByFee(resultTmp));
-			return;
+			///新增数据入库
+			waMonthWaterData.setIsOverroof("0");
+			waMonthWaterData.setIsDelte(0);
+			waMonthWaterData.setCrtTime(new Date());
+			waMonthWaterData.setUpdTime(new Date());
+			waMonthWaterDataDao.save((waMonthWaterData));
+		}catch (Exception e){
+			LOG.error("month actwater error=" + e);
 		}
-
-		///新增数据入库
-		waMonthWaterData.setIsOverroof("0");
-		waMonthWaterData.setIsDelte(0);
-        waMonthWaterData.setCrtTime(new Date());
-        waMonthWaterData.setUpdTime(new Date());
-		waMonthWaterDataDao.save((waMonthWaterData));
 	}
 
 	/**
@@ -191,7 +194,7 @@ public class WaMonthWaterDataService {
 		String result = "";
 		float beyondAmount = actWaterAmount - planWaterAmount;
 		float beyondRate = (float) beyondAmount/planWaterAmount;
-		if (actWaterAmount == 0 || planWaterAmount == 0){  //实际用水未生成情况下
+		if (actWaterAmount == 0 || planWaterAmount == 0 || actWaterAmount == 0.0 || planWaterAmount == 0.0){  //实际用水未生成情况下
 			return "";
 		}
 
@@ -236,7 +239,7 @@ public class WaMonthWaterDataService {
 		float planWaterAmount = Float.parseFloat(StringUtil.isEmpty(waMonthWaterData.getPlanMonthWater())? "0": waMonthWaterData.getPlanMonthWater());
 		float actWaterAmount = Float.parseFloat(StringUtil.isEmpty(waMonthWaterData.getActMonthWater())? "0": waMonthWaterData.getActMonthWater());
 		float beyondAmount = actWaterAmount - planWaterAmount;
-		String beyondResult = beyondAmount<0 ? "0" : String.valueOf(beyondAmount);
+		String beyondResult = beyondAmount<0 ? "0" : String.valueOf(df.format(beyondAmount));
 		waMonthWaterData.setBeyondAmount(beyondResult);
 		if (beyondAmount > 0){  //计划<实际则超标
 			waMonthWaterData.setIsOverroof("1");
@@ -254,7 +257,20 @@ public class WaMonthWaterDataService {
 	public void deleteWaMonthWaterData(int id) throws BizException{
 		waMonthWaterDataDao.delete(id);
 	}
-	
+
+	/**
+	 * REMARK
+	 * 根据companyid逻辑删除
+	 * Through the id delete a data
+	 */
+	public void updateMonthDataByEntity(int companyId) throws BizException{
+		WaMonthWaterData waMonthWaterData = new WaMonthWaterData();
+		waMonthWaterData.setCompanyId(String.valueOf(companyId));
+		waMonthWaterData.setIsDelte(1);
+		waMonthWaterDataDao.updateMonthDataByEntity(waMonthWaterData);
+	}
+
+
 	/**
 	 * REMARK
 	 * 物理删除
@@ -295,14 +311,11 @@ public class WaMonthWaterDataService {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean doReadXls(InputStream is) throws Exception{
+	public String doReadXls(InputStream is) throws Exception{
+		String result = "success";//返回结果标识
 		try {
 			HSSFWorkbook workBook = new HSSFWorkbook(is);
 			HSSFSheet sheet = workBook.getSheetAt(0);
-			boolean result=true;//返回结果标识
-			boolean cell_0=true,cell_1=true,cell_2=true,cell_3=true,cell_4=true;//单元格校验通过与否的标识
-			boolean cell_5=true,cell_6=true,cell_7=true,cell_8=true,cell_9=true;
-			List<WaMonthWaterData> monthWaterList = new ArrayList<WaMonthWaterData>();//创建list，用做中间变量，暂时存放user
 
 			for (int rowNum = 1;rowNum <= sheet.getLastRowNum();rowNum++) {
 				HSSFRow row = sheet.getRow(rowNum);
@@ -312,51 +325,68 @@ public class WaMonthWaterDataService {
 						continue;
 					}
 					WaCompanyInfo com = new WaCompanyInfo();
-					com.setCompanyCode(ExcelUtil.getCellValue(row.getCell(0)));
+					String companyCode = ExcelUtil.getCellValue(row.getCell(0));
+					com.setCompanyCode(companyCode);
 					WaCompanyInfo resultCom = waCompanyInfoDao.getEntityByCode(com);
+					if (StringUtil.isNull(resultCom)){
+						LOG.error("row is["+rowNum+"], companyCode ["+companyCode+"] is not exit");
+						result = "第" + (rowNum+1) + "行，节水代码为 " + companyCode + " 的单位信息不存在，请修改";
+						return result;
+					}
+
 					//根据code获取id后存入mysql
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setMonthDate(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setActMonthWater(df.format(Float.parseFloat((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString()))); //df.format(Float.parseFloat(
-					monthWaterList.add(waMonthWaterEntity);
-				}
-			}
-			if(result){
-				for(WaMonthWaterData monData : monthWaterList){
-					WaMonthWaterData tmp = new WaMonthWaterData();
-					tmp.setCompanyId(monData.getCompanyId());
-					tmp.setMonthDate(monData.getMonthDate());
-					tmp.setIsDelte(0);
-					WaMonthWaterData resultTmp = new WaMonthWaterData();
-					resultTmp = waMonthWaterDataDao.getWaListByEntity(tmp);
-					if(null != resultTmp){  //判断当前单位当月数据是否已存在,存在即先删除在录入
-//						monData.setPlanMonthWater(resultTmp.getPlanMonthWater());   //赋值数据库里面的计划用水信息
-						resultTmp.setActMonthWater(monData.getActMonthWater());
 
+					try {
+						waMonthWaterEntity.setActMonthWater(df.format(Float.parseFloat((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString()))); //df.format(Float.parseFloat(
+					}catch (Exception e){
+						LOG.error("row is["+rowNum+"], companyCode ["+companyCode+"] is not exit");
+						result = "第" + (rowNum+1) + "行，月实际用水量有问题，请修改";
+						return result;
+					}
+
+					WaMonthWaterData tmp = new WaMonthWaterData();
+					tmp.setCompanyId(waMonthWaterEntity.getCompanyId());
+					tmp.setMonthDate(waMonthWaterEntity.getMonthDate());
+					tmp.setIsDelte(0);
+					WaMonthWaterData resultTmp = waMonthWaterDataDao.getWaListByEntity(tmp);
+					if(null != resultTmp){  //判断当前单位当月数据是否已存在,存在即先删除在录入
+						resultTmp.setActMonthWater(waMonthWaterEntity.getActMonthWater());
 						float planWaterAmount = Float.valueOf(StringUtil.isEmpty(resultTmp.getPlanMonthWater())? "0": resultTmp.getPlanMonthWater());
 						float actWaterAmount = Float.valueOf(StringUtil.isEmpty(resultTmp.getActMonthWater())? "0": resultTmp.getActMonthWater());
-
 						resultTmp.setFeeStandard(getBeyondFee(actWaterAmount, planWaterAmount));  //获取收费标准
+						String beyondAmount = (actWaterAmount - planWaterAmount)>=0 ? df.format(actWaterAmount - planWaterAmount): "0";
+						String isoverroof = (actWaterAmount - planWaterAmount)>=0 ? "1" : "0";
+						resultTmp.setBeyondAmount(beyondAmount);
+						resultTmp.setIsOverroof(isoverroof);
 						waMonthWaterDataDao.update(resultTmp);
-						continue;
+					}else {
+						//不存在则新增
+						waMonthWaterEntity.setIsOverroof("0");
+						waMonthWaterEntity.setIsDelte(0);
+						waMonthWaterEntity.setCrtTime(new Date());
+						waMonthWaterEntity.setUpdTime(new Date());
+						waMonthWaterDataDao.save(waMonthWaterEntity);
 					}
-					addWaMonthWaterData(monData, "plan");
+
 				}
 			}
-			return result;
+
 		}catch (Exception e){
-			return false;
+			LOG.error("act water error==" + e);
+			return "实际用水数据导入失败，请重新操作";
 		}
+		return result;
 	}
 
-	public List<WaMonthWaterData> getTagFile(MultipartFile file){
+	public String insertTagFile(MultipartFile file){
 		try {
-			List<WaMonthWaterData> resultEntityList = getXlsContnetList(file.getInputStream());
-			return resultEntityList;
+			return insertXlsContnetList(file.getInputStream());
 		}catch (Exception e){
 			LOG.error("获取数据出错", e);
+			return "获取数据失败";
 		}
-		return null;
 	}
 
 	/**
@@ -365,12 +395,12 @@ public class WaMonthWaterDataService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<WaMonthWaterData> getXlsContnetList(InputStream is) throws Exception{
+	public String insertXlsContnetList(InputStream is) throws Exception{
+		String result = "success";
 		try {
 			HSSFWorkbook workBook = new HSSFWorkbook(is);
 			HSSFSheet sheet = workBook.getSheetAt(0);
 
-			List<WaMonthWaterData> waMonthWaterDataList = new ArrayList<>();
 			for (int rowNum = 1;rowNum <= sheet.getLastRowNum();rowNum++) {
 				WaMonthWaterData waMonthWaterEntity = new WaMonthWaterData();
 				HSSFRow row = sheet.getRow(rowNum);
@@ -382,19 +412,49 @@ public class WaMonthWaterDataService {
 					com.setCompanyCode(ExcelUtil.getCellValue(row.getCell(0)));
 					WaCompanyInfo resultCom = waCompanyInfoDao.getEntityByCode(com);
 					//根据code获取id后存入mysql
-
+					if (StringUtil.isNull(resultCom)){
+						LOG.error("get company is null, companycode = " + com.getCompanyCode());
+						return "第" + (rowNum+1) +"行，节水代码为" + com.getCompanyCode() + "单位信息不存在，请重新输入";
+					}
 
 					waMonthWaterEntity.setCompanyId(String.valueOf(resultCom.getCompanyId()));
 					waMonthWaterEntity.setMonthDate(ExcelUtil.getCellValue(row.getCell(2)));
-					waMonthWaterEntity.setPlanMonthWater(df.format(Float.parseFloat((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString())));
 					waMonthWaterEntity.setIsDelte(0);
-					waMonthWaterDataList.add(waMonthWaterEntity);
+					String planMonthWater = "";
+					try {
+						planMonthWater = df.format(Float.parseFloat((StringUtils.isBlank(row.getCell(3).toString()))? "0": row.getCell(3).toString()));
+
+					}catch (Exception e){
+						LOG.error("next month planwater error " + e);
+						return  "第" + (rowNum+1) +"行，节水代码为" + com.getCompanyCode() + "的计划用水量有问题，请重新输入";
+					}
+
+					//根据条件查询是否存在*单位 *月份 的信息
+					WaMonthWaterData checkData = getWaMonthWaterDataById(waMonthWaterEntity);
+					if(null != checkData){ //存在
+						waMonthWaterEntity.setMonthWaterId(checkData.getMonthWaterId());
+						waMonthWaterEntity.setActMonthWater(checkData.getActMonthWater());
+						waMonthWaterEntity.setPlanMonthWater(planMonthWater);  //新增计划用水
+						//存在情况下更新
+
+						updateWaMonthWaterData(waMonthWaterEntity, "");
+					}else {
+						//不存在情况下新增
+						waMonthWaterEntity.setPlanMonthWater(planMonthWater);  //读取新增计划用水
+						///新增数据入库
+						waMonthWaterEntity.setIsOverroof("0");
+						waMonthWaterEntity.setIsDelte(0);
+//						waMonthWaterEntity.setCrtTime(new Date());
+//						waMonthWaterEntity.setUpdTime(new Date());
+						waMonthWaterDataDao.save(waMonthWaterEntity);
+					}
 				}
 			}
-			return waMonthWaterDataList;
 		}catch (Exception e){
-			return null;
+			LOG.error("next planwater error>>" + e);
+			return "批量录入下月计划用水失败";
 		}
+		return result;
 	}
 
 }
