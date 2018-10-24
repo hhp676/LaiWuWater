@@ -28,11 +28,11 @@
                 </tr>
                <tr>
                     <td>计划的年份用水量:</td>
-                    <td><input type="text" style="width: 170px"  name="planYearAvgWater" id="planYearAvgWater" value="${waPlanYearWaterData.planYearAvgWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" onblur="this.v();" ></input></td>
+                    <td><input type="text" style="width: 170px"  name="planYearAvgWater" id="planYearAvgWater" value="${waPlanYearWaterData.planYearAvgWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') "></input></td>
                 </tr>
                 <tr>
                      <td>单位上报用水量:</td>
-                     <td><input type="text" style="width: 170px" name="planYearEditWater" id="planYearEditWater" value="${waPlanYearWaterData.planYearEditWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')"  onblur="this.v();" ></input></td>
+                     <td><input type="text" style="width: 170px" name="planYearEditWater" id="planYearEditWater" value="${waPlanYearWaterData.planYearEditWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
                  </tr>
             </table>
         </form>

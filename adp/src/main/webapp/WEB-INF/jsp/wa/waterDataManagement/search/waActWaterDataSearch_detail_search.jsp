@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td>时间月份<font>*</font>:</td>
-                    <td><input type="text" style="width: 170px" name="monthDate" id="monthDate" placeholder="例如：201809" value="${waMonthWaterData.monthDate}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" onblur="this.v();" ></input></td>
+                    <td><input type="text" style="width: 170px" name="monthDate" id="monthDate" placeholder="例如：201809" value="${waMonthWaterData.monthDate}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
                 </tr>
                <%-- <tr>
                     <td>计划用水量:</td>
@@ -32,7 +32,7 @@
                 </tr>--%>
                 <tr>
                      <td>实际用水量:</td>
-                     <td><input type="text" style="width: 170px" name="actMonthWater" id="actMonthWater" value="${waMonthWaterData.actMonthWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" onblur="this.v();" ></input></td>
+                     <td><input type="text" style="width: 170px" name="actMonthWater" id="actMonthWater" value="${waMonthWaterData.actMonthWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
                  </tr>
              <%--   <tr>
                     <td>收费标准:</td>
@@ -50,7 +50,7 @@
 <script type="text/javascript">
     var monthWaterId = "${monthWaterId}";
 </script>
-<script type="text/javascript" src="${ctx}/static/js/wa/waMonthWaterData_detail.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/wa/waterDataManagement/search/waActWaterData_detail.js"></script>
 </body>
 
 </html>

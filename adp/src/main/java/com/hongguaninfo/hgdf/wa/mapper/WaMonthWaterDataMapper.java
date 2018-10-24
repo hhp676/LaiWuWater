@@ -20,4 +20,6 @@ import com.hongguaninfo.hgdf.wa.entity.WaMonthWaterData;
  */
 public interface WaMonthWaterDataMapper extends BaseSqlMapper {
     WaMonthWaterData getWaListByEntity(WaMonthWaterData entity);
+
+    void updateMonthDataByEntity(WaMonthWaterData waMonthWaterData);
 }

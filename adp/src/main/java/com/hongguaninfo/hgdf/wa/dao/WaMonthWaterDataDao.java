@@ -46,4 +46,10 @@ public class WaMonthWaterDataDao extends BaseDao<WaMonthWaterData, WaMonthWaterD
     public WaMonthWaterData getWaListByEntity(WaMonthWaterData entity) {
         return getMapperByType(WaMonthWaterDataMapper.class).getWaListByEntity(entity);
     }
+
+    @Override
+    public void updateMonthDataByEntity(WaMonthWaterData waMonthWaterData) {
+        getMapperByType(WaMonthWaterDataMapper.class).updateMonthDataByEntity(waMonthWaterData);
+    }
+
 }

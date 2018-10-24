@@ -24,4 +24,7 @@ public interface WaPlanYearWaterDataMapper extends BaseSqlMapper {
     WaPlanYearWaterData getByYearWaterData(WaPlanYearWaterData waterData);
 
     void deleteByWaterData(WaPlanYearWaterData waterData);
+
+    void updatePlanYearDataByEntity(WaPlanYearWaterData waterData);
+
 }

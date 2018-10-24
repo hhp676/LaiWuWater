@@ -138,7 +138,7 @@
     var commFactilitiesId = "${commFacData.commFactilitiesId}";
     var industryWaterId = "${industryWaterData.industryWaterId}";
 </script>
-<script type="text/javascript" src="${ctx}/static/js/wa/waCompanyInfo_total.js"></script>
+<script type="text/javascript" src="${ctx}/static/js/wa/waCompanyInfo/waCompanyInfo_total.js"></script>
 </body>
 
 </html>
