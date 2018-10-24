@@ -75,7 +75,7 @@ public class IndexController extends BaseController {
      */
     @RequestMapping(value = "/")
     public String home(HttpServletRequest request, HttpServletResponse response, Model model) throws BizException {
-        model.addAttribute("loginUserId", SessionUtils.getUserId());
+       /* model.addAttribute("loginUserId", SessionUtils.getUserId());
         RSAPublicKey publicKey = RSAUtil.getDefaultPublicKey();
         model.addAttribute("rsa_modulus", new String(Hex.encodeHex(publicKey.getModulus().toByteArray())));
         model.addAttribute("rsa_exponent", new String(Hex.encodeHex(publicKey.getPublicExponent().toByteArray())));
@@ -97,8 +97,8 @@ public class IndexController extends BaseController {
         		}
         	}
         }
-        model.addAttribute("shouldChangePassword",shouldChangePassword);
-        return "index"; //index
+        model.addAttribute("shouldChangePassword",shouldChangePassword);*/
+        return "map"; //index
     }
 
     /**
