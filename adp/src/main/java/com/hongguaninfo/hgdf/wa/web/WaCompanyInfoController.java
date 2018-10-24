@@ -21,12 +21,17 @@ import com.hongguaninfo.hgdf.adp.core.utils.ResponseUtils;
 import com.hongguaninfo.hgdf.adp.service.sys.SysDatadicItemService;
 import com.hongguaninfo.hgdf.core.utils.FtpUtil;
 import com.hongguaninfo.hgdf.core.utils.Identities;
+import com.hongguaninfo.hgdf.core.utils.StringUtil;
 import com.hongguaninfo.hgdf.core.utils.exception.BaseException;
 import com.hongguaninfo.hgdf.core.utils.logging.Log;
 import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
 import com.hongguaninfo.hgdf.wa.entity.WaCompanyInfo;
+import com.hongguaninfo.hgdf.wa.entity.WaMonthWaterData;
+import com.hongguaninfo.hgdf.wa.entity.WaPlanYearWaterData;
 import com.hongguaninfo.hgdf.wa.entity.WaUploadfileData;
 import com.hongguaninfo.hgdf.wa.service.WaCompanyInfoService;
+import com.hongguaninfo.hgdf.wa.service.WaMonthWaterDataService;
+import com.hongguaninfo.hgdf.wa.service.WaPlanYearWaterDataService;
 import com.hongguaninfo.hgdf.wa.service.WaUploadfileDataService;
 import com.hongguaninfo.hgdf.wa.service.totalinfo.WaCommFacilitiesWaterDataService;
 import com.hongguaninfo.hgdf.wa.service.totalinfo.WaDormitoryWaterDataService;
@@ -89,6 +94,14 @@ public class WaCompanyInfoController {
     private WaIndustryWaterDataService waIndustryWaterDataService;
     @Autowired
     private WaUploadfileDataService waUploadfileDataService;
+
+    @Autowired
+    private WaPlanYearWaterDataService waPlanYearWaterDataService;
+
+    @Autowired
+    private WaMonthWaterDataService waMonthWaterDataService;
+
+
 
     /**
 	 * REMARK
@@ -246,9 +259,24 @@ public class WaCompanyInfoController {
             protected void doSomething() throws BizException {
                 JSONArray idArray = JSONObject.parseArray(companyIds);
                 for (Object id: idArray){
-                    waCompanyInfoService.deleteWaCompanyInfoLogic(Integer.parseInt(id.toString()));
-                }
+                    int companyId = Integer.parseInt(id.toString());
+                    waCompanyInfoService.deleteWaCompanyInfo(companyId);
 
+                  //判断年计划用水是否存在，是：逻辑删除；否：未操作
+                    WaPlanYearWaterData waPlanYearWaterData = new WaPlanYearWaterData();
+                    waPlanYearWaterData.setCompanyId(String.valueOf(companyId));
+                    if (waPlanYearWaterDataService.getPlanWaterList(waPlanYearWaterData).size()>0){
+                        waPlanYearWaterDataService.updatePlanYearDataByEntity(companyId);
+                    }
+
+                    //判断月用水是否存在， 是：逻辑删除；否：未操作
+                    WaMonthWaterData waMonthWaterData = new WaMonthWaterData();
+                    waMonthWaterData.setCompanyId(String.valueOf(companyId));
+                    if (!StringUtil.isNull(waMonthWaterDataService.getWaMonthWaterDataById(waMonthWaterData))){
+                        waMonthWaterDataService.updateMonthDataByEntity(companyId);
+                    }
+
+                }
             }
         };
         return templete.operate();
@@ -342,12 +370,7 @@ public class WaCompanyInfoController {
             String suffix = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
             if (".xls".equals(suffix)) {
                 if (!multipartFile.isEmpty()) {
-                    tag = waCompanyInfoService.doReadXls(multipartFile.getInputStream());
-                    if(tag){
-                        result = "success";
-                    }else{
-                        result = "导入失败，请检查导入文件内容格式是否正确。";
-                    }
+                    result = waCompanyInfoService.doReadXls(multipartFile.getInputStream());
                 }
             } else {
                 result = "导入失败,请导入xls文件";
