@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
                     <td>计划用水量:</td>
-                    <td><input type="text" style="width: 170px" name="planMonthWater" id="planMonthWater" value="${waMonthWaterData.planMonthWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') "></input></td>
+                    <td><input type="text" style="width: 170px" name="planMonthWater" id="planMonthWater" value="${waMonthWaterData.planMonthWater}"  onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') "></input></td>
                 </tr>
                 <tr>
                      <td>实际用水量:</td>
