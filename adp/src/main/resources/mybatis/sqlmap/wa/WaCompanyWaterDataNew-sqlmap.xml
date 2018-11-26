@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- sqlmapper 层 -->
+<mapper namespace="com.hongguaninfo.hgdf.wa.mapper.WaCompanyWaterDataNewMapper">
+
+
+    <!-- sqlColumn -->
+    <sql id="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN">
+        wcwdn.COMPANY_WATER_ID_ companyWaterId,
+        wcwdn.PRODUCT_NAME_ productName,
+        wcwdn.NEW_WATER_COUNT_ newWaterCount,
+        wcwdn.GONGYE_WATER_COUNT_ gongyeWaterCount,
+        wcwdn.TOTAL_COUNT_ totalCount,
+        wcwdn.WATER_STANDARD_ waterStandard,
+        wcwdn.EMPLOYEE_ employee,
+        wcwdn.GONGYI_WATER_COUNT_ gongyiWaterCount,
+        wcwdn.BOILER_WATER_ boilerWater,
+        wcwdn.FACTORY_LIVE_WATER_ factoryLiveWater,
+        wcwdn.REUSE_TOTAL_AMOUNT_ reuseTotalAmount,
+        wcwdn.AVAILABILITY_ availability,
+        wcwdn.INTER_COLD_WATER_LOOP_AMOUNT_ interColdWaterLoopAmount,
+        wcwdn.CIRCUL_RATE_ circulRate,
+        wcwdn.FRESH_WATER_BACK_AMOUNT_ freshWaterBackAmount,
+        wcwdn.STEAM_CONDEN_BACK_AMOUNT_ steamCondenBackAmount,
+        wcwdn.RECOVER_RATE_ recoverRate,
+        wcwdn.SAVE_AMOUNT_ saveAmount,
+        wcwdn.INSTALL_MONEY_ installMoney,
+        wcwdn.COMPANY_NAME_ companyName,
+        wcwdn.WATER_PLAN_NO_ waterPlanNo,
+        wcwdn.WRITE_PERSON_ writePerson,
+        wcwdn.WRITE_TIME_ writeTime,
+        wcwdn.IS_DELETE_ isDelete,
+        wcwdn.CRT_TIME_ crtTime,
+        wcwdn.UPD_TIME_ updTime
+    </sql>
+
+    <!-- sqlWhere -->
+    <sql id="SQL_WA_COMPANY_WATER_DATA_NEW_WHERE">
+        	<if test="companyWaterId != null">
+	            AND wcwdn.COMPANY_WATER_ID_ = #{companyWaterId}
+        </if>
+        		<if test="productName != null and productName.length() != 0">
+        		AND wcwdn.PRODUCT_NAME_ like '%${productName}%'
+        </if>
+        		<if test="newWaterCount != null and newWaterCount.length() != 0">
+        		AND wcwdn.NEW_WATER_COUNT_ like '%${newWaterCount}%'
+        </if>
+        		<if test="gongyeWaterCount != null and gongyeWaterCount.length() != 0">
+        		AND wcwdn.GONGYE_WATER_COUNT_ like '%${gongyeWaterCount}%'
+        </if>
+        		<if test="totalCount != null and totalCount.length() != 0">
+        		AND wcwdn.TOTAL_COUNT_ like '%${totalCount}%'
+        </if>
+        		<if test="waterStandard != null and waterStandard.length() != 0">
+        		AND wcwdn.WATER_STANDARD_ like '%${waterStandard}%'
+        </if>
+        		<if test="employee != null and employee.length() != 0">
+        		AND wcwdn.EMPLOYEE_ like '%${employee}%'
+        </if>
+        		<if test="gongyiWaterCount != null and gongyiWaterCount.length() != 0">
+        		AND wcwdn.GONGYI_WATER_COUNT_ like '%${gongyiWaterCount}%'
+        </if>
+        		<if test="boilerWater != null and boilerWater.length() != 0">
+        		AND wcwdn.BOILER_WATER_ like '%${boilerWater}%'
+        </if>
+        		<if test="factoryLiveWater != null and factoryLiveWater.length() != 0">
+        		AND wcwdn.FACTORY_LIVE_WATER_ like '%${factoryLiveWater}%'
+        </if>
+        		<if test="reuseTotalAmount != null and reuseTotalAmount.length() != 0">
+        		AND wcwdn.REUSE_TOTAL_AMOUNT_ like '%${reuseTotalAmount}%'
+        </if>
+        		<if test="availability != null and availability.length() != 0">
+        		AND wcwdn.AVAILABILITY_ like '%${availability}%'
+        </if>
+        		<if test="interColdWaterLoopAmount != null and interColdWaterLoopAmount.length() != 0">
+        		AND wcwdn.INTER_COLD_WATER_LOOP_AMOUNT_ like '%${interColdWaterLoopAmount}%'
+        </if>
+        		<if test="circulRate != null and circulRate.length() != 0">
+        		AND wcwdn.CIRCUL_RATE_ like '%${circulRate}%'
+        </if>
+        		<if test="freshWaterBackAmount != null and freshWaterBackAmount.length() != 0">
+        		AND wcwdn.FRESH_WATER_BACK_AMOUNT_ like '%${freshWaterBackAmount}%'
+        </if>
+        		<if test="steamCondenBackAmount != null and steamCondenBackAmount.length() != 0">
+        		AND wcwdn.STEAM_CONDEN_BACK_AMOUNT_ like '%${steamCondenBackAmount}%'
+        </if>
+        		<if test="recoverRate != null and recoverRate.length() != 0">
+        		AND wcwdn.RECOVER_RATE_ like '%${recoverRate}%'
+        </if>
+        		<if test="saveAmount != null and saveAmount.length() != 0">
+        		AND wcwdn.SAVE_AMOUNT_ like '%${saveAmount}%'
+        </if>
+        		<if test="installMoney != null and installMoney.length() != 0">
+        		AND wcwdn.INSTALL_MONEY_ like '%${installMoney}%'
+        </if>
+        		<if test="companyName != null and companyName.length() != 0">
+        		AND wcwdn.COMPANY_NAME_ like '%${companyName}%'
+        </if>
+        		<if test="waterPlanNo != null and waterPlanNo.length() != 0">
+        		AND wcwdn.WATER_PLAN_NO_ like '%${waterPlanNo}%'
+        </if>
+        		<if test="writePerson != null and writePerson.length() != 0">
+        		AND wcwdn.WRITE_PERSON_ like '%${writePerson}%'
+        </if>
+        		<if test="writeTime != null and writeTime.length() != 0">
+        		AND wcwdn.WRITE_TIME_ like '%${writeTime}%'
+        </if>
+        	<if test="isDelete != null">
+	            AND wcwdn.IS_DELETE_ = #{isDelete}
+        </if>
+        	<if test="crtTime != null">
+	            AND wcwdn.CRT_TIME_ = #{crtTime}
+        </if>
+        	<if test="updTime != null">
+	            AND wcwdn.UPD_TIME_ = #{updTime}
+        </if>
+        <if test="filterStr !=null and filterStr.length()!=0">
+            ${filterStr}
+        </if>
+    </sql>
+
+    <!-- According to the id check record  -->
+    <select id="getById" parameterType="long" resultType="WaCompanyWaterDataNew">
+        select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN" />
+        from WA_COMPANY_WATER_DATA_NEW wcwdn
+        <where>
+            wcwdn.COMPANY_WATER_ID_ = #{companyWaterId}
+        </where>
+    </select>
+
+    <!-- Query All  -->
+    <select id="getList" parameterType="WaCompanyWaterDataNew" resultType="WaCompanyWaterDataNew">
+        select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN"/>
+        from WA_COMPANY_WATER_DATA_NEW wcwdn
+        <where>
+            <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_WHERE"/>
+        </where>
+        <if test="orderStr != null and orderStr.length() != 0">
+            ORDER BY ${orderStr}
+        </if>
+        <if test="orderStr == null or orderStr.length() == 0">
+            ORDER BY
+                wcwdn.COMPANY_WATER_ID_ desc
+        </if>
+    </select>
+
+    <!-- Statistical line   -->
+    <select id="getListCount" parameterType="WaCompanyWaterDataNew" resultType="int">
+        select count(
+            wcwdn.COMPANY_WATER_ID_
+        ) as counts
+        from WA_COMPANY_WATER_DATA_NEW wcwdn
+        <where>
+            <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_WHERE"/>
+        </where>
+    </select>
+    
+	<!-- add 默认使用全局ID -->
+	<insert id="insert" parameterType="WaCompanyWaterDataNew" >
+		insert into WA_COMPANY_WATER_DATA_NEW 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		  	<if test="companyWaterId != null">
+        		COMPANY_WATER_ID_,
+      		</if>
+		  	<if test="productName != null">
+        		PRODUCT_NAME_,
+      		</if>
+		  	<if test="newWaterCount != null">
+        		NEW_WATER_COUNT_,
+      		</if>
+		  	<if test="gongyeWaterCount != null">
+        		GONGYE_WATER_COUNT_,
+      		</if>
+		  	<if test="totalCount != null">
+        		TOTAL_COUNT_,
+      		</if>
+		  	<if test="waterStandard != null">
+        		WATER_STANDARD_,
+      		</if>
+		  	<if test="employee != null">
+        		EMPLOYEE_,
+      		</if>
+		  	<if test="gongyiWaterCount != null">
+        		GONGYI_WATER_COUNT_,
+      		</if>
+		  	<if test="boilerWater != null">
+        		BOILER_WATER_,
+      		</if>
+		  	<if test="factoryLiveWater != null">
+        		FACTORY_LIVE_WATER_,
+      		</if>
+		  	<if test="reuseTotalAmount != null">
+        		REUSE_TOTAL_AMOUNT_,
+      		</if>
+		  	<if test="availability != null">
+        		AVAILABILITY_,
+      		</if>
+		  	<if test="interColdWaterLoopAmount != null">
+        		INTER_COLD_WATER_LOOP_AMOUNT_,
+      		</if>
+		  	<if test="circulRate != null">
+        		CIRCUL_RATE_,
+      		</if>
+		  	<if test="freshWaterBackAmount != null">
+        		FRESH_WATER_BACK_AMOUNT_,
+      		</if>
+		  	<if test="steamCondenBackAmount != null">
+        		STEAM_CONDEN_BACK_AMOUNT_,
+      		</if>
+		  	<if test="recoverRate != null">
+        		RECOVER_RATE_,
+      		</if>
+		  	<if test="saveAmount != null">
+        		SAVE_AMOUNT_,
+      		</if>
+		  	<if test="installMoney != null">
+        		INSTALL_MONEY_,
+      		</if>
+		  	<if test="companyName != null">
+        		COMPANY_NAME_,
+      		</if>
+		  	<if test="waterPlanNo != null">
+        		WATER_PLAN_NO_,
+      		</if>
+		  	<if test="writePerson != null">
+        		WRITE_PERSON_,
+      		</if>
+		  	<if test="writeTime != null">
+        		WRITE_TIME_,
+      		</if>
+		  	<if test="isDelete != null">
+        		IS_DELETE_,
+      		</if>
+		  	<if test="crtTime != null">
+        		CRT_TIME_,
+      		</if>
+		  	<if test="updTime != null">
+        		UPD_TIME_,
+      		</if>
+		</trim> 
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			  	<if test="companyWaterId != null">
+			  	  	   #{companyWaterId,jdbcType=NUMERIC},
+			  	</if>  
+			  	<if test="productName != null">
+			  	  	   #{productName,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="newWaterCount != null">
+			  	  	   #{newWaterCount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="gongyeWaterCount != null">
+			  	  	   #{gongyeWaterCount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="totalCount != null">
+			  	  	   #{totalCount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="waterStandard != null">
+			  	  	   #{waterStandard,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="employee != null">
+			  	  	   #{employee,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="gongyiWaterCount != null">
+			  	  	   #{gongyiWaterCount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="boilerWater != null">
+			  	  	   #{boilerWater,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="factoryLiveWater != null">
+			  	  	   #{factoryLiveWater,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="reuseTotalAmount != null">
+			  	  	   #{reuseTotalAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="availability != null">
+			  	  	   #{availability,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="interColdWaterLoopAmount != null">
+			  	  	   #{interColdWaterLoopAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="circulRate != null">
+			  	  	   #{circulRate,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="freshWaterBackAmount != null">
+			  	  	   #{freshWaterBackAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="steamCondenBackAmount != null">
+			  	  	   #{steamCondenBackAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="recoverRate != null">
+			  	  	   #{recoverRate,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="saveAmount != null">
+			  	  	   #{saveAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="installMoney != null">
+			  	  	   #{installMoney,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="companyName != null">
+			  	  	   #{companyName,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="waterPlanNo != null">
+			  	  	   #{waterPlanNo,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="writePerson != null">
+			  	  	   #{writePerson,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="writeTime != null">
+			  	  	   #{writeTime,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="isDelete != null">
+			  	  	   #{isDelete,jdbcType=NUMERIC},
+			  	</if>  
+			  	<if test="crtTime != null">
+			  	  	   #{crtTime,jdbcType=TIMESTAMP},
+			  	</if>  
+			  	<if test="updTime != null">
+			  	  	   #{updTime,jdbcType=TIMESTAMP},
+			  	</if>  
+		</trim>
+    </insert>
+
+	<!-- update  -->
+	<update id="update" parameterType="WaCompanyWaterDataNew">
+		UPDATE WA_COMPANY_WATER_DATA_NEW
+		<set>
+		  	<if test="companyWaterId != null">
+        		COMPANY_WATER_ID_ = #{companyWaterId} ,
+      		</if>
+		  	<if test="productName != null">
+        		PRODUCT_NAME_ = #{productName} ,
+      		</if>
+		  	<if test="newWaterCount != null">
+        		NEW_WATER_COUNT_ = #{newWaterCount} ,
+      		</if>
+		  	<if test="gongyeWaterCount != null">
+        		GONGYE_WATER_COUNT_ = #{gongyeWaterCount} ,
+      		</if>
+		  	<if test="totalCount != null">
+        		TOTAL_COUNT_ = #{totalCount} ,
+      		</if>
+		  	<if test="waterStandard != null">
+        		WATER_STANDARD_ = #{waterStandard} ,
+      		</if>
+		  	<if test="employee != null">
+        		EMPLOYEE_ = #{employee} ,
+      		</if>
+		  	<if test="gongyiWaterCount != null">
+        		GONGYI_WATER_COUNT_ = #{gongyiWaterCount} ,
+      		</if>
+		  	<if test="boilerWater != null">
+        		BOILER_WATER_ = #{boilerWater} ,
+      		</if>
+		  	<if test="factoryLiveWater != null">
+        		FACTORY_LIVE_WATER_ = #{factoryLiveWater} ,
+      		</if>
+		  	<if test="reuseTotalAmount != null">
+        		REUSE_TOTAL_AMOUNT_ = #{reuseTotalAmount} ,
+      		</if>
+		  	<if test="availability != null">
+        		AVAILABILITY_ = #{availability} ,
+      		</if>
+		  	<if test="interColdWaterLoopAmount != null">
+        		INTER_COLD_WATER_LOOP_AMOUNT_ = #{interColdWaterLoopAmount} ,
+      		</if>
+		  	<if test="circulRate != null">
+        		CIRCUL_RATE_ = #{circulRate} ,
+      		</if>
+		  	<if test="freshWaterBackAmount != null">
+        		FRESH_WATER_BACK_AMOUNT_ = #{freshWaterBackAmount} ,
+      		</if>
+		  	<if test="steamCondenBackAmount != null">
+        		STEAM_CONDEN_BACK_AMOUNT_ = #{steamCondenBackAmount} ,
+      		</if>
+		  	<if test="recoverRate != null">
+        		RECOVER_RATE_ = #{recoverRate} ,
+      		</if>
+		  	<if test="saveAmount != null">
+        		SAVE_AMOUNT_ = #{saveAmount} ,
+      		</if>
+		  	<if test="installMoney != null">
+        		INSTALL_MONEY_ = #{installMoney} ,
+      		</if>
+		  	<if test="companyName != null">
+        		COMPANY_NAME_ = #{companyName} ,
+      		</if>
+		  	<if test="waterPlanNo != null">
+        		WATER_PLAN_NO_ = #{waterPlanNo} ,
+      		</if>
+		  	<if test="writePerson != null">
+        		WRITE_PERSON_ = #{writePerson} ,
+      		</if>
+		  	<if test="writeTime != null">
+        		WRITE_TIME_ = #{writeTime} ,
+      		</if>
+		  	<if test="isDelete != null">
+        		IS_DELETE_ = #{isDelete} ,
+      		</if>
+		  	<if test="crtTime != null">
+        		CRT_TIME_ = #{crtTime} ,
+      		</if>
+		  	<if test="updTime != null">
+        		UPD_TIME_ = #{updTime} 
+      		</if>
+		 
+		</set>
+		WHERE
+            COMPANY_WATER_ID_ = #{companyWaterId}
+	</update>
+
+	<!-- delete  -->
+	<delete id="delete" parameterType="WaCompanyWaterDataNew">
+		DELETE FROM WA_COMPANY_WATER_DATA_NEW
+		WHERE
+            COMPANY_WATER_ID_ = #{companyWaterId}
+	</delete>
+ 
+</mapper>

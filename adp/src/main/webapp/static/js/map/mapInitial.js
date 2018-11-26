@@ -1,4 +1,4 @@
-﻿﻿// JavaScript Document
+﻿// JavaScript Document
 $(document).ready(function(){
     initialMap();
 });
@@ -65,7 +65,7 @@ function initialMap(){
             return false;
         });
         map.addLayers([TianDi_Map,TianDi_img_Map, TianDi_Map_CHLabels]);
-        map.setCenter(new OpenLayers.LonLat(116.661,36.928), 11);
+        map.setCenter(new OpenLayers.LonLat(117.655, 36.210), 11);
         point_layer = new OpenLayers.Layer.Vector('点图层', { styleMap: new OpenLayers.StyleMap({
             "default": {
                 externalGraphic: '${noselect}',
@@ -101,13 +101,11 @@ function initialMap(){
 			var fid = selectedFeature.id;
 			var detail = selectedFeature.attributes['detail'];
             var name = selectedFeature.attributes['name'];
-            var user = selectedFeature.attributes['user'];
-            var num = selectedFeature.attributes['num'];
 
 				/* var div = "<div id='p_popup'><div id='p_title'>" + name + "</div><div id='p_content'><div class='p_row'>单位地址：" + address + "<br></div><div class='p_row'>法人代表：" + lPerson + "<br></div><div class='p_row'>法人代表电话：" + ltel+ "<br></div><div class='p_row'>消防安全负责人：" + sPerson + "<br></div><div class='p_row'>安全负责人电话：" +stel + "<br></div><div class='p_row_ipart' title="+iPart+">重点部位：" +iPart1 + "<br></div><div class='p_row_water' title="+water+">周边水源：" + water1 +"<br></div><div class='p_row'>所属中队：" + sszd +"<br></div><div class='p_row'>建筑类型：" +jzlx +"</div></div></div>";*/
 
 
- var div = "<div id='p_popup'><div id='p_title'>" + name + "</div><div id='content'><div id='content1'class='child_content'><p>节水代码：" + num + "</p><p>单位名称：" + name + "</p><p>用户类别：" + user + "</p><p>单位简介：" + detail + "</p></div>";
+ var div = "<div id='p_popup'><div id='p_title'>" + name + "</div><div id='content'><div id='content1'class='child_content'><p>单位详情：" + detail + "</p></div>";
 				  
 				
 

@@ -22,7 +22,7 @@ import com.hongguaninfo.hgdf.core.utils.page.Page;
  * @param <M>
  * @param <PK>
  */
-public abstract class BaseDao<E, M, P extends Serializable> extends
+public abstract class   BaseDao<E, M, P extends Serializable> extends
         SqlSessionDaoSupport {
     protected static final Log LOG = LogFactory.getLog(BaseDao.class);
 

@@ -75,7 +75,7 @@ public class IndexController extends BaseController {
      */
     @RequestMapping(value = "/")
     public String home(HttpServletRequest request, HttpServletResponse response, Model model) throws BizException {
-       /* model.addAttribute("loginUserId", SessionUtils.getUserId());
+       model.addAttribute("loginUserId", SessionUtils.getUserId());
         RSAPublicKey publicKey = RSAUtil.getDefaultPublicKey();
         model.addAttribute("rsa_modulus", new String(Hex.encodeHex(publicKey.getModulus().toByteArray())));
         model.addAttribute("rsa_exponent", new String(Hex.encodeHex(publicKey.getPublicExponent().toByteArray())));
@@ -97,7 +97,10 @@ public class IndexController extends BaseController {
         		}
         	}
         }
-        model.addAttribute("shouldChangePassword",shouldChangePassword);*/
+        model.addAttribute("shouldChangePassword",shouldChangePassword);
+        /*if(SessionUtils.getUser() != null){
+            return "index";
+        }*/
         return "map"; //index
     }
 
@@ -118,23 +121,8 @@ public class IndexController extends BaseController {
         //让IE浏览器使用最高文档模式(避免使用杂项模式) yinyanzhen
         response.setHeader("X-UA-Compatible", "IE=Edge");
 
-        boolean shouldChangePassword = false;
-        SysConfig sysConf = sysConfigService.getSysConfigByKey(Constants.UPDPASSWORD_SWITCH);
-        if(sysConf != null){
-            if(StringUtils.isNotBlank(sysConf.getConfigValue()) && "0".equals(sysConf.getConfigValue())){
-                SysConfig cycleCon = sysConfigService.getSysConfigByKey(Constants.UPDPASSWORD_CYCLE);
-                if(cycleCon != null){
-                    if(StringUtils.isNotBlank(cycleCon.getConfigValue())){
-                        String cycleStr = cycleCon.getConfigValue();
-                        shouldChangePassword = sysUserService.shouldChangePassword(Integer.parseInt(cycleStr),sysUserService.getPureUser(SessionUtils.getUserId()));
-                    }
-                }
-            }
-        }
-        model.addAttribute("shouldChangePassword",shouldChangePassword);
-        return "index"; //index
+        return "index";
     }
-
 
     /**
      * @Title: home(解决shiro未记住最后页面跳转到NaN问题)

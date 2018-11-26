@@ -32,11 +32,16 @@
 						</div>
 					</div>--%>
 					<div style="width: 43%;">
-						<div title="公告" iconCls="acc_icon_photos" collapsible="true" id="noticeDiv"
+						<%--<div title="公告" iconCls="acc_icon_photos" collapsible="true" id="noticeDiv"
 							closable="false" style="padding: 5px;height:80px; background: url('${ctx}/static/images/map/yucheng.png')" >
 							<div style="text-align:center; line-height: 80px; color: #fdfdfd; font-size: 30px"> 欢迎 <shiro:principal />，进入禹城市节水信息化管理平台  </div>
 
-						</div>
+						</div>--%>
+							<div title="公告" iconCls="acc_icon_photos" collapsible="true" id="noticeDiv"
+								 closable="false" style="padding: 1px;height:180px;" >
+								<ul class="notice">
+								</ul>
+							</div>
 						<div title="天气预报" iconCls="m-icon-weather" collapsible="true"
 							closable="false" style="height: 150px; padding: 5px;overflow:hidden;">
 							<iframe allowtransparency="true" frameborder="0" width="590" id="tianqi"
