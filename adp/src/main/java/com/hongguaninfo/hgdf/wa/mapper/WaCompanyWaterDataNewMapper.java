@@ -8,6 +8,9 @@
 package com.hongguaninfo.hgdf.wa.mapper;
 
 import com.hongguaninfo.hgdf.adp.core.base.BaseSqlMapper;
+import com.hongguaninfo.hgdf.wa.entity.WaCompanyWaterDataNew;
+
+import java.util.List;
 
 /**
  * : wa_company_water_data_new。 <br />
@@ -19,4 +22,5 @@ import com.hongguaninfo.hgdf.adp.core.base.BaseSqlMapper;
  */
 public interface WaCompanyWaterDataNewMapper extends BaseSqlMapper {
 
+    List<WaCompanyWaterDataNew> getDataByCompanyId(int companyId);
 }

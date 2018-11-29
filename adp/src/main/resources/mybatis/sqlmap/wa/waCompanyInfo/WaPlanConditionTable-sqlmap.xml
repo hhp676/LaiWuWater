@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- sqlmapper 层 -->
+<mapper namespace="com.hongguaninfo.hgdf.wa.mapper.waCompanyInfo.WaPlanConditionTableMapper">
+
+
+    <!-- sqlColumn -->
+    <sql id="SQL_WA_PLAN_CONDITION_TABLE_COLUMN">
+        wpct.PLAN_CONDTION_ID_ planCondtionId,
+        wpct.COMPANY_ID_ companyId,
+        wpct.RESIDENT_LIVE_PLAN_AMOUNT_ residentLivePlanAmount,
+        wpct.RESIDENT_ACT_AMOUNT_ residentActAmount,
+        wpct.NO_RESIDENT_LIVE_PLAN_AMOUNT_ noResidentLivePlanAmount,
+        wpct.NO_RESIDENT_ACT_AMOUNT_ noResidentActAmount,
+        wpct.EDUCATION_PLAN_AMOUNT_ educationPlanAmount,
+        wpct.EDUCATION_ACT_AMOUNT_ educationActAmount,
+        wpct.SPECIAL_PLAN_AMOUNT_ specialPlanAmount,
+        wpct.SPECIAL_ACT_AMOUNT_ specialActAmount,
+        wpct.PLAN_WATER_TOTAL_ planWaterTotal,
+        wpct.ACT_WATER_TOTAL_ actWaterTotal,
+        wpct.SAVE_WATER_AMOUNT_ saveWaterAmount,
+        wpct.IS_DELETE_ isDelete,
+        wpct.CRT_TIME_ crtTime,
+        wpct.UPD_TIME_ updTime
+    </sql>
+
+    <!-- sqlWhere -->
+    <sql id="SQL_WA_PLAN_CONDITION_TABLE_WHERE">
+        	<if test="planCondtionId != null">
+	            AND wpct.PLAN_CONDTION_ID_ = #{planCondtionId}
+        </if>
+        		<if test="companyId != null and companyId.length() != 0">
+        		AND wpct.COMPANY_ID_ like '%${companyId}%'
+        </if>
+        		<if test="residentLivePlanAmount != null and residentLivePlanAmount.length() != 0">
+        		AND wpct.RESIDENT_LIVE_PLAN_AMOUNT_ like '%${residentLivePlanAmount}%'
+        </if>
+        		<if test="residentActAmount != null and residentActAmount.length() != 0">
+        		AND wpct.RESIDENT_ACT_AMOUNT_ like '%${residentActAmount}%'
+        </if>
+        		<if test="noResidentLivePlanAmount != null and noResidentLivePlanAmount.length() != 0">
+        		AND wpct.NO_RESIDENT_LIVE_PLAN_AMOUNT_ like '%${noResidentLivePlanAmount}%'
+        </if>
+        		<if test="noResidentActAmount != null and noResidentActAmount.length() != 0">
+        		AND wpct.NO_RESIDENT_ACT_AMOUNT_ like '%${noResidentActAmount}%'
+        </if>
+        		<if test="educationPlanAmount != null and educationPlanAmount.length() != 0">
+        		AND wpct.EDUCATION_PLAN_AMOUNT_ like '%${educationPlanAmount}%'
+        </if>
+        		<if test="educationActAmount != null and educationActAmount.length() != 0">
+        		AND wpct.EDUCATION_ACT_AMOUNT_ like '%${educationActAmount}%'
+        </if>
+        		<if test="specialPlanAmount != null and specialPlanAmount.length() != 0">
+        		AND wpct.SPECIAL_PLAN_AMOUNT_ like '%${specialPlanAmount}%'
+        </if>
+        		<if test="specialActAmount != null and specialActAmount.length() != 0">
+        		AND wpct.SPECIAL_ACT_AMOUNT_ like '%${specialActAmount}%'
+        </if>
+        		<if test="planWaterTotal != null and planWaterTotal.length() != 0">
+        		AND wpct.PLAN_WATER_TOTAL_ like '%${planWaterTotal}%'
+        </if>
+        		<if test="actWaterTotal != null and actWaterTotal.length() != 0">
+        		AND wpct.ACT_WATER_TOTAL_ like '%${actWaterTotal}%'
+        </if>
+        		<if test="saveWaterAmount != null and saveWaterAmount.length() != 0">
+        		AND wpct.SAVE_WATER_AMOUNT_ like '%${saveWaterAmount}%'
+        </if>
+        	<if test="isDelete != null">
+	            AND wpct.IS_DELETE_ = #{isDelete}
+        </if>
+        	<if test="crtTime != null">
+	            AND wpct.CRT_TIME_ = #{crtTime}
+        </if>
+        	<if test="updTime != null">
+	            AND wpct.UPD_TIME_ = #{updTime}
+        </if>
+        <if test="filterStr !=null and filterStr.length()!=0">
+            ${filterStr}
+        </if>
+    </sql>
+
+    <!-- According to the id check record  -->
+    <select id="getById" parameterType="long" resultType="WaPlanConditionTable">
+        select <include  refid="SQL_WA_PLAN_CONDITION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_PLAN_CONDITION_TABLE wpct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wpct.COMPANY_ID_
+        <where>
+            wpct.PLAN_CONDTION_ID_ = #{planCondtionId}
+        </where>
+    </select>
+
+	<!-- According to the id check record  -->
+	<select id="getDataByCompanyId" parameterType="Integer" resultType="WaPlanConditionTable">
+		select <include  refid="SQL_WA_PLAN_CONDITION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_PLAN_CONDITION_TABLE wpct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wpct.COMPANY_ID_
+		<where>
+			wpct.COMPANY_ID_ = #{companyId}
+		</where>
+	</select>
+
+    <!-- Query All  -->
+    <select id="getList" parameterType="WaPlanConditionTable" resultType="WaPlanConditionTable">
+        select <include  refid="SQL_WA_PLAN_CONDITION_TABLE_COLUMN"/>, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_PLAN_CONDITION_TABLE wpct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wpct.COMPANY_ID_
+        <where>
+            <include  refid="SQL_WA_PLAN_CONDITION_TABLE_WHERE"/>
+
+			<if test="companyCode != null and companyCode.length() != 0">
+				AND com.COMPANY_CODE_ like '%${companyCode}%'
+			</if>
+			<if test="companyName != null and companyName.length() != 0">
+				AND com.COMPANY_NAME_ like '%${companyName}%'
+			</if>
+        </where>
+        <if test="orderStr != null and orderStr.length() != 0">
+            ORDER BY ${orderStr}
+        </if>
+        <if test="orderStr == null or orderStr.length() == 0">
+            ORDER BY
+                wpct.PLAN_CONDTION_ID_ desc
+        </if>
+    </select>
+
+    <!-- Statistical line   -->
+    <select id="getListCount" parameterType="WaPlanConditionTable" resultType="int">
+        select count(
+            wpct.PLAN_CONDTION_ID_
+        ) as counts
+		from WA_PLAN_CONDITION_TABLE wpct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wpct.COMPANY_ID_
+        <where>
+            <include  refid="SQL_WA_PLAN_CONDITION_TABLE_WHERE"/>
+
+			<if test="companyCode != null and companyCode.length() != 0">
+				AND com.COMPANY_CODE_ like '%${companyCode}%'
+			</if>
+			<if test="companyName != null and companyName.length() != 0">
+				AND com.COMPANY_NAME_ like '%${companyName}%'
+			</if>
+        </where>
+    </select>
+    
+	<!-- add 默认使用全局ID -->
+	<insert id="insert" parameterType="WaPlanConditionTable" >
+		insert into WA_PLAN_CONDITION_TABLE 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		  	<if test="planCondtionId != null">
+        		PLAN_CONDTION_ID_,
+      		</if>
+		  	<if test="companyId != null">
+        		COMPANY_ID_,
+      		</if>
+		  	<if test="residentLivePlanAmount != null">
+        		RESIDENT_LIVE_PLAN_AMOUNT_,
+      		</if>
+		  	<if test="residentActAmount != null">
+        		RESIDENT_ACT_AMOUNT_,
+      		</if>
+		  	<if test="noResidentLivePlanAmount != null">
+        		NO_RESIDENT_LIVE_PLAN_AMOUNT_,
+      		</if>
+		  	<if test="noResidentActAmount != null">
+        		NO_RESIDENT_ACT_AMOUNT_,
+      		</if>
+		  	<if test="educationPlanAmount != null">
+        		EDUCATION_PLAN_AMOUNT_,
+      		</if>
+		  	<if test="educationActAmount != null">
+        		EDUCATION_ACT_AMOUNT_,
+      		</if>
+		  	<if test="specialPlanAmount != null">
+        		SPECIAL_PLAN_AMOUNT_,
+      		</if>
+		  	<if test="specialActAmount != null">
+        		SPECIAL_ACT_AMOUNT_,
+      		</if>
+		  	<if test="planWaterTotal != null">
+        		PLAN_WATER_TOTAL_,
+      		</if>
+		  	<if test="actWaterTotal != null">
+        		ACT_WATER_TOTAL_,
+      		</if>
+		  	<if test="saveWaterAmount != null">
+        		SAVE_WATER_AMOUNT_,
+      		</if>
+		  	<if test="isDelete != null">
+        		IS_DELETE_,
+      		</if>
+		  	<if test="crtTime != null">
+        		CRT_TIME_,
+      		</if>
+		  	<if test="updTime != null">
+        		UPD_TIME_,
+      		</if>
+		</trim> 
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			  	<if test="planCondtionId != null">
+			  	  	   #{planCondtionId,jdbcType=NUMERIC},
+			  	</if>  
+			  	<if test="companyId != null">
+			  	  	   #{companyId,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="residentLivePlanAmount != null">
+			  	  	   #{residentLivePlanAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="residentActAmount != null">
+			  	  	   #{residentActAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="noResidentLivePlanAmount != null">
+			  	  	   #{noResidentLivePlanAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="noResidentActAmount != null">
+			  	  	   #{noResidentActAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="educationPlanAmount != null">
+			  	  	   #{educationPlanAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="educationActAmount != null">
+			  	  	   #{educationActAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="specialPlanAmount != null">
+			  	  	   #{specialPlanAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="specialActAmount != null">
+			  	  	   #{specialActAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="planWaterTotal != null">
+			  	  	   #{planWaterTotal,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="actWaterTotal != null">
+			  	  	   #{actWaterTotal,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="saveWaterAmount != null">
+			  	  	   #{saveWaterAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="isDelete != null">
+			  	  	   #{isDelete,jdbcType=NUMERIC},
+			  	</if>  
+			  	<if test="crtTime != null">
+			  	  	   #{crtTime,jdbcType=TIMESTAMP},
+			  	</if>  
+			  	<if test="updTime != null">
+			  	  	   #{updTime,jdbcType=TIMESTAMP},
+			  	</if>  
+		</trim>
+    </insert>
+
+	<!-- update  -->
+	<update id="update" parameterType="WaPlanConditionTable">
+		UPDATE WA_PLAN_CONDITION_TABLE
+		<set>
+		  	<if test="planCondtionId != null">
+        		PLAN_CONDTION_ID_ = #{planCondtionId} ,
+      		</if>
+		  	<if test="companyId != null">
+        		COMPANY_ID_ = #{companyId} ,
+      		</if>
+		  	<if test="residentLivePlanAmount != null">
+        		RESIDENT_LIVE_PLAN_AMOUNT_ = #{residentLivePlanAmount} ,
+      		</if>
+		  	<if test="residentActAmount != null">
+        		RESIDENT_ACT_AMOUNT_ = #{residentActAmount} ,
+      		</if>
+		  	<if test="noResidentLivePlanAmount != null">
+        		NO_RESIDENT_LIVE_PLAN_AMOUNT_ = #{noResidentLivePlanAmount} ,
+      		</if>
+		  	<if test="noResidentActAmount != null">
+        		NO_RESIDENT_ACT_AMOUNT_ = #{noResidentActAmount} ,
+      		</if>
+		  	<if test="educationPlanAmount != null">
+        		EDUCATION_PLAN_AMOUNT_ = #{educationPlanAmount} ,
+      		</if>
+		  	<if test="educationActAmount != null">
+        		EDUCATION_ACT_AMOUNT_ = #{educationActAmount} ,
+      		</if>
+		  	<if test="specialPlanAmount != null">
+        		SPECIAL_PLAN_AMOUNT_ = #{specialPlanAmount} ,
+      		</if>
+		  	<if test="specialActAmount != null">
+        		SPECIAL_ACT_AMOUNT_ = #{specialActAmount} ,
+      		</if>
+		  	<if test="planWaterTotal != null">
+        		PLAN_WATER_TOTAL_ = #{planWaterTotal} ,
+      		</if>
+		  	<if test="actWaterTotal != null">
+        		ACT_WATER_TOTAL_ = #{actWaterTotal} ,
+      		</if>
+		  	<if test="saveWaterAmount != null">
+        		SAVE_WATER_AMOUNT_ = #{saveWaterAmount} ,
+      		</if>
+		  	<if test="isDelete != null">
+        		IS_DELETE_ = #{isDelete} ,
+      		</if>
+		  	<if test="crtTime != null">
+        		CRT_TIME_ = #{crtTime} ,
+      		</if>
+		  	<if test="updTime != null">
+        		UPD_TIME_ = #{updTime} 
+      		</if>
+		 
+		</set>
+		WHERE
+            PLAN_CONDTION_ID_ = #{planCondtionId}
+	</update>
+
+	<!-- delete  -->
+	<delete id="delete" parameterType="WaPlanConditionTable">
+		DELETE FROM WA_PLAN_CONDITION_TABLE
+		WHERE
+            PLAN_CONDTION_ID_ = #{planCondtionId}
+	</delete>
+ 
+</mapper>

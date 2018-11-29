@@ -73,14 +73,14 @@
                 </tr>
                 <tr>
                     <td>用水性质:</td>
-                    <%--<td><input type="text"   name="waterType" id="waterType" value="${waCompanyInfo.waterType}"></input></td>--%>
-                    <td>
+                    <td><input type="text"   name="waterType" id="waterType" value="${waCompanyInfo.waterType}"></input></td>
+                  <%--  <td>
                         <select name="waterType" style="width: 170px;">
                             <c:forEach var="waterTypeItem" items="${waterTypeMap}">
                                 <option value="${waterTypeItem.value}" <c:if test="${waCompanyInfo.waterType==waterTypeItem.value}">selected</c:if>>${waterTypeItem.key}</option>
                             </c:forEach>
                         </select>
-                    </td>
+                    </td>--%>
                 </tr>
                 <tr>
                     <td>是否是重点用户:</td>

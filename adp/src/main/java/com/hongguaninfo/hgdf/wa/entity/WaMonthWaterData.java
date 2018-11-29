@@ -45,6 +45,7 @@ public class WaMonthWaterData extends BaseEntity {
      * PLAN_MONTH_WATER_ : 计划月份用水量。
      */
     private String planMonthWater;
+
     /**
      * ACT_MONTH_WATER_ : 实际月份用水量。
      */
@@ -85,6 +86,55 @@ public class WaMonthWaterData extends BaseEntity {
      * 查询月份
      */
     private String waMonth;
+
+    /**
+     * 居民用水
+     */
+    private String residentWater;
+    /**
+     * 非居民用水
+     */
+    private String noResidentWater;
+    /**
+     * 教育用水
+     */
+    private String educationWater;
+    /**
+     * 特殊行业用水
+     */
+    private String specialTradeWater;
+
+    public String getResidentWater() {
+        return residentWater;
+    }
+
+    public void setResidentWater(String residentWater) {
+        this.residentWater = residentWater;
+    }
+
+    public String getNoResidentWater() {
+        return noResidentWater;
+    }
+
+    public void setNoResidentWater(String noResidentWater) {
+        this.noResidentWater = noResidentWater;
+    }
+
+    public String getEducationWater() {
+        return educationWater;
+    }
+
+    public void setEducationWater(String educationWater) {
+        this.educationWater = educationWater;
+    }
+
+    public String getSpecialTradeWater() {
+        return specialTradeWater;
+    }
+
+    public void setSpecialTradeWater(String specialTradeWater) {
+        this.specialTradeWater = specialTradeWater;
+    }
 
     public String getBeyondAmount() {
         return beyondAmount;

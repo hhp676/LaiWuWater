@@ -25,7 +25,7 @@
         wcwdn.RECOVER_RATE_ recoverRate,
         wcwdn.SAVE_AMOUNT_ saveAmount,
         wcwdn.INSTALL_MONEY_ installMoney,
-        wcwdn.COMPANY_NAME_ companyName,
+        wcwdn.COMPANY_SITE_ companySite,
         wcwdn.WATER_PLAN_NO_ waterPlanNo,
         wcwdn.WRITE_PERSON_ writePerson,
         wcwdn.WRITE_TIME_ writeTime,
@@ -93,8 +93,8 @@
         		<if test="installMoney != null and installMoney.length() != 0">
         		AND wcwdn.INSTALL_MONEY_ like '%${installMoney}%'
         </if>
-        		<if test="companyName != null and companyName.length() != 0">
-        		AND wcwdn.COMPANY_NAME_ like '%${companyName}%'
+        		<if test="companySite != null and companySite.length() != 0">
+        		AND wcwdn.COMPANY_SITE_ like '%${companySite}%'
         </if>
         		<if test="waterPlanNo != null and waterPlanNo.length() != 0">
         		AND wcwdn.WATER_PLAN_NO_ like '%${waterPlanNo}%'
@@ -121,19 +121,38 @@
 
     <!-- According to the id check record  -->
     <select id="getById" parameterType="long" resultType="WaCompanyWaterDataNew">
-        select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN" />
-        from WA_COMPANY_WATER_DATA_NEW wcwdn
+        select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_COMPANY_WATER_DATA_NEW wcwdn JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wcwdn.COMPANY_ID_
         <where>
             wcwdn.COMPANY_WATER_ID_ = #{companyWaterId}
         </where>
     </select>
 
+	<!-- According to the id check record  -->
+	<select id="getDataByCompanyId" parameterType="Integer" resultType="WaCompanyWaterDataNew">
+		select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_COMPANY_WATER_DATA_NEW wcwdn JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wcwdn.COMPANY_ID_
+		<where>
+			wcwdn.COMPANY_ID_ = #{companyId}
+		</where>
+	</select>
+
     <!-- Query All  -->
     <select id="getList" parameterType="WaCompanyWaterDataNew" resultType="WaCompanyWaterDataNew">
-        select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN"/>
-        from WA_COMPANY_WATER_DATA_NEW wcwdn
+        select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN"/>, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_COMPANY_WATER_DATA_NEW wcwdn JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wcwdn.COMPANY_ID_
         <where>
             <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_WHERE"/>
+
+			<if test="companyCode != null and companyCode.length() != 0">
+				AND com.COMPANY_CODE_ like '%${companyCode}%'
+			</if>
+			<if test="companyName != null and companyName.length() != 0">
+				AND com.COMPANY_NAME_ like '%${companyName}%'
+			</if>
         </where>
         <if test="orderStr != null and orderStr.length() != 0">
             ORDER BY ${orderStr}
@@ -149,9 +168,17 @@
         select count(
             wcwdn.COMPANY_WATER_ID_
         ) as counts
-        from WA_COMPANY_WATER_DATA_NEW wcwdn
+		from WA_COMPANY_WATER_DATA_NEW wcwdn JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wcwdn.COMPANY_ID_
         <where>
             <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_WHERE"/>
+
+			<if test="companyCode != null and companyCode.length() != 0">
+				AND com.COMPANY_CODE_ like '%${companyCode}%'
+			</if>
+			<if test="companyName != null and companyName.length() != 0">
+				AND com.COMPANY_NAME_ like '%${companyName}%'
+			</if>
         </where>
     </select>
     
@@ -216,8 +243,8 @@
 		  	<if test="installMoney != null">
         		INSTALL_MONEY_,
       		</if>
-		  	<if test="companyName != null">
-        		COMPANY_NAME_,
+		  	<if test="companySite != null">
+        		COMPANY_SITE_,
       		</if>
 		  	<if test="waterPlanNo != null">
         		WATER_PLAN_NO_,
@@ -296,8 +323,8 @@
 			  	<if test="installMoney != null">
 			  	  	   #{installMoney,jdbcType=VARCHAR},
 			  	</if>  
-			  	<if test="companyName != null">
-			  	  	   #{companyName,jdbcType=VARCHAR},
+			  	<if test="companySite != null">
+			  	  	   #{companySite,jdbcType=VARCHAR},
 			  	</if>  
 			  	<if test="waterPlanNo != null">
 			  	  	   #{waterPlanNo,jdbcType=VARCHAR},
@@ -381,8 +408,8 @@
 		  	<if test="installMoney != null">
         		INSTALL_MONEY_ = #{installMoney} ,
       		</if>
-		  	<if test="companyName != null">
-        		COMPANY_NAME_ = #{companyName} ,
+		  	<if test="companySite != null">
+        		COMPANY_SITE_ = #{companySite} ,
       		</if>
 		  	<if test="waterPlanNo != null">
         		WATER_PLAN_NO_ = #{waterPlanNo} ,

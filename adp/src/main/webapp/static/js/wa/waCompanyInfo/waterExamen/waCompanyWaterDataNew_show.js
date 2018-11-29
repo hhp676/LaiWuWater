@@ -36,7 +36,7 @@ waCompanyWaterDataNewDatagrid.initwaCompanyWaterDataNew = function(){
 			return;
 		}
 		var id = row.companyWaterId;
-		var editUrl = "/wa/WaCompanyWaterDataNew/waCompanyWaterDataEdit/"+id;
+		var editUrl = "/wa/WaCompanyWaterDataNew/waCompanyWaterDataNewDetail/"+id;
 		var iconCls = $(this).attr("iconCls");
 		var waCompanyWaterDataNewDetailWin = new HgWin({id:"waCompanyWaterDataNewDetailWin",title:"修改",width:850,height:380,iconCls:iconCls,url:editUrl});
 	});

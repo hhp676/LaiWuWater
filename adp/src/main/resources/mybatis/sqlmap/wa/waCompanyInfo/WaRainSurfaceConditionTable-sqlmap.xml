@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- sqlmapper 层 -->
+<mapper namespace="com.hongguaninfo.hgdf.wa.mapper.waCompanyInfo.WaRainSurfaceConditionTableMapper">
+
+
+    <!-- sqlColumn -->
+    <sql id="SQL_WA_RAIN_SURFACE_CONDITION_TABLE_COLUMN">
+        wrsct.RAIN_SURFACE_ID_ rainSurfaceId,
+        wrsct.COMPANY_ID_ companyId,
+        wrsct.RAIN_WATER_VOLUME_ rainWaterVolume,
+        wrsct.RAIN_ACT_AMOUNT_ rainActAmount,
+        wrsct.RAIN_USE_TIME_ rainUseTime,
+        wrsct.RAIN_PROJECT_INVEST_ rainProjectInvest,
+        wrsct.SURFACE_WATER_VOLUME_ surfaceWaterVolume,
+        wrsct.SURFACE_ACT_AMOUNT_ surfaceActAmount,
+        wrsct.SURFACE_USE_TIME_ surfaceUseTime,
+        wrsct.SURFACE_PROJECT_INVEST_ surfaceProjectInvest,
+        wrsct.PURPOSE_ purpose,
+        wrsct.FLAG_ flag,
+        wrsct.IS_DELETE_ isDelete,
+        wrsct.CRT_TIME_ crtTime,
+        wrsct.UPD_TIME_ updTime
+    </sql>
+
+    <!-- sqlWhere -->
+    <sql id="SQL_WA_RAIN_SURFACE_CONDITION_TABLE_WHERE">
+        	<if test="rainSurfaceId != null">
+	            AND wrsct.RAIN_SURFACE_ID_ = #{rainSurfaceId}
+        </if>
+        		<if test="companyId != null and companyId.length() != 0">
+        		AND wrsct.COMPANY_ID_ like '%${companyId}%'
+        </if>
+        		<if test="rainWaterVolume != null and rainWaterVolume.length() != 0">
+        		AND wrsct.RAIN_WATER_VOLUME_ like '%${rainWaterVolume}%'
+        </if>
+        		<if test="rainActAmount != null and rainActAmount.length() != 0">
+        		AND wrsct.RAIN_ACT_AMOUNT_ like '%${rainActAmount}%'
+        </if>
+        		<if test="rainUseTime != null and rainUseTime.length() != 0">
+        		AND wrsct.RAIN_USE_TIME_ like '%${rainUseTime}%'
+        </if>
+        		<if test="rainProjectInvest != null and rainProjectInvest.length() != 0">
+        		AND wrsct.RAIN_PROJECT_INVEST_ like '%${rainProjectInvest}%'
+        </if>
+        		<if test="surfaceWaterVolume != null and surfaceWaterVolume.length() != 0">
+        		AND wrsct.SURFACE_WATER_VOLUME_ like '%${surfaceWaterVolume}%'
+        </if>
+        		<if test="surfaceActAmount != null and surfaceActAmount.length() != 0">
+        		AND wrsct.SURFACE_ACT_AMOUNT_ like '%${surfaceActAmount}%'
+        </if>
+        		<if test="surfaceUseTime != null and surfaceUseTime.length() != 0">
+        		AND wrsct.SURFACE_USE_TIME_ like '%${surfaceUseTime}%'
+        </if>
+        		<if test="surfaceProjectInvest != null and surfaceProjectInvest.length() != 0">
+        		AND wrsct.SURFACE_PROJECT_INVEST_ like '%${surfaceProjectInvest}%'
+        </if>
+        		<if test="purpose != null and purpose.length() != 0">
+        		AND wrsct.PURPOSE_ like '%${purpose}%'
+        </if>
+        		<if test="flag != null and flag.length() != 0">
+        		AND wrsct.FLAG_ like '%${flag}%'
+        </if>
+        	<if test="isDelete != null">
+	            AND wrsct.IS_DELETE_ = #{isDelete}
+        </if>
+        	<if test="crtTime != null">
+	            AND wrsct.CRT_TIME_ = #{crtTime}
+        </if>
+        	<if test="updTime != null">
+	            AND wrsct.UPD_TIME_ = #{updTime}
+        </if>
+        <if test="filterStr !=null and filterStr.length()!=0">
+            ${filterStr}
+        </if>
+    </sql>
+
+    <!-- According to the id check record  -->
+    <select id="getById" parameterType="long" resultType="WaRainSurfaceConditionTable">
+        select <include  refid="SQL_WA_RAIN_SURFACE_CONDITION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_RAIN_SURFACE_CONDITION_TABLE wrsct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wrsct.COMPANY_ID_
+        <where>
+            wrsct.RAIN_SURFACE_ID_ = #{rainSurfaceId}
+        </where>
+    </select>
+
+	<!-- According to the id check record  -->
+	<select id="getDataByCompanyId" parameterType="Integer" resultType="WaRainSurfaceConditionTable">
+		select <include  refid="SQL_WA_RAIN_SURFACE_CONDITION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_RAIN_SURFACE_CONDITION_TABLE wrsct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wrsct.COMPANY_ID_
+		<where>
+			wrsct.COMPANY_ID_ = #{companyId}
+		</where>
+	</select>
+
+    <!-- Query All  -->
+    <select id="getList" parameterType="WaRainSurfaceConditionTable" resultType="WaRainSurfaceConditionTable">
+        select <include  refid="SQL_WA_RAIN_SURFACE_CONDITION_TABLE_COLUMN"/>, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_RAIN_SURFACE_CONDITION_TABLE wrsct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wrsct.COMPANY_ID_
+        <where>
+            <include  refid="SQL_WA_RAIN_SURFACE_CONDITION_TABLE_WHERE"/>
+
+			<if test="companyCode != null and companyCode.length() != 0">
+				AND com.COMPANY_CODE_ like '%${companyCode}%'
+			</if>
+			<if test="companyName != null and companyName.length() != 0">
+				AND com.COMPANY_NAME_ like '%${companyName}%'
+			</if>
+
+        </where>
+        <if test="orderStr != null and orderStr.length() != 0">
+            ORDER BY ${orderStr}
+        </if>
+        <if test="orderStr == null or orderStr.length() == 0">
+            ORDER BY
+                wrsct.RAIN_SURFACE_ID_ desc
+        </if>
+    </select>
+
+    <!-- Statistical line   -->
+    <select id="getListCount" parameterType="WaRainSurfaceConditionTable" resultType="int">
+        select count(
+            wrsct.RAIN_SURFACE_ID_
+        ) as counts
+		from WA_RAIN_SURFACE_CONDITION_TABLE wrsct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wrsct.COMPANY_ID_
+        <where>
+            <include  refid="SQL_WA_RAIN_SURFACE_CONDITION_TABLE_WHERE"/>
+
+			<if test="companyCode != null and companyCode.length() != 0">
+				AND com.COMPANY_CODE_ like '%${companyCode}%'
+			</if>
+			<if test="companyName != null and companyName.length() != 0">
+				AND com.COMPANY_NAME_ like '%${companyName}%'
+			</if>
+
+        </where>
+    </select>
+    
+	<!-- add 默认使用全局ID -->
+	<insert id="insert" parameterType="WaRainSurfaceConditionTable" >
+		insert into WA_RAIN_SURFACE_CONDITION_TABLE 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		  	<if test="rainSurfaceId != null">
+        		RAIN_SURFACE_ID_,
+      		</if>
+		  	<if test="companyId != null">
+        		COMPANY_ID_,
+      		</if>
+		  	<if test="rainWaterVolume != null">
+        		RAIN_WATER_VOLUME_,
+      		</if>
+		  	<if test="rainActAmount != null">
+        		RAIN_ACT_AMOUNT_,
+      		</if>
+		  	<if test="rainUseTime != null">
+        		RAIN_USE_TIME_,
+      		</if>
+		  	<if test="rainProjectInvest != null">
+        		RAIN_PROJECT_INVEST_,
+      		</if>
+		  	<if test="surfaceWaterVolume != null">
+        		SURFACE_WATER_VOLUME_,
+      		</if>
+		  	<if test="surfaceActAmount != null">
+        		SURFACE_ACT_AMOUNT_,
+      		</if>
+		  	<if test="surfaceUseTime != null">
+        		SURFACE_USE_TIME_,
+      		</if>
+		  	<if test="surfaceProjectInvest != null">
+        		SURFACE_PROJECT_INVEST_,
+      		</if>
+		  	<if test="purpose != null">
+        		PURPOSE_,
+      		</if>
+		  	<if test="flag != null">
+        		FLAG_,
+      		</if>
+		  	<if test="isDelete != null">
+        		IS_DELETE_,
+      		</if>
+		  	<if test="crtTime != null">
+        		CRT_TIME_,
+      		</if>
+		  	<if test="updTime != null">
+        		UPD_TIME_,
+      		</if>
+		</trim> 
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			  	<if test="rainSurfaceId != null">
+			  	  	   #{rainSurfaceId,jdbcType=NUMERIC},
+			  	</if>  
+			  	<if test="companyId != null">
+			  	  	   #{companyId,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="rainWaterVolume != null">
+			  	  	   #{rainWaterVolume,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="rainActAmount != null">
+			  	  	   #{rainActAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="rainUseTime != null">
+			  	  	   #{rainUseTime,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="rainProjectInvest != null">
+			  	  	   #{rainProjectInvest,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="surfaceWaterVolume != null">
+			  	  	   #{surfaceWaterVolume,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="surfaceActAmount != null">
+			  	  	   #{surfaceActAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="surfaceUseTime != null">
+			  	  	   #{surfaceUseTime,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="surfaceProjectInvest != null">
+			  	  	   #{surfaceProjectInvest,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="purpose != null">
+			  	  	   #{purpose,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="flag != null">
+			  	  	   #{flag,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="isDelete != null">
+			  	  	   #{isDelete,jdbcType=NUMERIC},
+			  	</if>  
+			  	<if test="crtTime != null">
+			  	  	   #{crtTime,jdbcType=TIMESTAMP},
+			  	</if>  
+			  	<if test="updTime != null">
+			  	  	   #{updTime,jdbcType=TIMESTAMP},
+			  	</if>  
+		</trim>
+    </insert>
+
+	<!-- update  -->
+	<update id="update" parameterType="WaRainSurfaceConditionTable">
+		UPDATE WA_RAIN_SURFACE_CONDITION_TABLE
+		<set>
+		  	<if test="rainSurfaceId != null">
+        		RAIN_SURFACE_ID_ = #{rainSurfaceId} ,
+      		</if>
+		  	<if test="companyId != null">
+        		COMPANY_ID_ = #{companyId} ,
+      		</if>
+		  	<if test="rainWaterVolume != null">
+        		RAIN_WATER_VOLUME_ = #{rainWaterVolume} ,
+      		</if>
+		  	<if test="rainActAmount != null">
+        		RAIN_ACT_AMOUNT_ = #{rainActAmount} ,
+      		</if>
+		  	<if test="rainUseTime != null">
+        		RAIN_USE_TIME_ = #{rainUseTime} ,
+      		</if>
+		  	<if test="rainProjectInvest != null">
+        		RAIN_PROJECT_INVEST_ = #{rainProjectInvest} ,
+      		</if>
+		  	<if test="surfaceWaterVolume != null">
+        		SURFACE_WATER_VOLUME_ = #{surfaceWaterVolume} ,
+      		</if>
+		  	<if test="surfaceActAmount != null">
+        		SURFACE_ACT_AMOUNT_ = #{surfaceActAmount} ,
+      		</if>
+		  	<if test="surfaceUseTime != null">
+        		SURFACE_USE_TIME_ = #{surfaceUseTime} ,
+      		</if>
+		  	<if test="surfaceProjectInvest != null">
+        		SURFACE_PROJECT_INVEST_ = #{surfaceProjectInvest} ,
+      		</if>
+		  	<if test="purpose != null">
+        		PURPOSE_ = #{purpose} ,
+      		</if>
+		  	<if test="flag != null">
+        		FLAG_ = #{flag} ,
+      		</if>
+		  	<if test="isDelete != null">
+        		IS_DELETE_ = #{isDelete} ,
+      		</if>
+		  	<if test="crtTime != null">
+        		CRT_TIME_ = #{crtTime} ,
+      		</if>
+		  	<if test="updTime != null">
+        		UPD_TIME_ = #{updTime} 
+      		</if>
+		 
+		</set>
+		WHERE
+           RAIN_SURFACE_ID_ = #{rainSurfaceId}
+	</update>
+
+	<!-- delete  -->
+	<delete id="delete" parameterType="WaRainSurfaceConditionTable">
+		DELETE FROM WA_RAIN_SURFACE_CONDITION_TABLE
+		WHERE
+            RAIN_SURFACE_ID_ = #{rainSurfaceId}
+	</delete>
+ 
+</mapper>

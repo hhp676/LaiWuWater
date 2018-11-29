@@ -120,4 +120,11 @@ public class WaCompanyWaterDataNewService {
         }
         return waCompanyWaterDataNewDao.getById(id);
 	}
+
+	public List<WaCompanyWaterDataNew> getDataByCompanyId(int companyId) throws BizException{
+		if (companyId == 0) {
+			return null;
+		}
+		return waCompanyWaterDataNewDao.getDataByCompanyId(companyId);
+	}
 }

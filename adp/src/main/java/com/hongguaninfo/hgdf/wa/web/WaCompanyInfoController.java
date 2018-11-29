@@ -29,13 +29,14 @@ import com.hongguaninfo.hgdf.wa.entity.WaCompanyInfo;
 import com.hongguaninfo.hgdf.wa.entity.WaMonthWaterData;
 import com.hongguaninfo.hgdf.wa.entity.WaPlanYearWaterData;
 import com.hongguaninfo.hgdf.wa.entity.WaUploadfileData;
-import com.hongguaninfo.hgdf.wa.service.WaCompanyInfoService;
-import com.hongguaninfo.hgdf.wa.service.WaMonthWaterDataService;
-import com.hongguaninfo.hgdf.wa.service.WaPlanYearWaterDataService;
-import com.hongguaninfo.hgdf.wa.service.WaUploadfileDataService;
+import com.hongguaninfo.hgdf.wa.service.*;
 import com.hongguaninfo.hgdf.wa.service.totalinfo.WaCommFacilitiesWaterDataService;
 import com.hongguaninfo.hgdf.wa.service.totalinfo.WaDormitoryWaterDataService;
 import com.hongguaninfo.hgdf.wa.service.totalinfo.WaIndustryWaterDataService;
+import com.hongguaninfo.hgdf.wa.service.waCompanyInfo.WaInterwaterInstallationTableService;
+import com.hongguaninfo.hgdf.wa.service.waCompanyInfo.WaPlanConditionTableService;
+import com.hongguaninfo.hgdf.wa.service.waCompanyInfo.WaRainSurfaceConditionTableService;
+import com.hongguaninfo.hgdf.wa.service.waCompanyInfo.WaSpecialtradeConditionTableService;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -101,8 +102,18 @@ public class WaCompanyInfoController {
     @Autowired
     private WaMonthWaterDataService waMonthWaterDataService;
 
+    @Autowired
+    private WaInterwaterInstallationTableService waInterwaterInstallationTableService;
 
+    @Autowired
+    private WaPlanConditionTableService waPlanConditionTableService;
+    @Autowired
+    private WaRainSurfaceConditionTableService waRainSurfaceConditionTableService;
+    @Autowired
+    private WaSpecialtradeConditionTableService waSpecialtradeConditionTableService;
 
+    @Autowired
+    private WaCompanyWaterDataNewService waCompanyWaterDataNewService;
     /**
 	 * REMARK
 	 * 列表页面。
@@ -323,9 +334,16 @@ public class WaCompanyInfoController {
                                            HttpServletRequest request, HttpServletResponse response,
                                            Model model) throws BizException {
         model.addAttribute("companyId", companyId);
-        model.addAttribute("commFacData" , waCommFacilitiesWaterDataService.getWaCommFacDataByCompanyId(companyId));
-        model.addAttribute("dormitoryWaterData", waDormitoryWaterDataService.getDorDataByCompanyId(companyId));
-        model.addAttribute("industryWaterData", waIndustryWaterDataService.getIndustryDataByCompanyId(companyId));
+        WaCompanyInfo waCompanyInfo = waCompanyInfoService.getWaCompanyInfoById(companyId);
+        model.addAttribute("companyCode", waCompanyInfo.getCompanyCode());
+        model.addAttribute("companyName", waCompanyInfo.getCompanyName());
+        model.addAttribute("waCompanyWaterDataNewAll", waCompanyWaterDataNewService.getDataByCompanyId(companyId));
+        model.addAttribute("waInterwaterInstallation", waInterwaterInstallationTableService.getDataByCompanyId(companyId));
+        model.addAttribute("waRainSurfaceData", waRainSurfaceConditionTableService.getDataByCompanyId(companyId));
+        model.addAttribute("planConditionDataAll", waPlanConditionTableService.getDataByCompanyId(companyId));
+        model.addAttribute("specialTradeConditionDataAll", waSpecialtradeConditionTableService.getDataByCompanyId(companyId));
+
+
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BaseException {
                 str = "wa/waCompanyInfo/waterTotal/waCompanyInfo_totalInfo";

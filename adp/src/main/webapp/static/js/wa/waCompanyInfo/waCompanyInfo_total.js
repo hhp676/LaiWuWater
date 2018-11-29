@@ -4,7 +4,10 @@ waCompanyInfoDatagrid.initTotal = function(companyId, dormitoryWaterId,commFacti
    var commAdd = commFactilitiesId == 0;
    var indAdd = industryWaterId == 0;
     $("#waCompanyInfo_totalInfo_layout [tag='ok']").click(function(){
-        var resultBol1, resultBol12,resultBol13,resultBol14,resultBol15,resultBol16;
+        debugger
+        alert(selectTabId+' ected');
+
+        /*var resultBol1, resultBol12,resultBol13,resultBol14,resultBol15,resultBol16;
         if(dorAdd){
              _saveDormitoryWaterData(true);
         }else{
@@ -20,13 +23,9 @@ waCompanyInfoDatagrid.initTotal = function(companyId, dormitoryWaterId,commFacti
         }else{
             _saveIndustryWater(false);
         }
-       /* if(resultBol1){
-            $.messager.ok("保存数据成功!")
-        }else {
-            $.messager.ok("保存失败!")
-        }*/
+
         $.messager.ok("保存数据成功!");
-        $("#waCompanyInfo_totalInfo_layout").parent().window("close");
+        $("#waCompanyInfo_totalInfo_layout").parent().window("close");*/
     });
 
     function _saveCommFacilitiesWaterData(isAdd){

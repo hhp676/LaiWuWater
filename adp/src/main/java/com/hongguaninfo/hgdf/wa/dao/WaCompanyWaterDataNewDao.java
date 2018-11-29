@@ -12,6 +12,7 @@ import com.hongguaninfo.hgdf.wa.entity.WaCompanyWaterDataNew;
 import com.hongguaninfo.hgdf.wa.mapper.WaCompanyWaterDataNewMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
 
 /**
@@ -29,6 +30,11 @@ public class WaCompanyWaterDataNewDao extends BaseDao<WaCompanyWaterDataNew, WaC
     @Override
     public String getMapperNamesapce() {
         return WaCompanyWaterDataNewMapper.class.getName().toString();
+    }
+
+    @Override
+    public List<WaCompanyWaterDataNew> getDataByCompanyId(int companyId) {
+        return getMapperByType(WaCompanyWaterDataNewMapper.class).getDataByCompanyId(companyId);
     }
 
 

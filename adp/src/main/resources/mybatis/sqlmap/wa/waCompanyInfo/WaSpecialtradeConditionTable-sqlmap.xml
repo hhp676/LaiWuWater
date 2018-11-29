@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- sqlmapper 层 -->
+<mapper namespace="com.hongguaninfo.hgdf.wa.mapper.waCompanyInfo.WaSpecialtradeConditionTableMapper">
+
+
+    <!-- sqlColumn -->
+    <sql id="SQL_WA_SPECIALTRADE_CONDITION_TABLE_COLUMN">
+        wsct.SPECIAL_ID_ specialId,
+        wsct.COMPANY_ID_ companyId,
+        wsct.WATER_TYPE_ waterType,
+        wsct.ADDRESS_ address,
+        wsct.TABLE_AMOUNT_ tableAmount,
+        wsct.WATER_AMOUNT_ waterAmount,
+        wsct.PRICE_ price,
+        wsct.IS_RECOVERY_ isRecovery,
+        wsct.IS_DELETE_ isDelete,
+        wsct.CRT_TIME_ crtTime,
+        wsct.UPD_TIME_ updTime
+    </sql>
+
+    <!-- sqlWhere -->
+    <sql id="SQL_WA_SPECIALTRADE_CONDITION_TABLE_WHERE">
+        	<if test="specialId != null">
+	            AND wsct.SPECIAL_ID_ = #{specialId}
+        </if>
+        		<if test="companyId != null and companyId.length() != 0">
+        		AND wsct.COMPANY_ID_ like '%${companyId}%'
+        </if>
+        		<if test="waterType != null and waterType.length() != 0">
+        		AND wsct.WATER_TYPE_ like '%${waterType}%'
+        </if>
+        		<if test="address != null and address.length() != 0">
+        		AND wsct.ADDRESS_ like '%${address}%'
+        </if>
+        		<if test="tableAmount != null and tableAmount.length() != 0">
+        		AND wsct.TABLE_AMOUNT_ like '%${tableAmount}%'
+        </if>
+        		<if test="waterAmount != null and waterAmount.length() != 0">
+        		AND wsct.WATER_AMOUNT_ like '%${waterAmount}%'
+        </if>
+        		<if test="price != null and price.length() != 0">
+        		AND wsct.PRICE_ like '%${price}%'
+        </if>
+        		<if test="isRecovery != null and isRecovery.length() != 0">
+        		AND wsct.IS_RECOVERY_ like '%${isRecovery}%'
+        </if>
+        	<if test="isDelete != null">
+	            AND wsct.IS_DELETE_ = #{isDelete}
+        </if>
+        	<if test="crtTime != null">
+	            AND wsct.CRT_TIME_ = #{crtTime}
+        </if>
+        	<if test="updTime != null">
+	            AND wsct.UPD_TIME_ = #{updTime}
+        </if>
+        <if test="filterStr !=null and filterStr.length()!=0">
+            ${filterStr}
+        </if>
+    </sql>
+
+    <!-- According to the id check record  -->
+    <select id="getById" parameterType="long" resultType="WaSpecialtradeConditionTable">
+        select <include  refid="SQL_WA_SPECIALTRADE_CONDITION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_SPECIALTRADE_CONDITION_TABLE wsct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wsct.COMPANY_ID_
+        <where>
+            wsct.SPECIAL_ID_ = #{specialId}
+        </where>
+    </select>
+
+	<!-- According to the id check record  -->
+	<select id="getDataByCompanyId" parameterType="Integer" resultType="WaSpecialtradeConditionTable">
+		select <include  refid="SQL_WA_SPECIALTRADE_CONDITION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_SPECIALTRADE_CONDITION_TABLE wsct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wsct.COMPANY_ID_
+		<where>
+			wsct.COMPANY_ID_ = #{companyId}
+		</where>
+	</select>
+
+    <!-- Query All  -->
+    <select id="getList" parameterType="WaSpecialtradeConditionTable" resultType="WaSpecialtradeConditionTable">
+        select <include  refid="SQL_WA_SPECIALTRADE_CONDITION_TABLE_COLUMN"/>, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_SPECIALTRADE_CONDITION_TABLE wsct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wsct.COMPANY_ID_
+        <where>
+            <include  refid="SQL_WA_SPECIALTRADE_CONDITION_TABLE_WHERE"/>
+
+			<if test="companyCode != null and companyCode.length() != 0">
+				AND com.COMPANY_CODE_ like '%${companyCode}%'
+			</if>
+			<if test="companyName != null and companyName.length() != 0">
+				AND com.COMPANY_NAME_ like '%${companyName}%'
+			</if>
+
+        </where>
+        <if test="orderStr != null and orderStr.length() != 0">
+            ORDER BY ${orderStr}
+        </if>
+        <if test="orderStr == null or orderStr.length() == 0">
+            ORDER BY
+                wsct.SPECIAL_ID_ desc
+        </if>
+    </select>
+
+    <!-- Statistical line   -->
+    <select id="getListCount" parameterType="WaSpecialtradeConditionTable" resultType="int">
+        select count(
+            wsct.SPECIAL_ID_
+        ) as counts
+		from WA_SPECIALTRADE_CONDITION_TABLE wsct JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wsct.COMPANY_ID_
+        <where>
+            <include  refid="SQL_WA_SPECIALTRADE_CONDITION_TABLE_WHERE"/>
+
+			<if test="companyCode != null and companyCode.length() != 0">
+				AND com.COMPANY_CODE_ like '%${companyCode}%'
+			</if>
+			<if test="companyName != null and companyName.length() != 0">
+				AND com.COMPANY_NAME_ like '%${companyName}%'
+			</if>
+
+        </where>
+    </select>
+    
+	<!-- add 默认使用全局ID -->
+	<insert id="insert" parameterType="WaSpecialtradeConditionTable" >
+		insert into WA_SPECIALTRADE_CONDITION_TABLE 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		  	<if test="specialId != null">
+        		SPECIAL_ID_,
+      		</if>
+		  	<if test="companyId != null">
+        		COMPANY_ID_,
+      		</if>
+		  	<if test="waterType != null">
+        		WATER_TYPE_,
+      		</if>
+		  	<if test="address != null">
+        		ADDRESS_,
+      		</if>
+		  	<if test="tableAmount != null">
+        		TABLE_AMOUNT_,
+      		</if>
+		  	<if test="waterAmount != null">
+        		WATER_AMOUNT_,
+      		</if>
+		  	<if test="price != null">
+        		PRICE_,
+      		</if>
+		  	<if test="isRecovery != null">
+        		IS_RECOVERY_,
+      		</if>
+		  	<if test="isDelete != null">
+        		IS_DELETE_,
+      		</if>
+		  	<if test="crtTime != null">
+        		CRT_TIME_,
+      		</if>
+		  	<if test="updTime != null">
+        		UPD_TIME_,
+      		</if>
+		</trim> 
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			  	<if test="specialId != null">
+			  	  	   #{specialId,jdbcType=NUMERIC},
+			  	</if>  
+			  	<if test="companyId != null">
+			  	  	   #{companyId,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="waterType != null">
+			  	  	   #{waterType,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="address != null">
+			  	  	   #{address,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="tableAmount != null">
+			  	  	   #{tableAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="waterAmount != null">
+			  	  	   #{waterAmount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="price != null">
+			  	  	   #{price,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="isRecovery != null">
+			  	  	   #{isRecovery,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="isDelete != null">
+			  	  	   #{isDelete,jdbcType=NUMERIC},
+			  	</if>  
+			  	<if test="crtTime != null">
+			  	  	   #{crtTime,jdbcType=TIMESTAMP},
+			  	</if>  
+			  	<if test="updTime != null">
+			  	  	   #{updTime,jdbcType=TIMESTAMP},
+			  	</if>  
+		</trim>
+    </insert>
+
+	<!-- update  -->
+	<update id="update" parameterType="WaSpecialtradeConditionTable">
+		UPDATE WA_SPECIALTRADE_CONDITION_TABLE
+		<set>
+		  	<if test="specialId != null">
+        		SPECIAL_ID_ = #{specialId} ,
+      		</if>
+		  	<if test="companyId != null">
+        		COMPANY_ID_ = #{companyId} ,
+      		</if>
+		  	<if test="waterType != null">
+        		WATER_TYPE_ = #{waterType} ,
+      		</if>
+		  	<if test="address != null">
+        		ADDRESS_ = #{address} ,
+      		</if>
+		  	<if test="tableAmount != null">
+        		TABLE_AMOUNT_ = #{tableAmount} ,
+      		</if>
+		  	<if test="waterAmount != null">
+        		WATER_AMOUNT_ = #{waterAmount} ,
+      		</if>
+		  	<if test="price != null">
+        		PRICE_ = #{price} ,
+      		</if>
+		  	<if test="isRecovery != null">
+        		IS_RECOVERY_ = #{isRecovery} ,
+      		</if>
+		  	<if test="isDelete != null">
+        		IS_DELETE_ = #{isDelete} ,
+      		</if>
+		  	<if test="crtTime != null">
+        		CRT_TIME_ = #{crtTime} ,
+      		</if>
+		  	<if test="updTime != null">
+        		UPD_TIME_ = #{updTime} 
+      		</if>
+		 
+		</set>
+		WHERE
+            SPECIAL_ID_ = #{specialId}
+	</update>
+
+	<!-- delete  -->
+	<delete id="delete" parameterType="WaSpecialtradeConditionTable">
+		DELETE FROM WA_SPECIALTRADE_CONDITION_TABLE
+		WHERE
+            SPECIAL_ID_ = #{specialId}
+	</delete>
+ 
+</mapper>

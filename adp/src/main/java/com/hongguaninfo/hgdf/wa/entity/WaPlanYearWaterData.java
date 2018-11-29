@@ -74,6 +74,55 @@ public class WaPlanYearWaterData extends BaseEntity {
 
     private String isImport;
 
+    /**
+     * 居民用水
+     */
+    private String residentWater;
+    /**
+     * 非居民用水
+     */
+    private String noResidentWater;
+    /**
+     * 教育用水
+     */
+    private String educationWater;
+    /**
+     * 特殊行业用水
+     */
+    private String specialTradeWater;
+
+    public String getResidentWater() {
+        return residentWater;
+    }
+
+    public void setResidentWater(String residentWater) {
+        this.residentWater = residentWater;
+    }
+
+    public String getNoResidentWater() {
+        return noResidentWater;
+    }
+
+    public void setNoResidentWater(String noResidentWater) {
+        this.noResidentWater = noResidentWater;
+    }
+
+    public String getEducationWater() {
+        return educationWater;
+    }
+
+    public void setEducationWater(String educationWater) {
+        this.educationWater = educationWater;
+    }
+
+    public String getSpecialTradeWater() {
+        return specialTradeWater;
+    }
+
+    public void setSpecialTradeWater(String specialTradeWater) {
+        this.specialTradeWater = specialTradeWater;
+    }
+
     public String getCompanyName() {
         return companyName;
     }

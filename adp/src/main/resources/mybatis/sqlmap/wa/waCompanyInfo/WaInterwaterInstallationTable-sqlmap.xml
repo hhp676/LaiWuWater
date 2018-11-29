@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- sqlmapper 层 -->
+<mapper namespace="com.hongguaninfo.hgdf.wa.mapper.waCompanyInfo.WaInterwaterInstallationTableMapper">
+
+
+    <!-- sqlColumn -->
+    <sql id="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN">
+        wiit.INTERWATER_ID_ interwaterId,
+        wiit.COMPANY_ID_ companyId,
+        wiit.PRODUCT_NAME_ productName,
+        wiit.HANDLE_TECH_ handleTech,
+        wiit.RECOVER_WATER_COUNT_ recoverWaterCount,
+        wiit.ACT_WATER_COUNT_ actWaterCount,
+        wiit.RUNTIME_ runtime,
+        wiit.INVEST_MONEY_ investMoney,
+        wiit.RUN_COST_ runCost,
+        wiit.INTERWATER_PRICE_ interwaterPrice,
+        wiit.INTERWATER_PIPING_ interwaterPiping,
+        wiit.USE_ 'use',
+        wiit.FLAG_ flag,
+        wiit.IS_DELETE_ isDelete,
+        wiit.CRT_TME_ crtTme,
+        wiit.UPD_TIME_ updTime
+    </sql>
+
+    <!-- sqlWhere -->
+    <sql id="SQL_WA_INTERWATER_INSTALLATION_TABLE_WHERE">
+        	<if test="interwaterId != null">
+	            AND wiit.INTERWATER_ID_ = #{interwaterId}
+        </if>
+        		<if test="companyId != null and companyId.length() != 0">
+        		AND wiit.COMPANY_ID_ like '%${companyId}%'
+        </if>
+        		<if test="productName != null and productName.length() != 0">
+        		AND wiit.PRODUCT_NAME_ like '%${productName}%'
+        </if>
+        		<if test="handleTech != null and handleTech.length() != 0">
+        		AND wiit.HANDLE_TECH_ like '%${handleTech}%'
+        </if>
+        		<if test="recoverWaterCount != null and recoverWaterCount.length() != 0">
+        		AND wiit.RECOVER_WATER_COUNT_ like '%${recoverWaterCount}%'
+        </if>
+        		<if test="actWaterCount != null and actWaterCount.length() != 0">
+        		AND wiit.ACT_WATER_COUNT_ like '%${actWaterCount}%'
+        </if>
+        		<if test="runtime != null and runtime.length() != 0">
+        		AND wiit.RUNTIME_ like '%${runtime}%'
+        </if>
+        		<if test="investMoney != null and investMoney.length() != 0">
+        		AND wiit.INVEST_MONEY_ like '%${investMoney}%'
+        </if>
+        		<if test="runCost != null and runCost.length() != 0">
+        		AND wiit.RUN_COST_ like '%${runCost}%'
+        </if>
+        		<if test="interwaterPrice != null and interwaterPrice.length() != 0">
+        		AND wiit.INTERWATER_PRICE_ like '%${interwaterPrice}%'
+        </if>
+        		<if test="interwaterPiping != null and interwaterPiping.length() != 0">
+        		AND wiit.INTERWATER_PIPING_ like '%${interwaterPiping}%'
+        </if>
+        		<if test="use != null and use.length() != 0">
+        		AND wiit.USE_ like '%${use}%'
+        </if>
+        		<if test="flag != null and flag.length() != 0">
+        		AND wiit.FLAG_ like '%${flag}%'
+        </if>
+        	<if test="isDelete != null">
+	            AND wiit.IS_DELETE_ = #{isDelete}
+        </if>
+        	<if test="crtTme != null">
+	            AND wiit.CRT_TME_ = #{crtTme}
+        </if>
+        	<if test="updTime != null">
+	            AND wiit.UPD_TIME_ = #{updTime}
+        </if>
+        <if test="filterStr !=null and filterStr.length()!=0">
+            ${filterStr}
+        </if>
+    </sql>
+
+    <!-- According to the id check record  -->
+    <select id="getById" parameterType="long" resultType="WaInterwaterInstallationTable">
+        select <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+        from WA_INTERWATER_INSTALLATION_TABLE wiit JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wiit.COMPANY_ID_
+        <where>
+            wiit.INTERWATER_ID_ = #{interwaterId}
+        </where>
+    </select>
+
+	<!-- According to the id check record  -->
+	<select id="getDataByCompanyId" parameterType="Integer" resultType="WaInterwaterInstallationTable">
+		select <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_INTERWATER_INSTALLATION_TABLE wiit JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wiit.COMPANY_ID_
+		<where>
+			wiit.COMPANY_ID_ = #{companyId}
+		</where>
+	</select>
+
+    <!-- Query All  -->
+    <select id="getList" parameterType="WaInterwaterInstallationTable" resultType="WaInterwaterInstallationTable">
+        select <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN"/>, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		from WA_INTERWATER_INSTALLATION_TABLE wiit JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wiit.COMPANY_ID_
+        <where>
+            <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_WHERE"/>
+			<if test="companyCode != null and companyCode.length() != 0">
+				AND com.COMPANY_CODE_ like '%${companyCode}%'
+			</if>
+			<if test="companyName != null and companyName.length() != 0">
+				AND com.COMPANY_NAME_ like '%${companyName}%'
+			</if>
+        </where>
+        <if test="orderStr != null and orderStr.length() != 0">
+            ORDER BY ${orderStr}
+        </if>
+        <if test="orderStr == null or orderStr.length() == 0">
+            ORDER BY
+                wiit.INTERWATER_ID_ desc
+        </if>
+    </select>
+
+    <!-- Statistical line   -->
+    <select id="getListCount" parameterType="WaInterwaterInstallationTable" resultType="int">
+        select count(
+            wiit.INTERWATER_ID_
+        ) as counts
+        from WA_INTERWATER_INSTALLATION_TABLE wiit JOIN WA_COMPANY_INFO com
+		on com.COMPANY_ID_ = wiit.COMPANY_ID_
+        <where>
+            <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_WHERE"/>
+			<if test="companyCode != null and companyCode.length() != 0">
+				AND com.COMPANY_CODE_ like '%${companyCode}%'
+			</if>
+			<if test="companyName != null and companyName.length() != 0">
+				AND com.COMPANY_NAME_ like '%${companyName}%'
+			</if>
+        </where>
+    </select>
+    
+	<!-- add 默认使用全局ID -->
+	<insert id="insert" parameterType="WaInterwaterInstallationTable" >
+		insert into WA_INTERWATER_INSTALLATION_TABLE 
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		  	<if test="interwaterId != null">
+        		INTERWATER_ID_,
+      		</if>
+		  	<if test="companyId != null">
+        		COMPANY_ID_,
+      		</if>
+		  	<if test="productName != null">
+        		PRODUCT_NAME_,
+      		</if>
+		  	<if test="handleTech != null">
+        		HANDLE_TECH_,
+      		</if>
+		  	<if test="recoverWaterCount != null">
+        		RECOVER_WATER_COUNT_,
+      		</if>
+		  	<if test="actWaterCount != null">
+        		ACT_WATER_COUNT_,
+      		</if>
+		  	<if test="runtime != null">
+        		RUNTIME_,
+      		</if>
+		  	<if test="investMoney != null">
+        		INVEST_MONEY_,
+      		</if>
+		  	<if test="runCost != null">
+        		RUN_COST_,
+      		</if>
+		  	<if test="interwaterPrice != null">
+        		INTERWATER_PRICE_,
+      		</if>
+		  	<if test="interwaterPiping != null">
+        		INTERWATER_PIPING_,
+      		</if>
+		  	<if test="use != null">
+        		USE_,
+      		</if>
+		  	<if test="flag != null">
+        		FLAG_,
+      		</if>
+		  	<if test="isDelete != null">
+        		IS_DELETE_,
+      		</if>
+		  	<if test="crtTme != null">
+        		CRT_TME_,
+      		</if>
+		  	<if test="updTime != null">
+        		UPD_TIME_,
+      		</if>
+		</trim> 
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			  	<if test="interwaterId != null">
+			  	  	   #{interwaterId,jdbcType=NUMERIC},
+			  	</if>  
+			  	<if test="companyId != null">
+			  	  	   #{companyId,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="productName != null">
+			  	  	   #{productName,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="handleTech != null">
+			  	  	   #{handleTech,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="recoverWaterCount != null">
+			  	  	   #{recoverWaterCount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="actWaterCount != null">
+			  	  	   #{actWaterCount,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="runtime != null">
+			  	  	   #{runtime,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="investMoney != null">
+			  	  	   #{investMoney,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="runCost != null">
+			  	  	   #{runCost,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="interwaterPrice != null">
+			  	  	   #{interwaterPrice,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="interwaterPiping != null">
+			  	  	   #{interwaterPiping,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="use != null">
+			  	  	   #{use,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="flag != null">
+			  	  	   #{flag,jdbcType=VARCHAR},
+			  	</if>  
+			  	<if test="isDelete != null">
+			  	  	   #{isDelete,jdbcType=NUMERIC},
+			  	</if>
+				<if test="updTime != null">
+					#{updTime,jdbcType=TIMESTAMP},
+				</if>
+		</trim>
+    </insert>
+
+	<!-- update  -->
+	<update id="update" parameterType="WaInterwaterInstallationTable">
+		UPDATE WA_INTERWATER_INSTALLATION_TABLE
+		<set>
+		  	<if test="interwaterId != null">
+        		INTERWATER_ID_ = #{interwaterId} ,
+      		</if>
+		  	<if test="companyId != null">
+        		COMPANY_ID_ = #{companyId} ,
+      		</if>
+		  	<if test="productName != null">
+        		PRODUCT_NAME_ = #{productName} ,
+      		</if>
+		  	<if test="handleTech != null">
+        		HANDLE_TECH_ = #{handleTech} ,
+      		</if>
+		  	<if test="recoverWaterCount != null">
+        		RECOVER_WATER_COUNT_ = #{recoverWaterCount} ,
+      		</if>
+		  	<if test="actWaterCount != null">
+        		ACT_WATER_COUNT_ = #{actWaterCount} ,
+      		</if>
+		  	<if test="runtime != null">
+        		RUNTIME_ = #{runtime} ,
+      		</if>
+		  	<if test="investMoney != null">
+        		INVEST_MONEY_ = #{investMoney} ,
+      		</if>
+		  	<if test="runCost != null">
+        		RUN_COST_ = #{runCost} ,
+      		</if>
+		  	<if test="interwaterPrice != null">
+        		INTERWATER_PRICE_ = #{interwaterPrice} ,
+      		</if>
+		  	<if test="interwaterPiping != null">
+        		INTERWATER_PIPING_ = #{interwaterPiping} ,
+      		</if>
+		  	<if test="use != null">
+        		USE_ = #{use} ,
+      		</if>
+		  	<if test="flag != null">
+        		FLAG_ = #{flag} ,
+      		</if>
+		  	<if test="isDelete != null">
+        		IS_DELETE_ = #{isDelete} ,
+      		</if>
+		  	<if test="crtTme != null">
+        		CRT_TME_ = #{crtTme} ,
+      		</if>
+		  	<if test="updTime != null">
+        		UPD_TIME_ = #{updTime} 
+      		</if>
+		 
+		</set>
+		WHERE
+            INTERWATER_ID_ = #{interwaterId}
+	</update>
+
+	<!-- delete  -->
+	<delete id="delete" parameterType="WaInterwaterInstallationTable">
+		DELETE FROM WA_INTERWATER_INSTALLATION_TABLE
+		WHERE
+            INTERWATER_ID_ = #{interwaterId}
+	</delete>
+ 
+</mapper>

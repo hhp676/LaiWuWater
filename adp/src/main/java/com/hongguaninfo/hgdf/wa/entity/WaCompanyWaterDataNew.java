@@ -31,6 +31,13 @@ public class WaCompanyWaterDataNew extends BaseEntity {
      * COMPANY_WATER_ID_ : 。
      */
     private Integer companyWaterId;
+
+    private String companyId;
+
+    private String companyCode;
+
+    private String companyName;
+
     /**
      * PRODUCT_NAME_ : 主产品名称。
      */
@@ -106,7 +113,7 @@ public class WaCompanyWaterDataNew extends BaseEntity {
     /**
      * COMPANY_NAME_ : 填报单位。
      */
-    private String companyName;
+    private String companySite;
     /**
      * WATER_PLAN_NO_ : 用水计划卡号。
      */
@@ -131,7 +138,38 @@ public class WaCompanyWaterDataNew extends BaseEntity {
      * UPD_TIME_ : 数据最后修改时间。
      */
     private Date updTime;
- 
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanySite() {
+        return companySite;
+    }
+
+    public void setCompanySite(String companySite) {
+        this.companySite = companySite;
+    }
 
     public Integer getCompanyWaterId() {
         return companyWaterId;
@@ -302,16 +340,6 @@ public class WaCompanyWaterDataNew extends BaseEntity {
     public void setInstallMoney(String installMoney) {
         this.installMoney = installMoney;
     }
-
-        
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
         
     public String getWaterPlanNo() {
         return waterPlanNo;

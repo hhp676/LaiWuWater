@@ -163,11 +163,11 @@ public class WaCompanyWaterDataNewController {
         return templete.operateModel();
     }
 
-    /**
+   /* *//**
      * REMARK
      * 修改信息
      * Through the id inquires the out a data
-     */
+     *//*
     @RequestMapping(value = "/waCompanyWaterDataEdit/{id}")
     public String showWaCompanyWaterDataEdit (@PathVariable int id,
                                                    HttpServletRequest request, HttpServletResponse response,
@@ -177,9 +177,9 @@ public class WaCompanyWaterDataNewController {
                 waCompanyWaterDataNewService.getWaCompanyWaterDataNewById(id));
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BaseException {
-                str = "wa/waCompanyInfo/waterExamen/waCompanyWaterDataNew_edit";
+                str = "wa/waCompanyInfo/waterExamen/waCompanyWaterDataNew_detail";
             }
         };
         return templete.operateModel();
-    }
+    }*/
 }

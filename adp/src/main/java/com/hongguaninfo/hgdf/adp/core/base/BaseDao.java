@@ -1,15 +1,14 @@
 package com.hongguaninfo.hgdf.adp.core.base;
 
-import java.io.Serializable;
-import java.util.List;
-
+import com.hongguaninfo.hgdf.core.utils.logging.Log;
+import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
+import com.hongguaninfo.hgdf.core.utils.page.Page;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import com.hongguaninfo.hgdf.core.utils.logging.Log;
-import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
-import com.hongguaninfo.hgdf.core.utils.page.Page;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * 
@@ -20,7 +19,6 @@ import com.hongguaninfo.hgdf.core.utils.page.Page;
  * 
  * @param <E>
  * @param <M>
- * @param <PK>
  */
 public abstract class   BaseDao<E, M, P extends Serializable> extends
         SqlSessionDaoSupport {
@@ -71,7 +69,7 @@ public abstract class   BaseDao<E, M, P extends Serializable> extends
     /**
      * 查询distinct
      * 
-     * @param disName
+     * @param entity
      * @return
      */
     public List<E> getDistinct(E entity) {
@@ -141,8 +139,8 @@ public abstract class   BaseDao<E, M, P extends Serializable> extends
      * 获取分页list
      * 
      * @param entity
-     * @param 开始位置
-     * @param 数量
+     * @param bPos
+     * @param count
      * @return
      */
     public List<E> getList(E entity, int bPos, int count) {
@@ -176,7 +174,7 @@ public abstract class   BaseDao<E, M, P extends Serializable> extends
     /**
      * 用于子类覆盖,在insert,update之前调用
      * 
-     * @param o
+     * @param
      */
     protected void prepareObjectForSaveOrUpdate(E entity) {
 

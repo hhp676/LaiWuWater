@@ -67,6 +67,8 @@
       </div>
 
 <script type="text/javascript" src="${ctx}/static/js/wa/waCompanyInfo/waterTotal/waCompanyInfo_waterTotal.js"></script>
+ <script type="text/javascript" src="${ctx}/static/js/wa/jquery.PrintArea.js"></script>
+ <script type="text/javascript" src="${ctx}/static/js/wa/laydate.js"></script>
 </body>
 
 </html>
