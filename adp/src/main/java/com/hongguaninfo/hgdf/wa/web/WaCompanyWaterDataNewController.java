@@ -17,7 +17,8 @@ import com.hongguaninfo.hgdf.adp.core.templete.OperateTemplete;
 import com.hongguaninfo.hgdf.core.utils.exception.BaseException;
 import com.hongguaninfo.hgdf.core.utils.logging.Log;
 import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
-import com.hongguaninfo.hgdf.wa.entity.WaCompanyWaterDataNew;
+import com.hongguaninfo.hgdf.wa.entity.waCompanyInfo.WaCompanyWaterDataNew;
+import com.hongguaninfo.hgdf.wa.service.WaCompanyInfoService;
 import com.hongguaninfo.hgdf.wa.service.WaCompanyWaterDataNewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,6 +56,9 @@ public class WaCompanyWaterDataNewController {
      */
     @Autowired
     private WaCompanyWaterDataNewService waCompanyWaterDataNewService;
+
+    @Autowired
+    private WaCompanyInfoService waCompanyInfoService;
 
     /**
 	 * REMARK
@@ -153,6 +157,7 @@ public class WaCompanyWaterDataNewController {
             HttpServletRequest request, HttpServletResponse response,
             Model model) throws BizException {
         model.addAttribute("companyWaterId", id);
+        model.addAttribute("companyData", waCompanyInfoService.getComPanyMap());
         model.addAttribute("waCompanyWaterDataNew",
          waCompanyWaterDataNewService.getWaCompanyWaterDataNewById(id));
         OperateTemplete templete = new HttpTemplete(request) {

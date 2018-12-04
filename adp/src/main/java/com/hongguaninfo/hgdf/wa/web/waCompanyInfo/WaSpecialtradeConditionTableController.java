@@ -18,6 +18,7 @@ import com.hongguaninfo.hgdf.core.utils.exception.BaseException;
 import com.hongguaninfo.hgdf.core.utils.logging.Log;
 import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
 import com.hongguaninfo.hgdf.wa.entity.waCompanyInfo.WaSpecialtradeConditionTable;
+import com.hongguaninfo.hgdf.wa.service.WaCompanyInfoService;
 import com.hongguaninfo.hgdf.wa.service.waCompanyInfo.WaSpecialtradeConditionTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,6 +57,8 @@ public class WaSpecialtradeConditionTableController {
     @Autowired
     private WaSpecialtradeConditionTableService waSpecialtradeConditionTableService;
 
+    @Autowired
+    private WaCompanyInfoService waCompanyInfoService;
     /**
 	 * REMARK
 	 * 列表页面。
@@ -152,12 +155,13 @@ public class WaSpecialtradeConditionTableController {
 	public String showWaSpecialtradeConditionTableDetail (@PathVariable int id,
             HttpServletRequest request, HttpServletResponse response,
             Model model) throws BizException {
-        model.addAttribute("id", id);
+        model.addAttribute("specialId", id);
+        model.addAttribute("companyData", waCompanyInfoService.getComPanyMap());
         model.addAttribute("waSpecialtradeData",
          waSpecialtradeConditionTableService.getWaSpecialtradeConditionTableById(id));
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BaseException {
-                 str = "wa/WaSpecialtradeConditionTable/waSpecialtradeConditionTable_detail";
+                 str = "wa/waCompanyInfo/WaSpecialtrade/waSpecialtradeConditionTable_detail";
             }
         };
         return templete.operateModel();

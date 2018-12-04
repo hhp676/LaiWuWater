@@ -15,7 +15,13 @@
 				<input type="hidden"   name="specialId" value="${specialId}" id="specialId"></input>
 				<tr>
 					<td width="130px;">单位名称<font>*</font>:</td>
-					<td><input type="text"   name="companyName" value="${waSpecialtradeData.companyName}" id="companyName"></input></td>
+					<td>
+						<select name="companyId" style="width: 170px">
+							<c:forEach var="companyDataItem" items="${companyData}">
+								<option value="${companyDataItem.key}" <c:if test="${waSpecialtradeData.companyId==companyDataItem.key}">selected</c:if>>${companyDataItem.value}</option>
+							</c:forEach>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td width="130px;">用水户性质<font>*</font>:</td>

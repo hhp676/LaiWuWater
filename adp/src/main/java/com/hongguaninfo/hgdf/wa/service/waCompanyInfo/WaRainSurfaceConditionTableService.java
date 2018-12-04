@@ -102,6 +102,7 @@ public class WaRainSurfaceConditionTableService {
         WaRainSurfaceConditionTable waRainSurfaceConditionTable = new WaRainSurfaceConditionTable();
         waRainSurfaceConditionTable.setUpdTime(new Date());
         waRainSurfaceConditionTable.setIsDelete(1);
+        waRainSurfaceConditionTable.setRainSurfaceId(id);
         waRainSurfaceConditionTableDao.update(waRainSurfaceConditionTable);
 	}	
 	

@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="easyui-layout" data-options="fit:true" id="WaterPrint_layout">
-    <div id="area2" style="width: 100%; float: left; margin: inherit;">
+    <div id="area2" style="">
         <br>
         <br>
         <table border="1" align="center" style="font-size: large; color:#333333; border-collapse: collapse; border: inherit 10px;">
@@ -17,13 +17,19 @@
                 <th >节水代码</th>
                 <th >单位名称</th>
                 <th >年份</th>
-                <th >计划用水量</th>
+                <th >年计划居民用水</th>
+                <th >年计划非居民用水</th>
+                <th >年计划教育用水</th>
+                <th >年计划特殊行业用水</th>
             </tr>
             <tr>
                 <td>${yearData.companyCode}</td>
                 <td>${yearData.companyName}</td>
                 <td>${yearData.planYear}</td>
-                <td>${yearData.planYearAvgWater}</td>
+                <td>${yearData.planYearResidentWwater}</td>
+                <td>${yearData.planYearNoResidentWater}</td>
+                <td>${yearData.planYearEducationWater}</td>
+                <td>${yearData.planYearSpecialTradeWater}</td>
             </tr>
         </table>
 

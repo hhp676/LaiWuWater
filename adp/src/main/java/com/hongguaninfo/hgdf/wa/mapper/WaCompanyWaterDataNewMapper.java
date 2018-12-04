@@ -8,7 +8,7 @@
 package com.hongguaninfo.hgdf.wa.mapper;
 
 import com.hongguaninfo.hgdf.adp.core.base.BaseSqlMapper;
-import com.hongguaninfo.hgdf.wa.entity.WaCompanyWaterDataNew;
+import com.hongguaninfo.hgdf.wa.entity.waCompanyInfo.WaCompanyWaterDataNew;
 
 import java.util.List;
 

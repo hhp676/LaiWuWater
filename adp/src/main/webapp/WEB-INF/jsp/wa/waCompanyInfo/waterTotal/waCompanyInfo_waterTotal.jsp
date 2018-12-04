@@ -18,16 +18,17 @@
             <tr>
 				<th data-options="field:'companyCode',width:150" editor="{type:'textbox'}"><b>节水代码</b></th>
                 <th data-options="field:'companyName',width:250" editor="{type:'textbox'}"><b>单位名称</b></th>
-                <th data-options="field:'contactNum',width:180" editor="{type:'textbox'}"><b>联系电话</b></th>
+				<th data-options="field:'userType',width:150" editor="{type:'textbox'}"><b>用户类别</b></th>
+               <%-- <th data-options="field:'contactNum',width:180" editor="{type:'textbox'}"><b>联系电话</b></th>
                 <th data-options="field:'contactMan',width:120" editor="{type:'textbox'}"><b>联系人</b></th>
-                <th data-options="field:'department',width:150" editor="{type:'textbox'}"><b>所属部门</b></th>
-                <th data-options="field:'userType',width:150" editor="{type:'textbox'}"><b>用户类别</b></th>
+                <th data-options="field:'department',width:150" editor="{type:'textbox'}"><b>所属部门</b></th>--%>
+               <%--
                 <th data-options="field:'email',width:150" editor="{type:'textbox'}"><b>邮箱</b></th>
                 <th data-options="field:'telphone',width:180" editor="{type:'textbox'}"><b>手机号码</b></th>
                 <th data-options="field:'cityArea',width:150" editor="{type:'textbox'}"><b>行政区域</b></th>
                 <th data-options="field:'postcode',width:120" editor="{type:'textbox'}"><b>邮编</b></th>
                 <th data-options="field:'peopleCount',width:120" editor="{type:'textbox'}"><b>单位人数</b></th>
-                <th data-options="field:'acreage',width:120" editor="{type:'textbox'}"><b>营业面积</b></th>
+                <th data-options="field:'acreage',width:120" editor="{type:'textbox'}"><b>营业面积</b></th>--%>
                 <th data-options="field:'waterType',width:150" editor="{type:'textbox'}"><b>用水性质</b></th>
                 <th data-options="field:'isImport',width:150" editor="{type:'textbox'}"><b>重点用户</b></th>
             </tr>

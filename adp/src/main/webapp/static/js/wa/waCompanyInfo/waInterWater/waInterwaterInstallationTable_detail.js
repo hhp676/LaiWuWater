@@ -1,7 +1,7 @@
 
 waInterwaterInstallationTableDatagrid.initwaWaterData = function(interwaterId) {
     if (waInterwaterInstallationTableDatagrid.mode == "edit") {
-        // $("#waInterwater_edit_layout [name='interwaterId']").attr("disabled","disabled");
+        $("#waCompanyWaterDataNew_edit_layout [name='companyId']").attr("disabled","disabled");
     }else if(waInterwaterInstallationTableDatagrid.mode == "add"){
         interwaterId = 0;
         $("#waInterwater_edit_layout [name='interwaterId']").val("");

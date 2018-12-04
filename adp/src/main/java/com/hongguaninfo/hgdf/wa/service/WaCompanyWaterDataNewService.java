@@ -13,7 +13,7 @@ import com.hongguaninfo.hgdf.adp.core.exception.BizException;
 import com.hongguaninfo.hgdf.adp.core.utils.generator.DbIdGenerator;
 import com.hongguaninfo.hgdf.core.utils.page.Page;
 import com.hongguaninfo.hgdf.wa.dao.WaCompanyWaterDataNewDao;
-import com.hongguaninfo.hgdf.wa.entity.WaCompanyWaterDataNew;
+import com.hongguaninfo.hgdf.wa.entity.waCompanyInfo.WaCompanyWaterDataNew;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 
 waSpecialtradeConditionTableDatagrid.initSpecialtrade = function(specialId) {
     if (waSpecialtradeConditionTableDatagrid.mode == "edit") {
-        $("#waSpecialtrade_edit_layout [name='specialId']").attr("disabled","disabled");
+        $("#waCompanyWaterDataNew_edit_layout [name='companyId']").attr("disabled","disabled");
     }else if(waSpecialtradeConditionTableDatagrid.mode == "add"){
         specialId = 0;
         $("#waSpecialtrade_edit_layout [name='specialId']").val("");

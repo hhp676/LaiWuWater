@@ -310,6 +310,25 @@ public class WaMonthWaterDataController {
         };
         return templete.operate();
     }
+
+    /**
+     * REMARK
+     *
+     * 修改
+     */
+    @RequestMapping("/overPlanUpdate")
+    @ResponseBody
+    @UserLog(code = "editWaMonthWaterData", name = "overPlanUpdate WaMonthWaterData", remarkClass = WaMonthWaterDataController.class)
+    public Map overPlanUpdate (final WaMonthWaterData vo, HttpServletResponse response,
+                                     final HttpServletRequest request) {
+        OperateTemplete templete = new HttpTemplete(request) {
+            protected void doSomething() throws BizException {
+                waMonthWaterDataService.updateWaMonthWaterData(vo, "overPlanUpdate");
+            }
+        };
+        return templete.operate();
+    }
+
     /**
 	 * REMARK
 	 * 删除
@@ -387,10 +406,8 @@ public class WaMonthWaterDataController {
             HttpServletRequest request, HttpServletResponse response,
             Model model) throws BizException {
         model.addAttribute("monthWaterId", monthWaterId);
-        WaMonthWaterData entity = new WaMonthWaterData();
-
         model.addAttribute("companyData", waCompanyInfoService.getComPanyMap());
-
+        WaMonthWaterData entity = new WaMonthWaterData();
         entity.setMonthWaterId(monthWaterId);
         entity.setIsDelte(0);
         WaMonthWaterData tmpEntity =  waMonthWaterDataService.getWaMonthWaterDataById(entity);

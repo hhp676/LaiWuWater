@@ -15,7 +15,10 @@ waMonthWaterDatagrid.initwaMonthWaterData = function(monthWaterId) {
         monthWaterId = 0;
         $("#waMonthWaterData_layout [name='monthWaterId']").val("");
         $("#waMonthWaterData_layout [name='monthDate']").val("");
-        $("#waMonthWaterData_layout [name='actMonthWater']").val("");
+        $("#waMonthWaterData_layout [name='actResidentWater']").val("");
+        $("#waMonthWaterData_layout [name='actNoResidentWater']").val("");
+        $("#waMonthWaterData_layout [name='actEducationWater']").val("");
+        $("#waMonthWaterData_layout [name='actSpecialTradeWater']").val("");
     }
     Hg.refRepeatSubmit("waMonthWaterData_form");//防止表单重复提交
 

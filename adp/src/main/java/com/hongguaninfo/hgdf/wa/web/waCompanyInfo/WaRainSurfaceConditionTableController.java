@@ -18,6 +18,7 @@ import com.hongguaninfo.hgdf.core.utils.exception.BaseException;
 import com.hongguaninfo.hgdf.core.utils.logging.Log;
 import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
 import com.hongguaninfo.hgdf.wa.entity.waCompanyInfo.WaRainSurfaceConditionTable;
+import com.hongguaninfo.hgdf.wa.service.WaCompanyInfoService;
 import com.hongguaninfo.hgdf.wa.service.waCompanyInfo.WaRainSurfaceConditionTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,7 +56,8 @@ public class WaRainSurfaceConditionTableController {
      */
     @Autowired
     private WaRainSurfaceConditionTableService waRainSurfaceConditionTableService;
-
+    @Autowired
+    private WaCompanyInfoService waCompanyInfoService;
     /**
 	 * REMARK
 	 * 列表页面。
@@ -153,6 +155,7 @@ public class WaRainSurfaceConditionTableController {
             HttpServletRequest request, HttpServletResponse response,
             Model model) throws BizException {
         model.addAttribute("rainSurfaceId", id);
+        model.addAttribute("companyData", waCompanyInfoService.getComPanyMap());
         model.addAttribute("waRainSurfaceData",
          waRainSurfaceConditionTableService.getWaRainSurfaceConditionTableById(id));
         OperateTemplete templete = new HttpTemplete(request) {

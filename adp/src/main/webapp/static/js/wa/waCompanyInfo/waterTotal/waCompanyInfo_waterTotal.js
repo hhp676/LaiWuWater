@@ -31,7 +31,7 @@ waCompanyInfoDatagrid.initwaCompanyInfo = function(){
         var companyId = row.companyId;
         var url = "/wa/WaCompanyInfo/totalInfoDetail/"+companyId;
         var iconCls = $(this).attr("iconCls");
-        var totalInfoDetailWin = new HgWin({id:"totalInfoDetailWin",title:"用水信息统计",width:1100,height:450,iconCls:iconCls,url:url});
+        var totalInfoDetailWin = new HgWin({id:"totalInfoDetailWin",title:"用水信息统计",width:1100,height:550,iconCls:iconCls,url:url});
     });
 
 } 

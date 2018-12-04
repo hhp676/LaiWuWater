@@ -27,13 +27,22 @@
                     <td><input type="text" style="width: 170px" name="planYear" id="planYear" value="${waPlanYearWaterData.planYear}"></input></td>
                 </tr>
                <tr>
-                    <td>计划的年份用水量:</td>
-                    <td><input type="text" style="width: 170px"  name="planYearAvgWater" id="planYearAvgWater" value="${waPlanYearWaterData.planYearAvgWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
+                    <td>年计划居民用水:</td>
+                    <td><input type="text" style="width: 170px"  name="planYearResidentWwater" id="planYearResidentWwater" value="${waPlanYearWaterData.planYearResidentWwater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
+               </tr>
+                <tr>
+                     <td>年计划非居民用水:</td>
+                     <td><input type="text" style="width: 170px" name="planYearNoResidentWater" id="planYearNoResidentWater" value="${waPlanYearWaterData.planYearNoResidentWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
                 </tr>
                 <tr>
-                     <td>单位上报用水量:</td>
-                     <td><input type="text" style="width: 170px" name="planYearEditWater" id="planYearEditWater" value="${waPlanYearWaterData.planYearEditWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
-                 </tr>
+                    <td>年计划教育用水:</td>
+                    <td><input type="text" style="width: 170px" name="planYearEducationWater" id="planYearEducationWater" value="${waPlanYearWaterData.planYearEducationWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
+                </tr>
+                <tr>
+                    <td>年计划特殊行业用水:</td>
+                    <td><input type="text" style="width: 170px" name="planYearSpecialTradeWater" id="planYearSpecialTradeWater" value="${waPlanYearWaterData.planYearSpecialTradeWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
+                </tr>
+
             </table>
         </form>
     </div>

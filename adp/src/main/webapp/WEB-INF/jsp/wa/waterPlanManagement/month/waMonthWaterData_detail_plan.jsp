@@ -17,7 +17,7 @@
                     <td>
                         <select name="companyId" style="width: 170px">
                             <c:forEach var="companyDataItem" items="${companyData}">
-                                <option value="${companyDataItem.key}" <c:if test="${waMonthWaterData.waCompanyInfo.companyId==companyDataItem.key}">selected</c:if>>${companyDataItem.value}</option>
+                                <option value="${companyDataItem.key}" <c:if test="${waMonthWaterData.companyId==companyDataItem.key}">selected</c:if>>${companyDataItem.value}</option>
                             </c:forEach>
                         </select>
                     </td>
@@ -27,17 +27,21 @@
                     <td><input type="text" style="width: 170px" name="monthDate" id="monthDate" placeholder="例如：201809" value="${waMonthWaterData.monthDate}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'')" ></input></td>
                 </tr>
                 <tr>
-                    <td>计划用水量:</td>
-                    <td><input type="text" style="width: 170px" name="planMonthWater" id="planMonthWater" value="${waMonthWaterData.planMonthWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
+                    <td>计划居民供水:</td>
+                    <td><input type="text" style="width: 170px" name="planResidentWater" id="planResidentWater" value="${waMonthWaterData.planResidentWater}" onkeyup="value=value.replace(/[^\d{1,}\.\d{1,}|\d{1,}]/g,'') " ></input></td>
                 </tr>
-               <%-- <tr>
-                     <td>实际用水量:</td>
-                     <td><input type="text" style="width: 170px" name="actMonthWater" id="actMonthWater" value="${waMonthWaterData.actMonthWater}" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" ></input></td>
+                <tr>
+                     <td>计划非居民供水:</td>
+                     <td><input type="text" style="width: 170px" name="planNoResidentWater" id="planNoResidentWater" value="${waMonthWaterData.planNoResidentWater}" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" ></input></td>
                  </tr>
                 <tr>
-                    <td>收费标准:</td>
-                    <td><textarea class="easyui-validatebox" style="height:80px;width:300px;font-family:Arial" name="feeStandard" id="feeStandard" >${waMonthWaterData.feeStandard}</textarea></td>
-                </tr>--%>
+                    <td>计划教育用水:</td>
+                    <td><input type="text" style="width: 170px" name="planEducationWater" id="planEducationWater" value="${waMonthWaterData.planEducationWater}" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" ></input></td>
+                </tr>
+                <tr>
+                    <td>计划特殊行业用水:</td>
+                    <td><input type="text" style="width: 170px" name="planSpecialTradeWater" id="planSpecialTradeWater" value="${waMonthWaterData.planSpecialTradeWater}" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();" ></input></td>
+                </tr>
             </table>
         </form>
     </div>

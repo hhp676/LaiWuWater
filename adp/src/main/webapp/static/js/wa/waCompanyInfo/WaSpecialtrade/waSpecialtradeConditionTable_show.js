@@ -6,14 +6,15 @@ waSpecialtradeConditionTableDatagrid.initwaSpecialtradeConditionTable = function
     //----------------------------------查询-----------------------------------------------------
 	$("#waSpecialtradeConditionTable_toolbar [tag='search']").click(function(){
 		 $('#waSpecialtradeConditionTable_datagrid').datagrid('load',{
-			 
+             companyCode: $("[name='companyCode']").val(),
+             companyName: $("[name='companyName']").val()
 		 });
 		 
 	});
  
     //----------------------------------清空-----------------------------------------------------
 	$("#waSpecialtradeConditionTable_toolbar [tag='clear']").click(function(){
-		$('#waSpecialtradeConditionTableForm').form('clear');
+		$('#waSpecialtradeConditionTableSearchForm').form('clear');
 		$('#waSpecialtradeConditionTable_datagrid').datagrid("load",{});
 	});
 	 //-------------------------------------------增加---------------------------------------------------
@@ -70,7 +71,7 @@ waSpecialtradeConditionTableDatagrid.initwaSpecialtradeConditionTable = function
 		}
 		$.messager.confirm("删除确认", "确认删除此条数据?", function(r){
 			if (r){
-				var id = row.id;
+				var id = row.specialId;
 				Hg.getJson("/wa/WaSpecialtradeConditionTable/delete",{id:id},function(data){
 					if (data.success) {
 						$.messager.ok("删除成功!",function(){

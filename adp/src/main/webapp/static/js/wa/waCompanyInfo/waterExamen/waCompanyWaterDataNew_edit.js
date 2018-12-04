@@ -1,7 +1,7 @@
 
 waCompanyWaterDataNewDatagrid.initwaWaterData = function(companyWaterId) {
     if (waCompanyWaterDataNewDatagrid.mode == "edit") {
-        $("#waCompanyWaterDataNew_edit_layout [name='companyWaterId']").attr("disabled","disabled");
+        $("#waCompanyWaterDataNew_edit_layout [name='companyId']").attr("disabled","disabled");
     }else if(waCompanyWaterDataNewDatagrid.mode == "add"){
         companyWaterId = 0;
         $("#waCompanyWaterDataNew_edit_layout [name='companyWaterId']").val("");

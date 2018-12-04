@@ -11,6 +11,10 @@
         wpywd.PLAN_YEAR_ planYear,
         wpywd.PLAN_YEAR_AVG_WATER_ planYearAvgWater,
         wpywd.PLAN_YEAR_EDIT_WATER_ planYearEditWater,
+        wpywd.PLAN_YEAR_RESIDENT_WATER_ planYearResidentWwater,
+        wpywd.PLAN_YEAR_NO_RESIDENT_WATER_ planYearNoResidentWater,
+        wpywd.PLAN_YEAR_EDUCATION_WATER_ planYearEducationWater,
+        wpywd.PLAN_YEAR_SPECIALTRADE_WATER_ planYearSpecialTradeWater,
         wpywd.ACT_YEAR_WATER_ actYearWater,
         wpywd.IS_OVERPROOF_ isOverproof,
         wpywd.IS_DELTE_ isDelte,
@@ -181,6 +185,20 @@
 		  	<if test="planYearEditWater != null">
         		PLAN_YEAR_EDIT_WATER_,
       		</if>
+
+			<if test="planYearResidentWwater != null">
+				PLAN_YEAR_RESIDENT_WATER_,
+			</if>
+			<if test="planYearNoResidentWater != null">
+				PLAN_YEAR_NO_RESIDENT_WATER_,
+			</if>
+			<if test="planYearEducationWater != null">
+				PLAN_YEAR_EDUCATION_WATER_,
+			</if>
+			<if test="planYearSpecialTradeWater != null">
+				PLAN_YEAR_SPECIALTRADE_WATER_,
+			</if>
+
 		  	<if test="actYearWater != null">
         		ACT_YEAR_WATER_,
       		</if>
@@ -212,7 +230,21 @@
 			  	</if>  
 			  	<if test="planYearEditWater != null">
 			  	  	   #{planYearEditWater,jdbcType=VARCHAR},
-			  	</if>  
+			  	</if>
+
+				<if test="planYearResidentWwater != null">
+					#{planYearResidentWwater,jdbcType=VARCHAR},
+				</if>
+				<if test="planYearNoResidentWater != null">
+					#{planYearNoResidentWater,jdbcType=VARCHAR},
+				</if>
+				<if test="planYearEducationWater != null">
+					#{planYearEducationWater,jdbcType=VARCHAR},
+				</if>
+				<if test="planYearSpecialTradeWater != null">
+					#{planYearSpecialTradeWater,jdbcType=VARCHAR},
+				</if>
+
 			  	<if test="actYearWater != null">
 			  	  	   #{actYearWater,jdbcType=VARCHAR},
 			  	</if>  
@@ -250,6 +282,19 @@
 		  	<if test="planYearEditWater != null">
         		PLAN_YEAR_EDIT_WATER_ = #{planYearEditWater} ,
       		</if>
+
+			<if test="planYearResidentWwater != null">
+				PLAN_YEAR_RESIDENT_WATER_ = #{planYearResidentWwater} ,
+			</if>
+			<if test="planYearNoResidentWater != null">
+				PLAN_YEAR_NO_RESIDENT_WATER_ = #{planYearNoResidentWater} ,
+			</if>
+			<if test="planYearEducationWater != null">
+				PLAN_YEAR_EDUCATION_WATER_ = #{planYearEducationWater} ,
+			</if>
+			<if test="planYearSpecialTradeWater != null">
+				PLAN_YEAR_SPECIALTRADE_WATER_ = #{planYearSpecialTradeWater} ,
+			</if>
 		  	<if test="actYearWater != null">
         		ACT_YEAR_WATER_ = #{actYearWater} ,
       		</if>

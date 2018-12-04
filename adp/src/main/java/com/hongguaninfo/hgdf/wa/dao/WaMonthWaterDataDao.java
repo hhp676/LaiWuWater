@@ -52,4 +52,10 @@ public class WaMonthWaterDataDao extends BaseDao<WaMonthWaterData, WaMonthWaterD
         getMapperByType(WaMonthWaterDataMapper.class).updateMonthDataByEntity(waMonthWaterData);
     }
 
+    public Page getOverPlanListPage(BasePage pageRequest) {
+        return pageQuery(getMapperNamesapce() + ".getOverPlanList",
+                getMapperNamesapce() + ".getOverPlanListCount", pageRequest);
+    }
+
+
 }

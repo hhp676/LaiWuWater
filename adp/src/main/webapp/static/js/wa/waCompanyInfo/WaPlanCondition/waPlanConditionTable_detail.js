@@ -1,10 +1,13 @@
 waPlanConditionTableDatagrid.initPlanCondition = function(planCondtionId) {
     if (waPlanConditionTableDatagrid.mode == "edit") {
-        $("#waPlanCondition_edit_layout [name='planCondtionId']").attr("disabled","disabled");
+        $("#waCompanyWaterDataNew_edit_layout [name='companyId']").attr("disabled","disabled");
     }else if(waPlanConditionTableDatagrid.mode == "add"){
         planCondtionId = 0;
         $("#waPlanCondition_edit_layout [name='planCondtionId']").val("");
 
+    }else if(waPlanConditionTableDatagrid.mode == "view") {
+        //查看详情时移除按钮
+        $("#waPlanCondition_edit_layout [tag='ok']").parent().remove();
     }
     Hg.refRepeatSubmit("waPlanCondition_edit_form");//防止表单重复提交
 

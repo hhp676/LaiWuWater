@@ -100,6 +100,7 @@ public class WaSpecialtradeConditionTableService {
 	 */
 	public void deleteWaSpecialtradeConditionTableLogic(int id) throws BizException{
         WaSpecialtradeConditionTable waSpecialtradeConditionTable = new WaSpecialtradeConditionTable();
+        waSpecialtradeConditionTable.setSpecialId(id);
         waSpecialtradeConditionTable.setUpdTime(new Date());
         waSpecialtradeConditionTable.setIsDelete(1);
         waSpecialtradeConditionTableDao.update(waSpecialtradeConditionTable);

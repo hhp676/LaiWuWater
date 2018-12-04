@@ -220,7 +220,10 @@ public class WaPlanYearWaterDataService {
 					waPlanYearWaterData.setPlanYear(ExcelUtil.getCellValue(row.getCell(2)));
 					//判断年计划用水量是否正常
 					try {
-						waPlanYearWaterData.setPlanYearAvgWater(df.format(Float.parseFloat((StringUtil.isNull(row.getCell(3)))? "0": row.getCell(3).toString())));
+						waPlanYearWaterData.setPlanYearResidentWwater(df.format(Float.parseFloat((StringUtil.isNull(row.getCell(3)))? "0": row.getCell(3).toString())));
+						waPlanYearWaterData.setPlanYearNoResidentWater(df.format(Float.parseFloat((StringUtil.isNull(row.getCell(4)))? "0": row.getCell(4).toString())));
+						waPlanYearWaterData.setPlanYearEducationWater(df.format(Float.parseFloat((StringUtil.isNull(row.getCell(5)))? "0": row.getCell(5).toString())));
+						waPlanYearWaterData.setPlanYearSpecialTradeWater(df.format(Float.parseFloat((StringUtil.isNull(row.getCell(6)))? "0": row.getCell(6).toString())));
 					}catch (Exception e){
 						LOG.error("row is["+rowNum+"], companyCode ["+companyCode+"] is not exit");
 						resultCon = "第" + (rowNum+1) + "行，计划用水量有问题，请修改";
@@ -247,15 +250,12 @@ public class WaPlanYearWaterDataService {
 						LOG.error("import mysql is error" +e);
 						return "录入至系统失败，请检查文件数据";
 					}
-
 				}
 			}
-
 			return resultCon;
 		}catch (Exception e){
 			LOG.error("import error---" + e);
 			return "导入失败，请检查文件数据";
 		}
 	}
-
 }

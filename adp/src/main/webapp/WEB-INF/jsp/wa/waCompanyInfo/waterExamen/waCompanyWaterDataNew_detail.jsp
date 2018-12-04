@@ -15,7 +15,13 @@
                 <input type="hidden"   name="companyWaterId" value="${companyWaterId}" id="companyWaterId"></input>
                 <tr>
                     <td width="130px;">单位名称<font>*</font>:</td>
-                    <td><input type="text"   name="companyName" value="${waCompanyWaterDataNew.companyName}" id="companyName"></input></td>
+                    <td>
+                        <select name="companyId" style="width: 170px">
+                            <c:forEach var="companyDataItem" items="${companyData}">
+                                <option value="${companyDataItem.key}" <c:if test="${waCompanyWaterDataNew.companyId==companyDataItem.key}">selected</c:if>>${companyDataItem.value}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td width="130px;">主产品名称<font>*</font>:</td>

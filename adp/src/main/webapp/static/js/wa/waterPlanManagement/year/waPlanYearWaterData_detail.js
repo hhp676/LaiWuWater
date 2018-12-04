@@ -7,16 +7,17 @@ waPlanYearWaterDataGrid.initPlanYearWaterDataDetail = function(planWaterId) {
             // rules:{  companyCode: { required: true ,rangelength:[1,100]}}
         });
         //查看详情时不可编辑
-        $("#waPlanYearWaterData_layout [name='planWaterCompanyName']").attr("disabled","disabled");
+        $("#waPlanYearWaterData_layout [name='companyId']").attr("disabled","disabled");
     } else if (waPlanYearWaterDataGrid.mode == "edit") {
-        $("#waPlanYearWaterData_layout [name='planWaterCompanyName']").attr("disabled","disabled");
+        $("#waPlanYearWaterData_layout [name='companyId']").attr("disabled","disabled");
     }else if(waPlanYearWaterDataGrid.mode == "add"){
         planWaterId = 0;
         $("#waPlanYearWaterData_layout [name='planWaterId']").val("");
         $("#waPlanYearWaterData_layout [name='planYear']").val("");
-        $("#waPlanYearWaterData_layout [name='planYearAvgWater']").val("");
-        $("#waPlanYearWaterData_layout [name='planYearEditWater']").val("");
-
+        $("#waPlanYearWaterData_layout [name='planYearResidentWwater']").val("");
+        $("#waPlanYearWaterData_layout [name='planYearNoResidentWater']").val("");
+        $("#waPlanYearWaterData_layout [name='planYearEducationWater']").val("");
+        $("#waPlanYearWaterData_layout [name='planYearSpecialTradeWater']").val("");
     }
     Hg.refRepeatSubmit("waPlanYearWaterData_form");//防止表单重复提交
 

@@ -18,6 +18,7 @@ import com.hongguaninfo.hgdf.core.utils.exception.BaseException;
 import com.hongguaninfo.hgdf.core.utils.logging.Log;
 import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
 import com.hongguaninfo.hgdf.wa.entity.waCompanyInfo.WaInterwaterInstallationTable;
+import com.hongguaninfo.hgdf.wa.service.WaCompanyInfoService;
 import com.hongguaninfo.hgdf.wa.service.waCompanyInfo.WaInterwaterInstallationTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,6 +57,8 @@ public class WaInterwaterInstallationTableController {
     @Autowired
     private WaInterwaterInstallationTableService waInterwaterInstallationTableService;
 
+    @Autowired
+    private WaCompanyInfoService waCompanyInfoService;
     /**
 	 * REMARK
 	 * 列表页面。
@@ -153,6 +156,7 @@ public class WaInterwaterInstallationTableController {
             HttpServletRequest request, HttpServletResponse response,
             Model model) throws BizException {
         model.addAttribute("interwaterId", interwaterId);
+        model.addAttribute("companyData", waCompanyInfoService.getComPanyMap());
         model.addAttribute("waInterWaterData",
          waInterwaterInstallationTableService.getWaInterwaterInstallationTableById(interwaterId));
         OperateTemplete templete = new HttpTemplete(request) {

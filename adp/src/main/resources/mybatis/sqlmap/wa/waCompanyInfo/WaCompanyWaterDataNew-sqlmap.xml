@@ -7,6 +7,7 @@
     <!-- sqlColumn -->
     <sql id="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN">
         wcwdn.COMPANY_WATER_ID_ companyWaterId,
+        wcwdn.COMPANY_ID_ companyId,
         wcwdn.PRODUCT_NAME_ productName,
         wcwdn.NEW_WATER_COUNT_ newWaterCount,
         wcwdn.GONGYE_WATER_COUNT_ gongyeWaterCount,
@@ -127,6 +128,7 @@
         <where>
             wcwdn.COMPANY_WATER_ID_ = #{companyWaterId}
         </where>
+
     </select>
 
 	<!-- According to the id check record  -->
@@ -134,9 +136,8 @@
 		select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
 		from WA_COMPANY_WATER_DATA_NEW wcwdn JOIN WA_COMPANY_INFO com
 		on com.COMPANY_ID_ = wcwdn.COMPANY_ID_
-		<where>
-			wcwdn.COMPANY_ID_ = #{companyId}
-		</where>
+		WHERE wcwdn.IS_DELETE_ = 0
+			AND wcwdn.COMPANY_ID_ = #{companyId}
 	</select>
 
     <!-- Query All  -->
@@ -189,6 +190,9 @@
 		  	<if test="companyWaterId != null">
         		COMPANY_WATER_ID_,
       		</if>
+			<if test="companyId != null">
+				COMPANY_ID_,
+			</if>
 		  	<if test="productName != null">
         		PRODUCT_NAME_,
       		</if>
@@ -268,7 +272,10 @@
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			  	<if test="companyWaterId != null">
 			  	  	   #{companyWaterId,jdbcType=NUMERIC},
-			  	</if>  
+			  	</if>
+				<if test="companyId != null">
+					#{companyId,jdbcType=VARCHAR},
+				</if>
 			  	<if test="productName != null">
 			  	  	   #{productName,jdbcType=VARCHAR},
 			  	</if>  

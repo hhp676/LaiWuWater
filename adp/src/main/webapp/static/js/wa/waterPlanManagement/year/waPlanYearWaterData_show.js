@@ -122,10 +122,13 @@ waPlanYearWaterDataGrid.initPlanYearWaterData = function(){
         var companyName = row.companyName;
         var companyCode = row.companyCode;
         var planYear = row.planYear;
-        var planYearAvgWater = row.planYearAvgWater;
-        var url = "/wa/WaPlanYearWaterData/print/"+companyId+"/"+companyName+"/"+companyCode+"/"+planYear+"/"+planYearAvgWater;
+        var planYearResidentWwater = row.planYearResidentWwater;
+        var planYearNoResidentWater = row.planYearNoResidentWater;
+        var planYearEducationWater = row.planYearEducationWater;
+        var planYearSpecialTradeWater = row.planYearSpecialTradeWater;
+        var url = "/wa/WaPlanYearWaterData/print/"+companyId+"/"+companyName+"/"+companyCode+"/"+planYear+"/"+planYearResidentWwater+"/"+planYearNoResidentWater+"/"+planYearEducationWater+"/"+planYearSpecialTradeWater;
         var iconCls = $(this).attr("iconCls");
-        var waPlanWaterPrintWin = new HgWin({id:"waPlanWaterPrintWin",title:"打印详情",width:850,height:380,iconCls:iconCls,url:url});
+        var waPlanWaterPrintWin = new HgWin({id:"waPlanWaterPrintWin",title:"打印详情",width:850,height:580,iconCls:iconCls,url:url});
     });
 
     //---------------------导入----------------------------------------------------------

@@ -30,10 +30,12 @@
 			<thead>
 			<tr>
 				<th data-options="field:'ck',checkbox:true"></th>
-				<th data-options="field:'planYear',width:150" editor="{type:'textbox'}"><b>计划的年份时间</b></th>
-				<th data-options="field:'planYearAvgWater',width:150" editor="{type:'textbox'}"><b>计划的年份用水量</b></th>
-				<%--<th data-options="field:'planYearEditWater',width:150" editor="{type:'textbox'}"><b>单位上报用水量</b></th>
-				<th data-options="field:'actYearWater',width:150" editor="{type:'textbox'}"><b>当前年份用水总量</b></th>--%>
+				<th data-options="field:'planYear',width:150" editor="{type:'textbox'}"><b>年份时间</b></th>
+				<th data-options="field:'planYearResidentWwater',width:150" editor="{type:'textbox'}"><b>年计划居民用水</b></th>
+				<th data-options="field:'planYearNoResidentWater',width:150" editor="{type:'textbox'}"><b>年计划非居民用水</b></th>
+				<th data-options="field:'planYearEducationWater',width:150" editor="{type:'textbox'}"><b>年计划教育用水</b></th>
+				<th data-options="field:'planYearSpecialTradeWater',width:150" editor="{type:'textbox'}"><b>年计划特殊行业用水</b></th>
+
 			</tr>
 			</thead>
 		</table>

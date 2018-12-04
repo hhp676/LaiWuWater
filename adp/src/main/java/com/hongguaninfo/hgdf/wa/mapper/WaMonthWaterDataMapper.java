@@ -10,6 +10,8 @@ package com.hongguaninfo.hgdf.wa.mapper;
 import com.hongguaninfo.hgdf.adp.core.base.BaseSqlMapper;
 import com.hongguaninfo.hgdf.wa.entity.WaMonthWaterData;
 
+import java.util.List;
+
 /**
  * : wa_month_water_data。 <br />
  * mapper 层 <br />
@@ -22,4 +24,5 @@ public interface WaMonthWaterDataMapper extends BaseSqlMapper {
     WaMonthWaterData getWaListByEntity(WaMonthWaterData entity);
 
     void updateMonthDataByEntity(WaMonthWaterData waMonthWaterData);
+
 }

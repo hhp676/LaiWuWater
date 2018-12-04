@@ -64,8 +64,8 @@ public class WaCompanyInfoService {
         for (WaCompanyInfo bo : list) {
 			bo.setUserType(sysDatadicItemBiz.getItemNameByValue("USER_TYPE",
 					bo.getUserType() + ""));  //用户类别
-			bo.setWaterType(sysDatadicItemBiz.getItemNameByValue("WATER_TYPE",
-					bo.getWaterType()+ "")); //用水性质
+//			bo.setWaterType(sysDatadicItemBiz.getItemNameByValue("WATER_TYPE",
+//					bo.getWaterType()+ "")); //用水性质
 			bo.setIsImport(sysDatadicItemBiz.getItemNameByValue("IS_IMPORT",
 					bo.getIsImport()+ "")); //重点用户
 		}

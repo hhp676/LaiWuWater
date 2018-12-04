@@ -8,7 +8,7 @@
 package com.hongguaninfo.hgdf.wa.dao;
 
 import com.hongguaninfo.hgdf.adp.core.base.BaseDao;
-import com.hongguaninfo.hgdf.wa.entity.WaCompanyWaterDataNew;
+import com.hongguaninfo.hgdf.wa.entity.waCompanyInfo.WaCompanyWaterDataNew;
 import com.hongguaninfo.hgdf.wa.mapper.WaCompanyWaterDataNewMapper;
 import org.springframework.stereotype.Repository;
 

@@ -275,8 +275,8 @@ public class WaPlanYearWaterDataController {
      * 详情信息
      * Through the id inquires the out a data
      */
-    @RequestMapping(value = "/print/{companyId}/{companyName}/{companyCode}/{planYear}/{planYearAvgWater}")
-    public String showPrint (@PathVariable String companyId,@PathVariable String companyName,@PathVariable String companyCode,@PathVariable String planYear, @PathVariable String planYearAvgWater,
+    @RequestMapping(value = "/print/{companyId}/{companyName}/{companyCode}/{planYear}/{planYearResidentWwater}/{planYearNoResidentWater}/{planYearEducationWater}/{planYearSpecialTradeWater}")
+    public String showPrint (@PathVariable String companyId,@PathVariable String companyName,@PathVariable String companyCode,@PathVariable String planYear, @PathVariable String planYearResidentWwater, @PathVariable String planYearNoResidentWater, @PathVariable String planYearEducationWater, @PathVariable String planYearSpecialTradeWater,
                                HttpServletRequest request, HttpServletResponse response,
                                Model model) throws BizException {
 
@@ -285,7 +285,10 @@ public class WaPlanYearWaterDataController {
        yearData.setCompanyName(companyName);
        yearData.setCompanyCode(companyCode);
        yearData.setPlanYear(planYear);
-        yearData.setPlanYearAvgWater(planYearAvgWater);
+        yearData.setPlanYearResidentWwater(planYearResidentWwater);
+        yearData.setPlanYearNoResidentWater(planYearNoResidentWater);
+        yearData.setPlanYearEducationWater(planYearEducationWater);
+        yearData.setPlanYearSpecialTradeWater(planYearSpecialTradeWater);
         model.addAttribute("yearData", yearData);
         OperateTemplete templete = new HttpTemplete(request) {
             protected void doSomething() throws BaseException {

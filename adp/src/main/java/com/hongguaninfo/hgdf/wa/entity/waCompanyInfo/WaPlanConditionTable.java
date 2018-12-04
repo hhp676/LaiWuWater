@@ -100,6 +100,31 @@ public class WaPlanConditionTable extends BaseEntity {
      */
     private Date updTime;
 
+    /**
+     * WRITE_PERSON_ : 填报人。
+     */
+    private String writePerson;
+    /**
+     * WRITE_TIME_ : 填报时间。
+     */
+    private String writeTime;
+
+    public String getWritePerson() {
+        return writePerson;
+    }
+
+    public void setWritePerson(String writePerson) {
+        this.writePerson = writePerson;
+    }
+
+    public String getWriteTime() {
+        return writeTime;
+    }
+
+    public void setWriteTime(String writeTime) {
+        this.writeTime = writeTime;
+    }
+
     public String getCompanyCode() {
         return companyCode;
     }

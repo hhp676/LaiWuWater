@@ -73,54 +73,53 @@ public class WaPlanYearWaterData extends BaseEntity {
     private String companyCode;
 
     private String isImport;
-
     /**
-     * 居民用水
+     * 年计划居民用水
      */
-    private String residentWater;
+    private String planYearResidentWwater;
     /**
-     * 非居民用水
+     * 年计划非居民用水
      */
-    private String noResidentWater;
+    private String planYearNoResidentWater;
     /**
-     * 教育用水
+     * 年计划教育用水
      */
-    private String educationWater;
+    private String planYearEducationWater;
     /**
-     * 特殊行业用水
+     * 年计划特殊行业用水
      */
-    private String specialTradeWater;
+    private String planYearSpecialTradeWater;
 
-    public String getResidentWater() {
-        return residentWater;
+    public String getPlanYearResidentWwater() {
+        return planYearResidentWwater;
     }
 
-    public void setResidentWater(String residentWater) {
-        this.residentWater = residentWater;
+    public void setPlanYearResidentWwater(String planYearResidentWwater) {
+        this.planYearResidentWwater = planYearResidentWwater;
     }
 
-    public String getNoResidentWater() {
-        return noResidentWater;
+    public String getPlanYearNoResidentWater() {
+        return planYearNoResidentWater;
     }
 
-    public void setNoResidentWater(String noResidentWater) {
-        this.noResidentWater = noResidentWater;
+    public void setPlanYearNoResidentWater(String planYearNoResidentWater) {
+        this.planYearNoResidentWater = planYearNoResidentWater;
     }
 
-    public String getEducationWater() {
-        return educationWater;
+    public String getPlanYearEducationWater() {
+        return planYearEducationWater;
     }
 
-    public void setEducationWater(String educationWater) {
-        this.educationWater = educationWater;
+    public void setPlanYearEducationWater(String planYearEducationWater) {
+        this.planYearEducationWater = planYearEducationWater;
     }
 
-    public String getSpecialTradeWater() {
-        return specialTradeWater;
+    public String getPlanYearSpecialTradeWater() {
+        return planYearSpecialTradeWater;
     }
 
-    public void setSpecialTradeWater(String specialTradeWater) {
-        this.specialTradeWater = specialTradeWater;
+    public void setPlanYearSpecialTradeWater(String planYearSpecialTradeWater) {
+        this.planYearSpecialTradeWater = planYearSpecialTradeWater;
     }
 
     public String getCompanyName() {

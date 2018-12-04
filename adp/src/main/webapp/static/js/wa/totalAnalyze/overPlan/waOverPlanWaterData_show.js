@@ -27,10 +27,8 @@ waMonthWaterDatagrid.initwaMonthWaterData = function(){
 		 $('#waMonthWaterData_datagrid_overPlan').datagrid('load',{
              companyCode: $("[name='month_companyCodeMonth_overPlan']").val(),
 			 companyName: $("[name='month_companyNameMonth_overPlan']").val(),
-             isOverroof: $("[name='month_isOverroof_overPlan']").val(),
              waYear: $("[name='month_waYear_overPlan']").val(),
-             waMonth: $("[name='month_waMonth_overPlan']").val(),
-             isImport: $("[name='month_isImportMonth_overPlan']").val()
+             waMonth: $("[name='month_waMonth_overPlan']").val()
 		 });
 	});
 

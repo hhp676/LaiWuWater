@@ -15,7 +15,13 @@
 					<input type="hidden"   name="planCondtionId" value="${planCondtionId}" id="planCondtionId"></input>
 					<tr>
 						<td width="130px;">单位名称<font>*</font>:</td>
-						<td><input type="text"   name="companyName" value="${waPlanConditionData.companyName}" id="companyName"></input></td>
+						<td>
+							<select name="companyId" style="width: 170px">
+								<c:forEach var="companyDataItem" items="${companyData}">
+									<option value="${companyDataItem.key}" <c:if test="${waPlanConditionData.companyId==companyDataItem.key}">selected</c:if>>${companyDataItem.value}</option>
+								</c:forEach>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<td width="130px;">居民生活用水计划数量<font>*</font>:</td>

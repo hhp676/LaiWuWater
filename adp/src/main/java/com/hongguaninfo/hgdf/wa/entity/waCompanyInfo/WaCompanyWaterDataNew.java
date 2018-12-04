@@ -4,7 +4,7 @@
  * Date:2018年11月24日 下午11:56:23
  * Copyright (c) 2016, hongguaninfo.com All Rights Reserved.
  */
-package com.hongguaninfo.hgdf.wa.entity;
+package com.hongguaninfo.hgdf.wa.entity.waCompanyInfo;
 
 import com.hongguaninfo.hgdf.adp.core.base.BaseEntity;
 

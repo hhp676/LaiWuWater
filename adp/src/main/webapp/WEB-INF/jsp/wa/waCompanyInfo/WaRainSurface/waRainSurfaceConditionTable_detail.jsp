@@ -15,7 +15,13 @@
 				<input type="hidden"   name="rainSurfaceId" value="${rainSurfaceId}" id="rainSurfaceId"></input>
 				<tr>
 					<td width="130px;">单位名称<font>*</font>:</td>
-					<td><input type="text"   name="companyName" value="${waRainSurfaceData.companyName}" id="companyName"></input></td>
+					<td>
+						<select name="companyId" style="width: 170px">
+							<c:forEach var="companyDataItem" items="${companyData}">
+								<option value="${companyDataItem.key}" <c:if test="${waRainSurfaceData.companyId==companyDataItem.key}">selected</c:if>>${companyDataItem.value}</option>
+							</c:forEach>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td width="130px;">雨水储水容量m3<font>*</font>:</td>

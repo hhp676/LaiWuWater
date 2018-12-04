@@ -69,7 +69,7 @@ waRainSurfaceConditionTableDatagrid.initwaRainSurfaceConditionTable = function()
 		}
 		$.messager.confirm("删除确认", "确认删除此条数据?", function(r){
 			if (r){
-				var id = row.id;
+				var id = row.rainSurfaceId;
 				Hg.getJson("/wa/WaRainSurfaceConditionTable/delete",{id:id},function(data){
 					if (data.success) {
 						$.messager.ok("删除成功!",function(){

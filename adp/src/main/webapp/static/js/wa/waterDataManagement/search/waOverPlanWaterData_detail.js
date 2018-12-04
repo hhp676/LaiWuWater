@@ -10,14 +10,15 @@ waMonthWaterDatagrid.initwaMonthWaterData = function(monthWaterId) {
         $("#waMonthWaterData_layout [name='companyId']").attr("disabled","disabled");
     } else if (waMonthWaterDatagrid.mode == "edit") {
         $("#waMonthWaterData_layout [name='companyId']").attr("disabled","disabled");
-       /* $("#waMonthWaterData_layout [name='feeStandard']").attr("disabled","disabled");*/
+        $("#waMonthWaterData_layout [name='feeStandard']").attr("disabled","disabled");
     }else if(waMonthWaterDatagrid.mode == "add"){
         monthWaterId = 0;
+        $("#waMonthWaterData_layout [name='monthWaterId']").val("");
         $("#waMonthWaterData_layout [name='monthDate']").val("");
-        $("#waMonthWaterData_layout [name='planResidentWater']").val("");
-        $("#waMonthWaterData_layout [name='planNoResidentWater']").val("");
-        $("#waMonthWaterData_layout [name='planEducationWater']").val("");
-        $("#waMonthWaterData_layout [name='planSpecialTradeWater']").val("");
+        $("#waMonthWaterData_layout [name='planMonthWater']").val("");
+        $("#waMonthWaterData_layout [name='actMonthWater']").val("");
+        $("#waMonthWaterData_layout [name='feeStandard']").val("");
+        $("#waMonthWaterData_layout [name='feeStandard']").attr("disabled","disabled");
     }
     Hg.refRepeatSubmit("waMonthWaterData_form");//防止表单重复提交
 
@@ -48,8 +49,8 @@ waMonthWaterDatagrid.initwaMonthWaterData = function(monthWaterId) {
         if(!$('#waMonthWaterData_form').validate().form()) return false;
         $("#waMonthWaterData_layout").block();
         //提交数据--------------------------------------------------
-        var submitUrl = "/wa/WaMonthWaterData/planAdd";
-        if (!isAdd) submitUrl = "/wa/WaMonthWaterData/planUpdate";
+        var submitUrl = "/wa/WaMonthWaterData/add";
+        if (!isAdd) submitUrl = "/wa/WaMonthWaterData/overPlanUpdate";
         Hg.getJson(submitUrl,$("#waMonthWaterData_form").serializeArray(),function(data){
             if (!data.success) {
                 $("#waMonthWaterData_layout").unblock();
@@ -58,7 +59,7 @@ waMonthWaterDatagrid.initwaMonthWaterData = function(monthWaterId) {
             } else {
                 $.messager.ok("保存数据成功!",function(){
                     $("#waMonthWaterData_layout").parent().window("close");
-                    $('#waMonthWaterData_datagrid_plan').datagrid("reload");
+                    $('#waMonthWaterData_datagrid_overPlan').datagrid("reload");
                 });
             }
         });

@@ -1,7 +1,7 @@
 /*
  * File Name:WaMonthWaterData.java
  * Package Name:com.hongguaninfo.hgdf.bud.entity.wa
- * Date:2018年09月11日 下午8:49:44
+ * Date:2018年11月30日 上午9:01:16
  * Copyright (c) 2016, hongguaninfo.com All Rights Reserved.
  */
 package com.hongguaninfo.hgdf.wa.entity;
@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * : wa_month_water_data. <br />
  * entity 层 <br />
- * Date: 2018年09月11日 下午8:49:44 <br />
+ * Date: 2018年11月30日 上午9:01:16 <br />
  *
  * @author  hhp
  * @since V1.0.0
@@ -32,51 +32,19 @@ public class WaMonthWaterData extends BaseEntity {
      */
     private Integer monthWaterId;
     /**
-     * COMPANY_CODE_ : 单位代码。
+     * COMPANY_ID_ : 单位id。
      */
     private String companyId;
 
-    private String companyName;
     /**
-     * MONTH_DATE_ : 月份时间。
+     * 节水代码
      */
-    private String monthDate;
-    /**
-     * PLAN_MONTH_WATER_ : 计划月份用水量。
-     */
-    private String planMonthWater;
-
-    /**
-     * ACT_MONTH_WATER_ : 实际月份用水量。
-     */
-    private String actMonthWater;
-    /**
-     * IS_OVERROOF_ : 是否超标当月计划。
-     */
-    private String isOverroof;
-    /**
-     * IS_DELTE_ : 。
-     */
-    private Integer isDelte;
-    /**
-     * CRT_TIME_ : 。
-     */
-    private Date crtTime;
-    /**
-     * UPD_TIME_ : 。
-     */
-    private Date updTime;
-
-    private String isImport;
-
-    private String beyondAmount;
-
-    /**
-     * 收费标准
-     */
-    private String feeStandard;
-
     private String companyCode;
+
+    /**
+     * 单位名称
+     */
+    private String companyName;
     /**
      * 查询年份
      */
@@ -86,70 +54,213 @@ public class WaMonthWaterData extends BaseEntity {
      * 查询月份
      */
     private String waMonth;
+    /**
+     * MONTH_DATE_ : 月份时间。
+     */
+    private String monthDate;
+    /**
+     * PLAN_RESIDENT_WATER_ : 计划居民供水。
+     */
+    private String planResidentWater;
+    /**
+     * PLAN_NO_RESIDENT_WATER_ : 计划非居民供水。
+     */
+    private String planNoResidentWater;
+    /**
+     * PLAN_EDUCATION_WATER_ : 计划教育用水。
+     */
+    private String planEducationWater;
+    /**
+     * PLAN_SPECIAL_TRADE_WATER_ : 计划特殊行业用水。
+     */
+    private String planSpecialTradeWater;
+    /**
+     * ACT_RESIDENT_WATER_ : 实际居民用水。
+     */
+    private String actResidentWater;
+    /**
+     * ACT_NO_RESIDENT_WATER_ : 实际非居民用水。
+     */
+    private String actNoResidentWater;
+    /**
+     * ACT_EDUCATION_WATER_ : 实际教育用水。
+     */
+    private String actEducationWater;
+    /**
+     * ACT_SPECIAL_TRADE_WATER_ : 实际特殊行业用水。
+     */
+    private String actSpecialTradeWater;
+    /**
+     * BEYOND_RESIDENT_WATER_ : 居民用水超出量。
+     */
+    private String beyondResidentWater;
+    /**
+     * BEYOND_NO_RESIDENT_WATER_ : 非居民用水超出量。
+     */
+    private String beyondNoResidentWater;
+    /**
+     * BEYOND_EDUCATION_WATER_ : 教育用水超出量。
+     */
+    private String beyondEducationWater;
+    /**
+     * BEYOND_SPECIAL_TRADE_WATER_ : 特殊行业用水超出量。
+     */
+    private String beyondSpecialTradeWater;
+    /**
+     * FEE_RESIDENT_WATER_ : 居民用水收费标准。
+     */
+    private String feeResidentWater;
+    /**
+     * FEE_NO_RESIDENT_WATER_ : 非居民用水收费。
+     */
+    private String feeNoResidentWater;
+    /**
+     * FEE_EDUCATION_WATER_ : 教育用水收费。
+     */
+    private String feeEducationWater;
+    /**
+     * FEE_SPECIAL_TRADE_WATER_ : 特殊行业用水收费。
+     */
+    private String feeSpecialTradeWater;
+    /**
+     * IS_OVER_RESIDENT_WATER_ : 居民用水是否超标。
+     */
+    private String isOverResidentWater;
+    /**
+     * IS_OVER_NO_RESIDENT_WATER_ : 非居民用水是否超标。
+     */
+    private String isOverNoResidentWater;
+    /**
+     * IS_OVER_EDUCATION_WATER_ : 教育用水是否超标。
+     */
+    private String isOverEducationWater;
+    /**
+     * IS_OVER_SPECIAL_TRADE_WATER_ : 特殊行业用水是否超标。
+     */
+    private String isOverSpecialTradeWater;
+    /**
+     * IS_DELTE_ : 。
+     */
+    private Integer isDelte;
 
     /**
-     * 居民用水
+     * 计划用水删除
      */
-    private String residentWater;
+    private Integer isDeletePlan;
     /**
-     * 非居民用水
+     * 实际用水删除
      */
-    private String noResidentWater;
+    private Integer isDeleteAct;
     /**
-     * 教育用水
+     * CRT_TIME_ : 。
      */
-    private String educationWater;
+    private Date crtTime;
     /**
-     * 特殊行业用水
+     * UPD_TIME_ : 数据最后修改时间。
      */
-    private String specialTradeWater;
+    private Date updTime;
 
-    public String getResidentWater() {
-        return residentWater;
+    /**
+     * 是否是重点用户
+     */
+    private String isImport;
+
+    /**
+     * 展示指标名称
+     */
+    private String indexName;
+
+    /**
+     * 展示指标计划数值
+     */
+    private String indexPlanValue;
+    /**
+     * 展示指标实际数值
+     */
+    private String indexActValue;
+    /**
+     * 展示指标是否超标
+     */
+    private String indexOverRoof;
+    /**
+     * 展示指标收费标准
+     */
+    private String indexFee;
+    /**
+     * 展示指标超出数量
+     */
+    private String indexBeyondAmount;
+
+    public String getIndexName() {
+        return indexName;
     }
 
-    public void setResidentWater(String residentWater) {
-        this.residentWater = residentWater;
+    public void setIndexName(String indexName) {
+        this.indexName = indexName;
     }
 
-    public String getNoResidentWater() {
-        return noResidentWater;
+    public String getIndexPlanValue() {
+        return indexPlanValue;
     }
 
-    public void setNoResidentWater(String noResidentWater) {
-        this.noResidentWater = noResidentWater;
+    public void setIndexPlanValue(String indexPlanValue) {
+        this.indexPlanValue = indexPlanValue;
     }
 
-    public String getEducationWater() {
-        return educationWater;
+    public String getIndexActValue() {
+        return indexActValue;
     }
 
-    public void setEducationWater(String educationWater) {
-        this.educationWater = educationWater;
+    public void setIndexActValue(String indexActValue) {
+        this.indexActValue = indexActValue;
     }
 
-    public String getSpecialTradeWater() {
-        return specialTradeWater;
+    public String getIndexOverRoof() {
+        return indexOverRoof;
     }
 
-    public void setSpecialTradeWater(String specialTradeWater) {
-        this.specialTradeWater = specialTradeWater;
+    public void setIndexOverRoof(String indexOverRoof) {
+        this.indexOverRoof = indexOverRoof;
     }
 
-    public String getBeyondAmount() {
-        return beyondAmount;
+    public String getIndexFee() {
+        return indexFee;
     }
 
-    public void setBeyondAmount(String beyondAmount) {
-        this.beyondAmount = beyondAmount;
+    public void setIndexFee(String indexFee) {
+        this.indexFee = indexFee;
     }
 
-    public String getFeeStandard() {
-        return feeStandard;
+    public String getIndexBeyondAmount() {
+        return indexBeyondAmount;
     }
 
-    public void setFeeStandard(String feeStandard) {
-        this.feeStandard = feeStandard;
+    public void setIndexBeyondAmount(String indexBeyondAmount) {
+        this.indexBeyondAmount = indexBeyondAmount;
+    }
+
+    public Integer getIsDeletePlan() {
+        return isDeletePlan;
+    }
+
+    public void setIsDeletePlan(Integer isDeletePlan) {
+        this.isDeletePlan = isDeletePlan;
+    }
+
+    public Integer getIsDeleteAct() {
+        return isDeleteAct;
+    }
+
+    public void setIsDeleteAct(Integer isDeleteAct) {
+        this.isDeleteAct = isDeleteAct;
+    }
+
+    public String getIsImport() {
+        return isImport;
+    }
+
+    public void setIsImport(String isImport) {
+        this.isImport = isImport;
     }
 
     public String getCompanyCode() {
@@ -158,6 +269,22 @@ public class WaMonthWaterData extends BaseEntity {
 
     public void setCompanyCode(String companyCode) {
         this.companyCode = companyCode;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public Integer getMonthWaterId() {
+        return monthWaterId;
+    }
+
+    public void setMonthWaterId(Integer monthWaterId) {
+        this.monthWaterId = monthWaterId;
     }
 
     public String getWaYear() {
@@ -176,44 +303,6 @@ public class WaMonthWaterData extends BaseEntity {
         this.waMonth = waMonth;
     }
 
-    public String getIsImport() {
-        return isImport;
-    }
-
-    public void setIsImport(String isImport) {
-        this.isImport = isImport;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    private WaCompanyInfo waCompanyInfo;
-
-    public WaCompanyInfo getWaCompanyInfo() {
-        return waCompanyInfo;
-    }
-
-    public void setWaCompanyInfo(WaCompanyInfo waCompanyInfo) {
-        this.waCompanyInfo = waCompanyInfo;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Integer getMonthWaterId() {
-        return monthWaterId;
-    }
-
-    public void setMonthWaterId(Integer monthWaterId) {
-        this.monthWaterId = monthWaterId;
-    }
-
     public String getCompanyId() {
         return companyId;
     }
@@ -222,6 +311,7 @@ public class WaMonthWaterData extends BaseEntity {
         this.companyId = companyId;
     }
 
+        
     public String getMonthDate() {
         return monthDate;
     }
@@ -230,31 +320,187 @@ public class WaMonthWaterData extends BaseEntity {
         this.monthDate = monthDate;
     }
 
-    public String getPlanMonthWater() {
-        return planMonthWater;
+        
+    public String getPlanResidentWater() {
+        return planResidentWater;
     }
 
-    public void setPlanMonthWater(String planMonthWater) {
-        this.planMonthWater = planMonthWater;
+    public void setPlanResidentWater(String planResidentWater) {
+        this.planResidentWater = planResidentWater;
     }
 
         
-    public String getActMonthWater() {
-        return actMonthWater;
+    public String getPlanNoResidentWater() {
+        return planNoResidentWater;
     }
 
-    public void setActMonthWater(String actMonthWater) {
-        this.actMonthWater = actMonthWater;
+    public void setPlanNoResidentWater(String planNoResidentWater) {
+        this.planNoResidentWater = planNoResidentWater;
     }
 
-    public String getIsOverroof() {
-        return isOverroof;
+        
+    public String getPlanEducationWater() {
+        return planEducationWater;
     }
 
-    public void setIsOverroof(String isOverroof) {
-        this.isOverroof = isOverroof;
+    public void setPlanEducationWater(String planEducationWater) {
+        this.planEducationWater = planEducationWater;
     }
 
+        
+    public String getPlanSpecialTradeWater() {
+        return planSpecialTradeWater;
+    }
+
+    public void setPlanSpecialTradeWater(String planSpecialTradeWater) {
+        this.planSpecialTradeWater = planSpecialTradeWater;
+    }
+
+        
+    public String getActResidentWater() {
+        return actResidentWater;
+    }
+
+    public void setActResidentWater(String actResidentWater) {
+        this.actResidentWater = actResidentWater;
+    }
+
+        
+    public String getActNoResidentWater() {
+        return actNoResidentWater;
+    }
+
+    public void setActNoResidentWater(String actNoResidentWater) {
+        this.actNoResidentWater = actNoResidentWater;
+    }
+
+        
+    public String getActEducationWater() {
+        return actEducationWater;
+    }
+
+    public void setActEducationWater(String actEducationWater) {
+        this.actEducationWater = actEducationWater;
+    }
+
+        
+    public String getActSpecialTradeWater() {
+        return actSpecialTradeWater;
+    }
+
+    public void setActSpecialTradeWater(String actSpecialTradeWater) {
+        this.actSpecialTradeWater = actSpecialTradeWater;
+    }
+
+        
+    public String getBeyondResidentWater() {
+        return beyondResidentWater;
+    }
+
+    public void setBeyondResidentWater(String beyondResidentWater) {
+        this.beyondResidentWater = beyondResidentWater;
+    }
+
+        
+    public String getBeyondNoResidentWater() {
+        return beyondNoResidentWater;
+    }
+
+    public void setBeyondNoResidentWater(String beyondNoResidentWater) {
+        this.beyondNoResidentWater = beyondNoResidentWater;
+    }
+
+        
+    public String getBeyondEducationWater() {
+        return beyondEducationWater;
+    }
+
+    public void setBeyondEducationWater(String beyondEducationWater) {
+        this.beyondEducationWater = beyondEducationWater;
+    }
+
+        
+    public String getBeyondSpecialTradeWater() {
+        return beyondSpecialTradeWater;
+    }
+
+    public void setBeyondSpecialTradeWater(String beyondSpecialTradeWater) {
+        this.beyondSpecialTradeWater = beyondSpecialTradeWater;
+    }
+
+        
+    public String getFeeResidentWater() {
+        return feeResidentWater;
+    }
+
+    public void setFeeResidentWater(String feeResidentWater) {
+        this.feeResidentWater = feeResidentWater;
+    }
+
+        
+    public String getFeeNoResidentWater() {
+        return feeNoResidentWater;
+    }
+
+    public void setFeeNoResidentWater(String feeNoResidentWater) {
+        this.feeNoResidentWater = feeNoResidentWater;
+    }
+
+        
+    public String getFeeEducationWater() {
+        return feeEducationWater;
+    }
+
+    public void setFeeEducationWater(String feeEducationWater) {
+        this.feeEducationWater = feeEducationWater;
+    }
+
+        
+    public String getFeeSpecialTradeWater() {
+        return feeSpecialTradeWater;
+    }
+
+    public void setFeeSpecialTradeWater(String feeSpecialTradeWater) {
+        this.feeSpecialTradeWater = feeSpecialTradeWater;
+    }
+
+        
+    public String getIsOverResidentWater() {
+        return isOverResidentWater;
+    }
+
+    public void setIsOverResidentWater(String isOverResidentWater) {
+        this.isOverResidentWater = isOverResidentWater;
+    }
+
+        
+    public String getIsOverNoResidentWater() {
+        return isOverNoResidentWater;
+    }
+
+    public void setIsOverNoResidentWater(String isOverNoResidentWater) {
+        this.isOverNoResidentWater = isOverNoResidentWater;
+    }
+
+        
+    public String getIsOverEducationWater() {
+        return isOverEducationWater;
+    }
+
+    public void setIsOverEducationWater(String isOverEducationWater) {
+        this.isOverEducationWater = isOverEducationWater;
+    }
+
+        
+    public String getIsOverSpecialTradeWater() {
+        return isOverSpecialTradeWater;
+    }
+
+    public void setIsOverSpecialTradeWater(String isOverSpecialTradeWater) {
+        this.isOverSpecialTradeWater = isOverSpecialTradeWater;
+    }
+
+        
     public Integer getIsDelte() {
         return isDelte;
     }

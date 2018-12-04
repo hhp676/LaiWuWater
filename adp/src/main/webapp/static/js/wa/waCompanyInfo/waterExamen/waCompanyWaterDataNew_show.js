@@ -20,7 +20,7 @@ waCompanyWaterDataNewDatagrid.initwaCompanyWaterDataNew = function(){
 	$("#waCompanyWaterDataNew_toolbar [tag='add'],#waCompanyWaterDataNew_contextMenu [tag='add']").click(function(){
 		waCompanyWaterDataNewDatagrid.mode = "add";
 		var iconCls = $(this).attr("iconCls");
-		var waCompanyWaterDataNewDetailWin = new HgWin({id:"waCompanyWaterDataNewDetailWin",title:"添加",width:850,height:400,iconCls:iconCls,url:"/wa/WaCompanyWaterDataNew/waCompanyWaterDataEdit/0"});
+		var waCompanyWaterDataNewDetailWin = new HgWin({id:"waCompanyWaterDataNewDetailWin",title:"添加",width:850,height:400,iconCls:iconCls,url:"/wa/WaCompanyWaterDataNew/waCompanyWaterDataNewDetail/0"});
 	});
 	
 	//-------------------------------------------修改---------------------------------------------------

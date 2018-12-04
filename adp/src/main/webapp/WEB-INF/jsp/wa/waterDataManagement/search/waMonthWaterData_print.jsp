@@ -13,19 +13,23 @@
 </head>
 <body>
 <div class="easyui-layout" data-options="fit:true" id="print_layout">
-    <div id="area1" style="width: 100%; float: left; margin: inherit;">
+    <div id="area1" style="">
         <br>
         <br>
         <table border="1" align="center" style="font-size: large; color:#333333; border-collapse: collapse; border: inherit 10px;">
             <tr style="border-collapse: collapse">
                 <th >单位名称</th>
-                <th >计划用水量</th>
-                <th >实际用水量</th>
+                <th >实际居民供水</th>
+                <th >实际非居民供水</th>
+                <th >实际教育供水</th>
+                <th >实际特殊行业供水</th>
             </tr>
             <tr>
                 <td>${waMonthWaterData.companyName}</td>
-                <td>${waMonthWaterData.planMonthWater}</td>
-                <td>${waMonthWaterData.actMonthWater}</td>
+                <td>${waMonthWaterData.actResidentWater}</td>
+                <td>${waMonthWaterData.actNoResidentWater}</td>
+                <td>${waMonthWaterData.actEducationWater}</td>
+                <td>${waMonthWaterData.actSpecialTradeWater}</td>
             </tr>
         </table>
 

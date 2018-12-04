@@ -11,9 +11,9 @@
 <body>
 <div class="easyui-layout" data-options="fit:true" id="waCompanyInfo_totalInfo_layout">
     <div data-options="" style="">
-        <div class="easyui-tabs" fit=true id="waterinfoTab" tabPosition="top">
-            <div title="企业用水情况调查" id="commFacWater_layout" style="padding:2px">
-                <div >
+        <div class="easyui-tabs" fit=true  id="waterinfoTab" tabPosition="top">
+            <div title="企业用水情况调查"  id="commFacWater_layout" style="padding:2px;">
+                <div>
                     <center> <h2>企业用水情况调查</h2></center>
                     节水代码： ${companyCode}
                     &nbsp; &nbsp; &nbsp;
@@ -26,9 +26,9 @@
                     &nbsp; &nbsp; &nbsp; &nbsp;
                     填报时间：
                 </div>
-                <table border="1" align="center" style=" color:#333333; border-collapse: collapse;">
+                <table border="1" align="center" style=" color:#333333; border-collapse: collapse;" fitColumns=true>
                     <tr>
-                        <th>主产品名称</th>
+                        <th style="width:70px">主产品名称</th>
                         <th>单位产品新水量m3/单位产品</th>
                         <th>全年产量</th>
                         <th>行业用水标准</th>
@@ -75,9 +75,8 @@
             <div title="中水回用设施情况调查" id="interwater_layout" style="padding:2px">
                 <div >
                     <center> <h2>中水回用设施情况调查</h2></center>
-                    节水代码： ${companyCode}
-                    &nbsp; &nbsp; &nbsp;
-                    填报单位（盖章）:${companyName}
+
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -103,17 +102,17 @@
                     <c:forEach var="interwater" items="${waInterwaterInstallation}">
                         <tr  style="height:30px">
                             <td style="width:100px">${interwater.companyName}</td>
-                            <td style="width:60px">${interwater.productName}</td>
+                            <td style="width:50px">${interwater.productName}</td>
                             <td style="width:50px">${interwater.handleTech}</td>
                             <td style="width:50px">${interwater.recoverWaterCount}</td>
                             <td style="width:50px">${interwater.actWaterCount}</td>
                             <td style="width:50px">${interwater.runtime}</td>
                             <td style="width:50px">${interwater.investMoney}</td>
-                            <td style="width:50px">${interwater.runCost}</td>
+                            <td style="width:40px">${interwater.runCost}</td>
                             <td style="width:50px">${interwater.interwaterPrice}</td>
                             <td style="width:50px">${interwater.interwaterPiping}</td>
-                            <td style="width:100px">${interwater.use}</td>
-                            <td style="width:100px">${interwater.flag}</td>
+                            <td style="width:80px">${interwater.use}</td>
+                            <td style="width:80px">${interwater.flag}</td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -122,9 +121,8 @@
             <div title="雨水地表水使用情况调查" id="rainSurface_layout" style="padding:2px">
                 <div >
                     <center> <h2>雨水地表水使用情况调查</h2></center>
-                    节水代码： ${companyCode}
-                    &nbsp; &nbsp; &nbsp;
-                    填报单位（盖章）:${companyName}
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -134,11 +132,11 @@
                 </div>
                 <table border="1" align="center" style=" color:#333333; border-collapse: collapse;">
                     <tr>
-                        <th rowspan="2">单位名称</th>
-                        <th colspan="4">雨水回收利用（m3/日）</th>
-                        <th colspan="4">地表水利用（m3/日）</th>
-                        <th rowspan="2">用途</th>
-                        <th rowspan="2">备注</th>
+                        <th style="width:140px" rowspan="2">单位名称</th>
+                        <th style="width:320px" colspan="4">雨水回收利用（m3/日）</th>
+                        <th style="width:320px" colspan="4">地表水利用（m3/日）</th>
+                        <th style="width:120px" rowspan="2">用途</th>
+                        <th style="width:120px" rowspan="2">备注</th>
                     </tr>
                     <tr>
                         <th>储水容量m3</th>
@@ -171,9 +169,8 @@
             <div title="用水计划执行情况调查" id="planCondition_layout" style="padding:2px">
                 <div >
                     <center> <h2>用水计划执行情况调查</h2></center>
-                    节水代码： ${companyCode}
-                    &nbsp; &nbsp; &nbsp;
-                    填报单位（盖章）:${companyName}
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -183,17 +180,17 @@
                 </div>
                 <table border="1" align="center" style=" color:#333333; border-collapse: collapse;">
                     <tr>
-                        <th>居民生活用水计划数量</th>
-                        <th>居民生活用水实际用水量</th>
-                        <th>非居民用水计划数量</th>
-                        <th>非居民用水实际用水量</th>
-                        <th>教育用水计划数量</th>
-                        <th>教育用水实际用水量</th>
-                        <th>特种用水计划数量</th>
-                        <th>实际用水量</th>
-                        <th>用水计划总计</th>
-                        <th>实际用水量总计</th>
-                        <th>节水量</th>
+                        <th style="width:120px">居民生活用水计划数量</th>
+                        <th style="width:120px">居民生活用水实际用水量</th>
+                        <th style="width:120px">非居民用水计划数量</th>
+                        <th style="width:120px">非居民用水实际用水量</th>
+                        <th style="width:120px">教育用水计划数量</th>
+                        <th style="width:120px">教育用水实际用水量</th>
+                        <th style="width:120px">特种用水计划数量</th>
+                        <th style="width:120px">实际用水量</th>
+                        <th style="width:120px">用水计划总计</th>
+                        <th style="width:100px">实际用水量总计</th>
+                        <th style="width:80px">节水量</th>
                     </tr>
                     <c:forEach var="planConditionData" items="${planConditionDataAll}">
                         <tr style="height:30px">
@@ -216,9 +213,8 @@
             <div title="特种行业情况调查" id="specialTradeCondition_layout" style="padding:2px">
                 <div >
                     <center> <h2>特种行业情况调查</h2></center>
-                    节水代码： ${companyCode}
-                    &nbsp; &nbsp; &nbsp;
-                    填报单位（盖章）:${companyName}
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -228,12 +224,12 @@
                 </div>
                 <table border="1" align="center" style=" color:#333333; border-collapse: collapse;">
                     <tr>
-                        <th>用水户性质</th>
-                        <th>地址</th>
-                        <th>装表数</th>
-                        <th>用水量</th>
-                        <th>收费价格</th>
-                        <th>废水（尾水）是否处理回收</th>
+                        <th  style="width:140px">用水户性质</th>
+                        <th  style="width:140px">地址</th>
+                        <th  style="width:140px">装表数</th>
+                        <th  style="width:140px">用水量</th>
+                        <th  style="width:140px">收费价格</th>
+                        <th  style="width:170px">废水（尾水）是否处理回收</th>
                     </tr>
                     <c:forEach var="specialTradeConditionData" items="${specialTradeConditionDataAll}">
                         <tr style="height:30px">
@@ -283,7 +279,6 @@
     });
 
     printTab = function(){
-        debugger
         //mode:popup弹窗执行打印/popClose打印执行完毕自动关闭/extraHead头信息
         var options = { mode : 'popup', popClose : 'popup',
             extraHead : '<meta charset="utf-8" />,<meta http-equiv="X-UA-Compatible" content="IE=edge"/>' };

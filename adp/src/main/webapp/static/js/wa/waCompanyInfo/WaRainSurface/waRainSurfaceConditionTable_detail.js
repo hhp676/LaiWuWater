@@ -1,7 +1,7 @@
 
 waRainSurfaceConditionTableDatagrid.initRainSurface = function(rainSurfaceId) {
     if (waRainSurfaceConditionTableDatagrid.mode == "edit") {
-        // $("#waRainSurface_edit_layout [name='rainSurfaceId']").attr("disabled","disabled");
+        $("#waCompanyWaterDataNew_edit_layout [name='companyId']").attr("disabled","disabled");
     }else if(waRainSurfaceConditionTableDatagrid.mode == "add"){
         rainSurfaceId = 0;
         $("#waRainSurface_edit_layout [name='rainSurfaceId']").val("");

@@ -4,7 +4,6 @@ waCompanyInfoDatagrid.initTotal = function(companyId, dormitoryWaterId,commFacti
    var commAdd = commFactilitiesId == 0;
    var indAdd = industryWaterId == 0;
     $("#waCompanyInfo_totalInfo_layout [tag='ok']").click(function(){
-        debugger
         alert(selectTabId+' ected');
 
         /*var resultBol1, resultBol12,resultBol13,resultBol14,resultBol15,resultBol16;

@@ -14,6 +14,8 @@
         wsct.WATER_AMOUNT_ waterAmount,
         wsct.PRICE_ price,
         wsct.IS_RECOVERY_ isRecovery,
+        wsct.WRITE_PERSON_ writePerson,
+        wsct.WRITE_TIME_ writeTime,
         wsct.IS_DELETE_ isDelete,
         wsct.CRT_TIME_ crtTime,
         wsct.UPD_TIME_ updTime
@@ -45,6 +47,12 @@
         		<if test="isRecovery != null and isRecovery.length() != 0">
         		AND wsct.IS_RECOVERY_ like '%${isRecovery}%'
         </if>
+				<if test="writePerson != null and writePerson.length() != 0">
+				AND wsct.WRITE_PERSON_ like '%${writePerson}%'
+		</if>
+				<if test="writeTime != null and writeTime.length() != 0">
+				AND wsct.WRITE_TIME_ like '%${writeTime}%'
+		</if>
         	<if test="isDelete != null">
 	            AND wsct.IS_DELETE_ = #{isDelete}
         </if>
@@ -74,9 +82,9 @@
 		select <include  refid="SQL_WA_SPECIALTRADE_CONDITION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
 		from WA_SPECIALTRADE_CONDITION_TABLE wsct JOIN WA_COMPANY_INFO com
 		on com.COMPANY_ID_ = wsct.COMPANY_ID_
-		<where>
-			wsct.COMPANY_ID_ = #{companyId}
-		</where>
+		WHERE wsct.IS_DELETE_ = 0
+		AND wsct.COMPANY_ID_ = #{companyId}
+
 	</select>
 
     <!-- Query All  -->
@@ -152,6 +160,12 @@
 		  	<if test="isRecovery != null">
         		IS_RECOVERY_,
       		</if>
+			<if test="writePerson != null">
+				WRITE_PERSON_,
+			</if>
+			<if test="writeTime != null">
+				WRITE_TIME_,
+			</if>
 		  	<if test="isDelete != null">
         		IS_DELETE_,
       		</if>
@@ -186,8 +200,14 @@
 			  	</if>  
 			  	<if test="isRecovery != null">
 			  	  	   #{isRecovery,jdbcType=VARCHAR},
-			  	</if>  
-			  	<if test="isDelete != null">
+			  	</if>
+				<if test="writePerson != null">
+						#{writePerson,jdbcType=VARCHAR},
+				</if>
+				<if test="writeTime != null">
+						#{writeTime,jdbcType=VARCHAR},
+				</if>
+				<if test="isDelete != null">
 			  	  	   #{isDelete,jdbcType=NUMERIC},
 			  	</if>  
 			  	<if test="crtTime != null">
@@ -227,6 +247,12 @@
 		  	<if test="isRecovery != null">
         		IS_RECOVERY_ = #{isRecovery} ,
       		</if>
+			<if test="writePerson != null">
+				WRITE_PERSON_ = #{writePerson} ,
+			</if>
+			<if test="writeTime != null">
+				WRITE_TIME_ = #{writeTime} ,
+			</if>
 		  	<if test="isDelete != null">
         		IS_DELETE_ = #{isDelete} ,
       		</if>

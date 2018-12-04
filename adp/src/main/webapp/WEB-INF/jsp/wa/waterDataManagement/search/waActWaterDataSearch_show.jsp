@@ -14,16 +14,15 @@
 			pageList="${defaultPageList}">
        	 	<thead>
             <tr>
-				<th data-options="field:'monthWaterId',width:0, hidden:true" editor="{type:'hidden', options:{required:true,missingMessage:'此输入项为必填项'}}"><b></b></th>
-				<th data-options="field:'companyCode',width:80, formatter: function(value,row,index){return row.waCompanyInfo.companyCode;}" editor="{type:'textbox'}"><b>节水代码</b></th>
-				<th data-options="field:'companyName',width:150, formatter: function(value,row,index){return row.waCompanyInfo.companyName;}" editor="{type:'textbox'}"><b>单位名称</b></th>
+				<th data-options="field:'monthWaterId',width:0, hidden:true"><b></b></th>
+				<th data-options="field:'companyCode',width:80" editor="{type:'textbox'}"><b>节水代码</b></th>
+				<th data-options="field:'companyName',width:150" editor="{type:'textbox'}"><b>单位名称</b></th>
 				<th data-options="field:'isImport'" editor="{type:'textbox'}"><b>重点用户</b></th>
 				<th data-options="field:'monthDate',width:150" editor="{type:'textbox'}"><b>月份时间</b></th>
-                <%--<th data-options="field:'planMonthWater',width:150" editor="{type:'textbox'}"><b>计划月份用水量</b></th>--%>
-				<th data-options="field:'actMonthWater',width:150" editor="{type:'textbox'}"><b>实际月份用水量</b></th>
-				<%--<th data-options="field:'beyondAmount',width:150" editor="{type:'textbox'}"><b>超计划用水量</b></th>
-				<th data-options="field:'feeStandard',width:200" editor="{type:'textbox'}"><b>收费标准</b></th>
-				<th data-options="field:'isOverroof',width:150" editor="{type:'textbox'}"><b>是否超标当月计划</b></th>--%>
+                <th data-options="field:'actResidentWater',width:150" editor="{type:'textbox'}"><b>实际居民用水</b></th>
+				<th data-options="field:'actNoResidentWater',width:150" editor="{type:'textbox'}"><b>实际非居民用水</b></th>
+				<th data-options="field:'actEducationWater',width:150" editor="{type:'textbox'}"><b>实际教育用水</b></th>
+				<th data-options="field:'actSpecialTradeWater',width:150" editor="{type:'textbox'}"><b>实际特殊行业用水</b></th>
             </tr>
             </thead>
         </table>

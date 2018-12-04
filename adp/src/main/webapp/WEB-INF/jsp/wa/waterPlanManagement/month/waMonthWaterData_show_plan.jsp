@@ -16,16 +16,15 @@
             <tr>
 				<th data-options="field:'ck',checkbox:true"></th>
 				<th data-options="field:'monthWaterId',width:0, hidden:true" editor="{type:'hidden'}"><b></b></th>
-				<th data-options="field:'companyCode',width:80, formatter: function(value,row,index){return row.waCompanyInfo.companyCode;}" editor="{type:'textbox'}"><b>节水代码</b></th>
-				<th data-options="field:'companyName',width:150, formatter: function(value,row,index){return row.waCompanyInfo.companyName;}" editor="{type:'textbox'}"><b>单位名称</b></th>
+				<th data-options="field:'companyCode',width:80" editor="{type:'textbox'}"><b>节水代码</b></th>
+				<th data-options="field:'companyName',width:150" editor="{type:'textbox'}"><b>单位名称</b></th>
 				<th data-options="field:'isImport', width:80" editor="{type:'textbox'}"><b>重点用户</b></th>
 				<th data-options="field:'monthDate',width:150" editor="{type:'textbox'}"><b>月份时间</b></th>
-                <th data-options="field:'planMonthWater',width:150" editor="{type:'textbox'}"><b>计划月份用水量</b></th>
-				<%--<th data-options="field:'actMonthWater',width:150" editor="{type:'textbox'}"><b>实际月份用水量</b></th>
-				<th data-options="field:'beyondAmount',width:150" editor="{type:'textbox'}"><b>超计划用水量</b></th>
-				<th data-options="field:'feeStandard',width:200" editor="{type:'textbox'}"><b>收费标准</b></th>
-				<th data-options="field:'isOverroof',width:150" editor="{type:'textbox'}"><b>是否超标当月计划</b></th>--%>
-            </tr>
+                <th data-options="field:'planResidentWater',width:150" editor="{type:'textbox'}"><b>居民用水</b></th>
+				<th data-options="field:'planNoResidentWater',width:150" editor="{type:'textbox'}"><b>非居民用水</b></th>
+				<th data-options="field:'planEducationWater',width:150" editor="{type:'textbox'}"><b>教育用水</b></th>
+				<th data-options="field:'planSpecialTradeWater',width:150" editor="{type:'textbox'}"><b>特殊行业用水</b></th>
+			</tr>
             </thead>
         </table>
        	<div id="waMonthWaterData_toolbar_plan" style="display: none;">
@@ -49,12 +48,6 @@
 									<option value="0">否</option>
 								</select>
 							</td>
-							<%--<td width="60px" align="right"><span>是否超标:</span></td>
-							<td><select name="month_isOverroof_plan" style="width: 80px">
-								<option selected="selected" value="">全部</option>
-								<option value="1">是</option>
-								<option value="0">否</option>
-							</select></td>--%>
 							<td style="text-align: right;"><a class="easyui-linkbutton" iconCls="m-icon-search" tag="search">查询</a>
 							&nbsp;
 								<a class="easyui-linkbutton" iconCls="m-icon-clear" tag="clear">清空</a>
@@ -75,16 +68,9 @@
     		<shiro:hasPermission name="<%= Auths.WA_MONTH_WATER_DATA_VIEW %>">
        			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="m-icon-list" plain="true" tag="view">查看详情</a>
        		</shiro:hasPermission>
-			<%--<shiro:hasPermission name="<%= Auths.WA_MONTH_WATER_DATA_PRINT %>">
-				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="m-icon-list" plain="true" tag="print">打印</a>
-			</shiro:hasPermission>--%>
 			<shiro:hasPermission name="<%= Auths.WA_MONTH_WATER_DATA_IMPORT %>">
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="m-icon-list" plain="true" tag="sumExcel">计划用水批量导入</a>
 			</shiro:hasPermission>
-			<%--<shiro:hasPermission name="<%= Auths.WA_MONTH_WATER_DATA_IMPORT %>">
-				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="m-icon-list" plain="true" tag="import">实际用水导入</a>
-			</shiro:hasPermission>
-			--%>
 	 	</div>
 	 </div>
 
@@ -93,13 +79,7 @@
 <script type="text/javascript" src="${ctx}/static/js/wa/jquery.PrintArea.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/wa/laydate.js"></script>
 <script type="text/javascript">
-   /* laydate.render({
-        elem: '#month_waYear' //指定元素
-        ,type: 'year'
-        ,theme: 'grid'
-//	 	,format: 'yyyyMM'
-    });
-*/
+
     $(function(){
         var currTime=new Date();
         var strDate=currTime.getFullYear()+"-"+(currTime.getMonth()+1);

@@ -18,6 +18,7 @@ import com.hongguaninfo.hgdf.core.utils.exception.BaseException;
 import com.hongguaninfo.hgdf.core.utils.logging.Log;
 import com.hongguaninfo.hgdf.core.utils.logging.LogFactory;
 import com.hongguaninfo.hgdf.wa.entity.waCompanyInfo.WaPlanConditionTable;
+import com.hongguaninfo.hgdf.wa.service.WaCompanyInfoService;
 import com.hongguaninfo.hgdf.wa.service.waCompanyInfo.WaPlanConditionTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,9 +46,6 @@ import java.util.Map;
 @RequestMapping("/wa/WaPlanConditionTable")
 public class WaPlanConditionTableController {
 
-    /**
-     *
-     */
     private static final Log LOG = LogFactory.getLog(WaPlanConditionTableController.class);
 
     /**
@@ -55,6 +53,9 @@ public class WaPlanConditionTableController {
      */
     @Autowired
     private WaPlanConditionTableService waPlanConditionTableService;
+
+    @Autowired
+    private WaCompanyInfoService waCompanyInfoService;
 
     /**
 	 * REMARK
@@ -153,6 +154,7 @@ public class WaPlanConditionTableController {
             HttpServletRequest request, HttpServletResponse response,
             Model model) throws BizException {
         model.addAttribute("planCondtionId", id);
+        model.addAttribute("companyData", waCompanyInfoService.getComPanyMap());
         model.addAttribute("waPlanConditionData",
          waPlanConditionTableService.getWaPlanConditionTableById(id));
         OperateTemplete templete = new HttpTemplete(request) {
