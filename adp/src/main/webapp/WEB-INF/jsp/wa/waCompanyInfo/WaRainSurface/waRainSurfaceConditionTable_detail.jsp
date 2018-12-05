@@ -54,6 +54,12 @@
 				</tr><tr>
 					<td width="130px;">备注<font>*</font>:</td>
 					<td><input type="text"   name="flag" value="${waRainSurfaceData.flag}" id="flag"></input></td>
+				</tr><tr>
+					<td width="130px;">填报人<font>*</font>:</td>
+					<td><input type="text"   name="writePerson" value="${waRainSurfaceData.writePerson}" id="writePerson"></input></td>
+				</tr><tr>
+					<td width="130px;">填报时间<font>*</font>:</td>
+					<td><input type="text"   name="writeTime" value="${waRainSurfaceData.writeTime}" id="writeTime"></input></td>
 				</tr>
 				</thead>
 			</table>

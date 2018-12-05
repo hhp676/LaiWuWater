@@ -187,7 +187,7 @@
                         <th style="width:120px">教育用水计划数量</th>
                         <th style="width:120px">教育用水实际用水量</th>
                         <th style="width:120px">特种用水计划数量</th>
-                        <th style="width:120px">实际用水量</th>
+                        <th style="width:120px">特种用水实际用水量</th>
                         <th style="width:120px">用水计划总计</th>
                         <th style="width:100px">实际用水量总计</th>
                         <th style="width:80px">节水量</th>

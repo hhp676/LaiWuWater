@@ -24,6 +24,21 @@ waCompanyInfoDatagrid.initwaCompanyInfo_insert = function(){
 		var iconCls = $(this).attr("iconCls");
 		var waCompanyInfoDetailWin = new HgWin({id:"waCompanyInfoDetailWin",title:"添加",width:850,height:400,iconCls:iconCls,url:"/wa/WaCompanyInfo/waCompanyInfoDetail/0"});
 	});
+
+    //--------------------------------节水信息录入------------------------------------------------------------------
+    $("#waCompanyInfo_toolbar_insert [tag='saveWaterView']").click(function(){
+        waCompanyInfoDatagrid.mode = "saveWaterView";
+        var row = $("#waCompanyInfo_datagrid_insert").datagrid("getSelected");
+        if (!row) {
+            $.messager.alert("提示","请选择一条数据","warning");
+            return;
+        }
+        var companyId = row.companyId;
+        var url = "/wa/WaCompanyInfo/showsaveWaterView/"+companyId;
+        var iconCls = $(this).attr("iconCls");
+        var saveWaterViewWin = new HgWin({id:"saveWaterViewWin",title:"节水信息录入",width:800,height:350,iconCls:iconCls,url:url});
+    });
+
 	/*
 	//-------------------------------------------修改---------------------------------------------------
 	$("#waCompanyInfo_toolbar [tag='edit'],#waCompanyInfo_contextMenu [tag='edit']").click(function(){

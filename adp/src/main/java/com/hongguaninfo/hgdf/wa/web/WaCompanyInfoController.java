@@ -352,6 +352,26 @@ public class WaCompanyInfoController {
         return templete.operateModel();
     }
 
+
+    /**
+     * REMARK
+     * 节水信息录入
+     * Through the id inquires the out a data
+     */
+    @RequestMapping(value = "/showsaveWaterView/{companyId}")
+    public String showsaveWaterView (@PathVariable int companyId,
+                                       HttpServletRequest request, HttpServletResponse response,
+                                       Model model) throws BizException {
+        model.addAttribute("companyId", companyId);
+
+        OperateTemplete templete = new HttpTemplete(request) {
+            protected void doSomething() throws BaseException {
+                str = "wa/waCompanyInfo/waterTotal/waCompanyInfo_totalInfoInsert";
+            }
+        };
+        return templete.operateModel();
+    }
+
     /**
      * 批量导入页面展示
      * @param request

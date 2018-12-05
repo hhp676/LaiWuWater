@@ -11,7 +11,6 @@ package com.hongguaninfo.hgdf.wa.web.waCompanyInfo;
 import com.hongguaninfo.hgdf.adp.core.aop.log.UserLog;
 import com.hongguaninfo.hgdf.adp.core.base.BasePage;
 import com.hongguaninfo.hgdf.adp.core.exception.BizException;
-import com.hongguaninfo.hgdf.adp.core.interceptor.RepeatSubmitToken;
 import com.hongguaninfo.hgdf.adp.core.templete.HttpTemplete;
 import com.hongguaninfo.hgdf.adp.core.templete.OperateTemplete;
 import com.hongguaninfo.hgdf.core.utils.exception.BaseException;
@@ -97,7 +96,7 @@ public class WaInterwaterInstallationTableController {
 	 */
     @RequestMapping("/add")
     @ResponseBody
-    @RepeatSubmitToken(removeToken = true)
+//    @RepeatSubmitToken(removeToken = true)
     @UserLog(code = "addWaInterwaterInstallationTable", name = "add WaInterwaterInstallationTable", remarkClass = WaInterwaterInstallationTable.class)
     public Map addWaInterwaterInstallationTable (@Valid final WaInterwaterInstallationTable vo, BindingResult result,
             HttpServletResponse response, final HttpServletRequest request) {

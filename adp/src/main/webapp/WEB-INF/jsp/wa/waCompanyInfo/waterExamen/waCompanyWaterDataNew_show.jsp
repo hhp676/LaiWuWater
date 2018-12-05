@@ -19,7 +19,9 @@
 			pageList="${defaultPageList}">
        	 	<thead>
             <tr>
-				<th data-options="field:'companyWaterId',width:0, hidden:true" editor="{type:'hidden', options:{required:true,missingMessage:'此输入项为必填项'}}"><b></b></th>
+				<th data-options="field:'companyWaterId',hidden:true" ><b></b></th>
+				<th data-options="field:'companyCode',width:150" editor="{type:'textbox'}"><b>节水代码</b></th>
+				<th data-options="field:'companyName',width:190" editor="{type:'textbox'}"><b>单位名称</b></th>
                 <th data-options="field:'productName',width:150" editor="{type:'textbox'}"><b>主产品名称</b></th>
                 <th data-options="field:'newWaterCount',width:150" editor="{type:'textbox'}"><b>单位产品新水量m3/单位产品</b></th>
                 <th data-options="field:'gongyeWaterCount',width:150" editor="{type:'textbox'}"><b>工业新水量</b></th>
@@ -35,10 +37,10 @@
                 <th data-options="field:'circulRate',width:150" editor="{type:'textbox'}"><b>循环率</b></th>
                 <th data-options="field:'freshWaterBackAmount',width:150" editor="{type:'textbox'}"><b>回水量 </b></th>
                 <th data-options="field:'steamCondenBackAmount',width:150" editor="{type:'textbox'}"><b>蒸汽冷凝回水量 </b></th>
-                <th data-options="field:'recoverRate',width:150" editor="{type:'textbox'}"><b>回用率</b></th>
+           <%--     <th data-options="field:'recoverRate',width:150" editor="{type:'textbox'}"><b>回用率</b></th>
                 <th data-options="field:'saveAmount',width:150" editor="{type:'textbox'}"><b>节水量</b></th>
                 <th data-options="field:'installMoney',width:150" editor="{type:'textbox'}"><b>节水设施投资</b></th>
-                <th data-options="field:'companyName',width:150" editor="{type:'textbox'}"><b>填报单位</b></th>
+                <th data-options="field:'companyName',width:150" editor="{type:'textbox'}"><b>填报单位</b></th>--%>
                 <th data-options="field:'waterPlanNo',width:150" editor="{type:'textbox'}"><b>用水计划卡号</b></th>
                 <th data-options="field:'writePerson',width:150" editor="{type:'textbox'}"><b>填报人</b></th>
                 <th data-options="field:'writeTime',width:150" editor="{type:'textbox'}"><b>填报时间</b></th>
@@ -50,10 +52,10 @@
 			<form id="wwaCompanyWaterDataNewSearchForm">
        			<table width="100%">
 						<tr>
-							<td width="100px" align="right"><span>主产品名称:</span></td>
-							<td width="120px;"><input name="checkName"></td>
-							<%--<td width="120px" align="right"><span>条件2:</span></td>
-							<td><input name=" "></td>--%>
+							<td width="60px" align="right"><span>节水代码:</span></td>
+							<td width="120px;"><input name="companyCode"></td>
+							<td width="120px" align="right"><span>单位名称:</span></td>
+							<td><input name="companyName"></td>
 							<td style="text-align: right;"><a class="easyui-linkbutton" iconCls="m-icon-search" tag="search">查询</a>
 							&nbsp;
 								<a class="easyui-linkbutton" iconCls="m-icon-clear" tag="clear">清空</a>

@@ -43,6 +43,12 @@
 				</tr><tr>
 					<td width="130px;">废水（尾水）是否处理回收<font>*</font>:</td>
 					<td><input type="text"   name="isRecovery" value="${waSpecialtradeData.isRecovery}" id="isRecovery"></input></td>
+				</tr><tr>
+					<td width="130px;">填报人<font>*</font>:</td>
+					<td><input type="text"   name="writePerson" value="${waSpecialtradeData.writePerson}" id="writePerson"></input></td>
+				</tr><tr>
+					<td width="130px;">填报时间<font>*</font>:</td>
+					<td><input type="text"   name="writeTime" value="${waSpecialtradeData.writeTime}" id="writeTime"></input></td>
 				</tr>
 				</thead>
 			</table>

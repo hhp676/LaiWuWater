@@ -34,6 +34,19 @@ waCompanyInfoDatagrid.initwaCompanyInfo = function(){
         var totalInfoDetailWin = new HgWin({id:"totalInfoDetailWin",title:"用水信息统计",width:1100,height:550,iconCls:iconCls,url:url});
     });
 
+   /* //--------------------------------节水信息录入------------------------------------------------------------------
+    $("#waCompanyInfo_toolbar_waterTotal [tag='saveWaterView']").click(function(){
+        waCompanyInfoDatagrid.mode = "saveWaterView";
+        var row = $("#waCompanyInfo_datagrid_waterTotal").datagrid("getSelected");
+        if (!row) {
+            $.messager.alert("提示","请选择一条数据","warning");
+            return;
+        }
+        var companyId = row.companyId;
+        var url = "/wa/WaCompanyInfo/showsaveWaterView/"+companyId;
+        var iconCls = $(this).attr("iconCls");
+        var saveWaterViewWin = new HgWin({id:"saveWaterViewWin",title:"节水信息录入",width:800,height:350,iconCls:iconCls,url:url});
+    });*/
 } 
 
 waCompanyInfoDatagrid.initwaCompanyInfo();

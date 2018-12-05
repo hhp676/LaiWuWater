@@ -24,11 +24,9 @@ waCompanyWaterDataNewDatagrid.initwaWaterData = function(companyWaterId) {
         }
     });
 
-
     $("#waCompanyWaterDataNew_edit_layout [tag='cancel']").click(function(){
         $("#waCompanyWaterDataNew_edit_layout").parent().window("close");
     });
-
 
     //私有页面方法------------------------------------------------------------------------------------------------------
     function _saveWaWaterWater(isAdd) {

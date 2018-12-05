@@ -65,6 +65,9 @@
 			<shiro:hasPermission name="<%= Auths.WA_COMPANY_INFO_IMPORT %>">
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="m-icon-import" plain="true" tag="import">批量导入</a>
 			</shiro:hasPermission>
+			<shiro:hasPermission name="<%= Auths.WA_COMPANY_INFO_IMPORT %>">
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="m-icon-list" plain="true" tag="saveWaterView">节水信息录入</a>
+			</shiro:hasPermission>
 			</div>
       </div>
        					 

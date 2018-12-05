@@ -6,7 +6,8 @@ waCompanyWaterDataNewDatagrid.initwaCompanyWaterDataNew = function(){
     //----------------------------------查询-----------------------------------------------------
 	$("#waCompanyWaterDataNew_toolbar [tag='search']").click(function(){
 		 $('#waCompanyWaterDataNew_datagrid').datagrid('load',{
-             productName: $("[name='checkName']").val(),
+             companyCode: $("[name='companyCode']").val(),
+             companyName: $("[name='companyName']").val()
 		 });
 		 
 	});

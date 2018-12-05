@@ -6,12 +6,11 @@
  * Copyright (c) 2016, hongguaninfo.com All Rights Reserved.
  *
  */
-package com.hongguaninfo.hgdf.wa.web;
+package com.hongguaninfo.hgdf.wa.web.waCompanyInfo;
 
 import com.hongguaninfo.hgdf.adp.core.aop.log.UserLog;
 import com.hongguaninfo.hgdf.adp.core.base.BasePage;
 import com.hongguaninfo.hgdf.adp.core.exception.BizException;
-import com.hongguaninfo.hgdf.adp.core.interceptor.RepeatSubmitToken;
 import com.hongguaninfo.hgdf.adp.core.templete.HttpTemplete;
 import com.hongguaninfo.hgdf.adp.core.templete.OperateTemplete;
 import com.hongguaninfo.hgdf.core.utils.exception.BaseException;
@@ -98,7 +97,7 @@ public class WaCompanyWaterDataNewController {
 	 */
     @RequestMapping("/add")
     @ResponseBody
-    @RepeatSubmitToken(removeToken = true)
+//    @RepeatSubmitToken(removeToken = true)
     @UserLog(code = "addWaCompanyWaterDataNew", name = "add WaCompanyWaterDataNew", remarkClass = WaCompanyWaterDataNew.class)
     public Map addWaCompanyWaterDataNew (@Valid final WaCompanyWaterDataNew vo, BindingResult result,
             HttpServletResponse response, final HttpServletRequest request) {

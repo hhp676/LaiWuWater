@@ -23,7 +23,7 @@
         wiit.CRT_TME_ crtTme,
         wiit.UPD_TIME_ updTime,
         wiit.WRITE_PERSON_ writePerson,
-        wiit.WRITE_TIME_ writeTime,
+        wiit.WRITE_TIME_ writeTime
     </sql>
 
     <!-- sqlWhere -->
