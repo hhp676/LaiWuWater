@@ -335,8 +335,9 @@ public class WaCompanyInfoController {
                                            Model model) throws BizException {
         model.addAttribute("companyId", companyId);
         WaCompanyInfo waCompanyInfo = waCompanyInfoService.getWaCompanyInfoById(companyId);
-        model.addAttribute("companyCode", waCompanyInfo.getCompanyCode());
-        model.addAttribute("companyName", waCompanyInfo.getCompanyName());
+//        model.addAttribute("companyCode", waCompanyInfo.getCompanyCode());
+//        model.addAttribute("companyName", waCompanyInfo.getCompanyName());
+        model.addAttribute("companyInfoData", waCompanyInfo);
         model.addAttribute("waCompanyWaterDataNewAll", waCompanyWaterDataNewService.getDataByCompanyId(companyId));
         model.addAttribute("waInterwaterInstallation", waInterwaterInstallationTableService.getDataByCompanyId(companyId));
         model.addAttribute("waRainSurfaceData", waRainSurfaceConditionTableService.getDataByCompanyId(companyId));

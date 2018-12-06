@@ -82,13 +82,13 @@
                 </tr><tr>
                     <td width="130px;"> 用水计划卡号<font>*</font>:</td>
                     <td><input type="text"   name="waterPlanNo" value="${waCompanyWaterDataNew.waterPlanNo}" id="waterPlanNo"></input></td>
-                </tr><tr>
+                </tr><%--<tr>
                     <td width="130px;">填报人<font>*</font>:</td>
                     <td><input type="text"   name="writePerson" value="${waCompanyWaterDataNew.writePerson}" id="writePerson"></input></td>
                 </tr><tr>
                     <td width="130px;">填报时间<font>*</font>:</td>
                     <td><input type="text"   name="writeTime" value="${waCompanyWaterDataNew.writeTime}" id="writeTime"></input></td>
-                </tr>
+                </tr>--%>
                 </thead>
             </table>
         </form>

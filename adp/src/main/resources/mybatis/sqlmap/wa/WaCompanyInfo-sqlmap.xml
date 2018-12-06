@@ -22,6 +22,8 @@
         wci.WATER_TYPE_ waterType,
         wci.IS_IMPORT_ isImport,
         wci.IS_DELETE_ isDelete,
+        wci.WRITE_PERSON_ writePerson,
+        wci.WRITE_TIME_ writeTime,
         wci.DESCR_ descr,
         wci.CRT_TIME_ crtTime,
         wci.UPD_TIME_ updTime
@@ -199,6 +201,13 @@
 		  	<if test="isImport != null">
         		IS_IMPORT_,
       		</if>
+
+			<if test="writePerson != null">
+				WRITE_PERSON_,
+			</if>
+			<if test="writeTime != null">
+				WRITE_TIME_,
+			</if>
 		  	<if test="isDelete != null">
         		IS_DELETE_,
       		</if>
@@ -257,8 +266,14 @@
 			  	</if>  
 			  	<if test="isImport != null">
 			  	  	   #{isImport,jdbcType=NUMERIC},
-			  	</if>  
-			  	<if test="isDelete != null">
+			  	</if>
+				<if test="writePerson != null">
+					#{writePerson,jdbcType=VARCHAR},
+				</if>
+				<if test="writeTime != null">
+					#{writeTime,jdbcType=VARCHAR},
+				</if>
+				<if test="isDelete != null">
 			  	  	   #{isDelete,jdbcType=NUMERIC},
 			  	</if>  
 			  	<if test="descr != null">
@@ -322,6 +337,12 @@
 		  	<if test="isImport != null">
         		IS_IMPORT_ = #{isImport} ,
       		</if>
+			<if test="writePerson != null">
+				WRITE_PERSON_ = #{writePerson},
+			</if>
+			<if test="writeTime != null">
+				WRITE_TIME_ = #{writeTime},
+			</if>
 		  	<if test="isDelete != null">
         		IS_DELETE_ = #{isDelete} ,
       		</if>

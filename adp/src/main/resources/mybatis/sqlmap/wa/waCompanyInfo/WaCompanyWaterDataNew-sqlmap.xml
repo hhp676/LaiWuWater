@@ -28,8 +28,7 @@
         wcwdn.INSTALL_MONEY_ installMoney,
         wcwdn.COMPANY_SITE_ companySite,
         wcwdn.WATER_PLAN_NO_ waterPlanNo,
-        wcwdn.WRITE_PERSON_ writePerson,
-        wcwdn.WRITE_TIME_ writeTime,
+
         wcwdn.IS_DELETE_ isDelete,
         wcwdn.CRT_TIME_ crtTime,
         wcwdn.UPD_TIME_ updTime
@@ -100,12 +99,12 @@
         		<if test="waterPlanNo != null and waterPlanNo.length() != 0">
         		AND wcwdn.WATER_PLAN_NO_ like '%${waterPlanNo}%'
         </if>
-        		<if test="writePerson != null and writePerson.length() != 0">
+        		<!--<if test="writePerson != null and writePerson.length() != 0">
         		AND wcwdn.WRITE_PERSON_ like '%${writePerson}%'
         </if>
         		<if test="writeTime != null and writeTime.length() != 0">
         		AND wcwdn.WRITE_TIME_ like '%${writeTime}%'
-        </if>
+        </if>-->
         	<if test="isDelete != null">
 	            AND wcwdn.IS_DELETE_ = #{isDelete}
         </if>
@@ -122,7 +121,11 @@
 
     <!-- According to the id check record  -->
     <select id="getById" parameterType="long" resultType="WaCompanyWaterDataNew">
-        select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+        select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN" />,
+		com.COMPANY_CODE_ companyCode,
+		com.COMPANY_NAME_ companyName,
+		com.WRITE_PERSON_ writePerson,
+		com.WRITE_TIME_ writeTime
 		from WA_COMPANY_WATER_DATA_NEW wcwdn JOIN WA_COMPANY_INFO com
 		on com.COMPANY_ID_ = wcwdn.COMPANY_ID_
         <where>
@@ -133,7 +136,11 @@
 
 	<!-- According to the id check record  -->
 	<select id="getDataByCompanyId" parameterType="Integer" resultType="WaCompanyWaterDataNew">
-		select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		select <include  refid="SQL_WA_COMPANY_WATER_DATA_NEW_COLUMN" />,
+		com.COMPANY_CODE_ companyCode,
+		com.COMPANY_NAME_ companyName,
+		com.WRITE_PERSON_ writePerson,
+		com.WRITE_TIME_ writeTime
 		from WA_COMPANY_WATER_DATA_NEW wcwdn JOIN WA_COMPANY_INFO com
 		on com.COMPANY_ID_ = wcwdn.COMPANY_ID_
 		WHERE wcwdn.IS_DELETE_ = 0
@@ -253,12 +260,12 @@
 		  	<if test="waterPlanNo != null">
         		WATER_PLAN_NO_,
       		</if>
-		  	<if test="writePerson != null">
+		  	<!--<if test="writePerson != null">
         		WRITE_PERSON_,
       		</if>
 		  	<if test="writeTime != null">
         		WRITE_TIME_,
-      		</if>
+      		</if>-->
 		  	<if test="isDelete != null">
         		IS_DELETE_,
       		</if>
@@ -336,12 +343,12 @@
 			  	<if test="waterPlanNo != null">
 			  	  	   #{waterPlanNo,jdbcType=VARCHAR},
 			  	</if>  
-			  	<if test="writePerson != null">
+			  <!--	<if test="writePerson != null">
 			  	  	   #{writePerson,jdbcType=VARCHAR},
 			  	</if>  
 			  	<if test="writeTime != null">
 			  	  	   #{writeTime,jdbcType=VARCHAR},
-			  	</if>  
+			  	</if>  -->
 			  	<if test="isDelete != null">
 			  	  	   #{isDelete,jdbcType=NUMERIC},
 			  	</if>  
@@ -421,12 +428,12 @@
 		  	<if test="waterPlanNo != null">
         		WATER_PLAN_NO_ = #{waterPlanNo} ,
       		</if>
-		  	<if test="writePerson != null">
+		  	<!--<if test="writePerson != null">
         		WRITE_PERSON_ = #{writePerson} ,
       		</if>
 		  	<if test="writeTime != null">
         		WRITE_TIME_ = #{writeTime} ,
-      		</if>
+      		</if>-->
 		  	<if test="isDelete != null">
         		IS_DELETE_ = #{isDelete} ,
       		</if>

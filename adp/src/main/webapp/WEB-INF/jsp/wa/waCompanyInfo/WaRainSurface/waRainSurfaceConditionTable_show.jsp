@@ -21,7 +21,8 @@
             <tr>
                 <th data-options="field:'rainSurfaceId',hidden:true" editor="{type:'hidden'}"><b></b></th>
 				<th data-options="field:'companyCode',width:150" editor="{type:'textbox'}"><b>节水代码</b></th>
-				<th data-options="field:'companyName',width:150" editor="{type:'textbox'}"><b>单位名称</b></th>
+				<th data-options="field:'companyName',width:150" editor="{type:'textbox'}"><b>节水单位</b></th>
+				<th data-options="field:'unitName',width:150" editor="{type:'textbox'}"><b>单位名称</b></th>
 				<th data-options="field:'rainWaterVolume',width:150" editor="{type:'textbox'}"><b>雨水储水容量m3</b></th>
                 <th data-options="field:'rainActAmount',width:150" editor="{type:'textbox'}"><b>雨水实际使用量（年）</b></th>
                 <th data-options="field:'rainUseTime',width:150" editor="{type:'textbox'}"><b>雨水投入使用时间</b></th>

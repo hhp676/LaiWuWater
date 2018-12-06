@@ -42,8 +42,8 @@
                 <th data-options="field:'installMoney',width:150" editor="{type:'textbox'}"><b>节水设施投资</b></th>
                 <th data-options="field:'companyName',width:150" editor="{type:'textbox'}"><b>填报单位</b></th>--%>
                 <th data-options="field:'waterPlanNo',width:150" editor="{type:'textbox'}"><b>用水计划卡号</b></th>
-                <th data-options="field:'writePerson',width:150" editor="{type:'textbox'}"><b>填报人</b></th>
-                <th data-options="field:'writeTime',width:150" editor="{type:'textbox'}"><b>填报时间</b></th>
+                <%--<th data-options="field:'writePerson',width:150" editor="{type:'textbox'}"><b>填报人</b></th>
+                <th data-options="field:'writeTime',width:150" editor="{type:'textbox'}"><b>填报时间</b></th>--%>
             </tr>
             </thead>
         </table>

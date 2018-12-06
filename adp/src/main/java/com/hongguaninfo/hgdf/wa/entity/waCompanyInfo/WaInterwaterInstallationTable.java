@@ -43,7 +43,10 @@ public class WaInterwaterInstallationTable extends BaseEntity {
      * COMPANY_NAME_ : 单位名称。
      */
     private String companyName;
-
+    /**
+     * 单位名称
+     */
+    private String unitName;
     /**
      * PRODUCT_NAME_ : 项目名称。
      */
@@ -149,7 +152,14 @@ public class WaInterwaterInstallationTable extends BaseEntity {
         this.interwaterId = interwaterId;
     }
 
-        
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
+
     public String getCompanyId() {
         return companyId;
     }

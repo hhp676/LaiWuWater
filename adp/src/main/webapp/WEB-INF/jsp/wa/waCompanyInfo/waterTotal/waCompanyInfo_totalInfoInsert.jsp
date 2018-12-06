@@ -72,13 +72,13 @@
                         </tr><tr>
                             <td width="200px;">节水设施投资（万元）<font>*</font>:</td>
                             <td><input type="text"   name="installMoney" value="" id="installMoney"></input></td>
-                        </tr><tr>
+                        </tr><%--<tr>
                             <td width="200px;">填报人<font>*</font>:</td>
                             <td><input type="text"   name="writePerson" value="" id="commFacWaterTab_writePerson"></input></td>
                         </tr><tr>
                             <td width="200px;">填报时间<font>*</font>:</td>
                             <td><input type="text"   name="writeTime" value="" id="commFacWaterTab_writeTime"></input></td>
-                        </tr>
+                        </tr>--%>
                         </thead>
                     </table>
                 </form>
@@ -91,7 +91,7 @@
                         <thead>
                         <tr>
                             <td width="200px;">企业（单位）小区<font>*</font>:</td>
-                            <td><input type="text"   name="companyName" value="" id="interwaterWaterTab_companyName"></input></td>
+                            <td><input type="text"   name="unitName" value="" id="interwaterWaterTab_unitName"></input></td>
                         </tr>
                         <tr>
                             <td width="200px;">项目名称<font>*</font>:</td>
@@ -137,14 +137,14 @@
                             <td width="200px;">备注<font>*</font>:</td>
                             <td><input type="text"   name="flag" value="" id="interwaterWaterTab_flag"></input></td>
                         </tr>
-                        <tr>
+                        <%--<tr>
                             <td width="200px;">填报人<font>*</font>:</td>
                             <td><input type="text"   name="writePerson" value="" id="interwaterWaterTab_writePerson"></input></td>
                         </tr>
                         <tr>
                             <td width="200px;">填报时间<font>*</font>:</td>
                             <td><input type="text"   name="writeTime" value="" id="interwaterWaterTab_writeTime"></input></td>
-                        </tr>
+                        </tr>--%>
                         </thead>
                     </table>
                 </form>
@@ -157,7 +157,7 @@
                         <thead>
                         <tr>
                             <td width="200px;">单位名称<font>*</font>:</td>
-                            <td><input type="text"   name="companyName" value="" id="rainSurfaceTab_companyName"></input></td>
+                            <td><input type="text"   name="unitName" value="" id="rainSurfaceTab_unitName"></input></td>
                         </tr>
                         <tr>
                             <td width="200px;">雨水回收利用-储水容量m3<font>*</font>:</td>
@@ -200,14 +200,14 @@
                             <td width="200px;">备注<font>*</font>:</td>
                             <td><input type="text"   name="flag" value="" id="rainSurfaceTab_flag"></input></td>
                         </tr>
-                        <tr>
+                        <%--<tr>
                             <td width="200px;">填报人<font>*</font>:</td>
                             <td><input type="text"   name="writePerson" value="" id="rainSurfaceTab_writePerson"></input></td>
                         </tr>
                         <tr>
                             <td width="200px;">填报时间<font>*</font>:</td>
                             <td><input type="text"   name="writeTime" value="" id="rainSurfaceTab_writeTime"></input></td>
-                        </tr>
+                        </tr>--%>
                         </thead>
                     </table>
                 </form>
@@ -260,14 +260,14 @@
                             <td width="200px;">节水量<font>*</font>:</td>
                             <td><input type="text"   name="saveWaterAmount" value="" id="saveWaterAmount"></input></td>
                         </tr>
-                        <tr>
+                       <%-- <tr>
                             <td width="200px;">填报人<font>*</font>:</td>
                             <td><input type="text"   name="writePerson" value="" id="planConditionTab_writePerson"></input></td>
                         </tr>
                         <tr>
                             <td width="200px;">填报时间<font>*</font>:</td>
                             <td><input type="text"   name="writeTime" value="" id="planConditionTab_writeTime"></input></td>
-                        </tr>
+                        </tr>--%>
                         </thead>
                     </table>
                 </form>
@@ -302,14 +302,14 @@
                             <td width="200px;">废水（尾水）是否处理回收<font>*</font>:</td>
                             <td><input type="text"   name="isRecovery" value="" id="isRecovery"></input></td>
                         </tr>
-                        <tr>
+                      <%--  <tr>
                             <td width="200px;">填报人<font>*</font>:</td>
                             <td><input type="text"   name="writePerson" value="" id="specialTab_writePerson"></input></td>
                         </tr>
                         <tr>
                             <td width="200px;">填报时间<font>*</font>:</td>
                             <td><input type="text"   name="writeTime" value="" id="specialTab_writeTime"></input></td>
-                        </tr>
+                        </tr>--%>
                         </thead>
                     </table>
                 </form>

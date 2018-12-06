@@ -8,6 +8,7 @@
     <sql id="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN">
         wiit.INTERWATER_ID_ interwaterId,
         wiit.COMPANY_ID_ companyId,
+        wiit.UNIT_NAME_ unitName,
         wiit.PRODUCT_NAME_ productName,
         wiit.HANDLE_TECH_ handleTech,
         wiit.RECOVER_WATER_COUNT_ recoverWaterCount,
@@ -21,9 +22,9 @@
         wiit.FLAG_ flag,
         wiit.IS_DELETE_ isDelete,
         wiit.CRT_TME_ crtTme,
-        wiit.UPD_TIME_ updTime,
-        wiit.WRITE_PERSON_ writePerson,
-        wiit.WRITE_TIME_ writeTime
+        wiit.UPD_TIME_ updTime
+      /*  wiit.WRITE_PERSON_ writePerson,
+        wiit.WRITE_TIME_ writeTime*/
     </sql>
 
     <!-- sqlWhere -->
@@ -76,12 +77,7 @@
         	<if test="updTime != null">
 	            AND wiit.UPD_TIME_ = #{updTime}
         </if>
-		<if test="writePerson != null and writePerson.length() != 0">
-			AND wiit.WRITE_PERSON_ like '%${writePerson}%'
-		</if>
-		<if test="writeTime != null and writeTime.length() != 0">
-			AND wiit.WRITE_TIME_ like '%${writeTime}%'
-		</if>
+
         <if test="filterStr !=null and filterStr.length()!=0">
             ${filterStr}
         </if>
@@ -89,7 +85,11 @@
 
     <!-- According to the id check record  -->
     <select id="getById" parameterType="long" resultType="WaInterwaterInstallationTable">
-        select <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+        select <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN" />,
+		com.COMPANY_CODE_ companyCode,
+		com.COMPANY_NAME_ companyName,
+		com.WRITE_PERSON_ writePerson,
+		com.WRITE_TIME_ writeTime
         from WA_INTERWATER_INSTALLATION_TABLE wiit JOIN WA_COMPANY_INFO com
 		on com.COMPANY_ID_ = wiit.COMPANY_ID_
         <where>
@@ -99,7 +99,11 @@
 
 	<!-- According to the id check record  -->
 	<select id="getDataByCompanyId" parameterType="Integer" resultType="WaInterwaterInstallationTable">
-		select <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN" />, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+		select <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN" />,
+		com.COMPANY_CODE_ companyCode,
+		com.COMPANY_NAME_ companyName,
+		com.WRITE_PERSON_ writePerson,
+		com.WRITE_TIME_ writeTime
 		from WA_INTERWATER_INSTALLATION_TABLE wiit JOIN WA_COMPANY_INFO com
 		on com.COMPANY_ID_ = wiit.COMPANY_ID_
 		WHERE wiit.IS_DELETE_ = 0
@@ -109,7 +113,11 @@
 
     <!-- Query All  -->
     <select id="getList" parameterType="WaInterwaterInstallationTable" resultType="WaInterwaterInstallationTable">
-        select <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN"/>, com.COMPANY_CODE_ companyCode, com.COMPANY_NAME_ companyName
+        select <include  refid="SQL_WA_INTERWATER_INSTALLATION_TABLE_COLUMN"/>,
+		com.COMPANY_CODE_ companyCode,
+		com.COMPANY_NAME_ companyName,
+		com.WRITE_PERSON_ writePerson,
+		com.WRITE_TIME_ writeTime
 		from WA_INTERWATER_INSTALLATION_TABLE wiit JOIN WA_COMPANY_INFO com
 		on com.COMPANY_ID_ = wiit.COMPANY_ID_
         <where>
@@ -158,6 +166,9 @@
 		  	<if test="companyId != null">
         		COMPANY_ID_,
       		</if>
+			<if test="unitName != null">
+				UNIT_NAME_,
+			</if>
 		  	<if test="productName != null">
         		PRODUCT_NAME_,
       		</if>
@@ -200,12 +211,12 @@
 		  	<if test="updTime != null">
         		UPD_TIME_,
       		</if>
-			<if test="writePerson != null">
+			<!--<if test="writePerson != null">
 				WRITE_PERSON_,
 			</if>
 			<if test="writeTime != null">
 				WRITE_TIME_,
-			</if>
+			</if>-->
 		</trim> 
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			  	<if test="interwaterId != null">
@@ -213,7 +224,10 @@
 			  	</if>  
 			  	<if test="companyId != null">
 			  	  	   #{companyId,jdbcType=VARCHAR},
-			  	</if>  
+			  	</if>
+				<if test="unitName != null">
+						#{unitName,jdbcType=VARCHAR},
+				</if>
 			  	<if test="productName != null">
 			  	  	   #{productName,jdbcType=VARCHAR},
 			  	</if>  
@@ -253,12 +267,12 @@
 				<if test="updTime != null">
 					#{updTime,jdbcType=TIMESTAMP},
 				</if>
-				<if test="writePerson != null">
+				<!--<if test="writePerson != null">
 					#{writePerson,jdbcType=VARCHAR},
 				</if>
 				<if test="writeTime != null">
 					#{writeTime,jdbcType=VARCHAR},
-				</if>
+				</if>-->
 		</trim>
     </insert>
 
@@ -272,6 +286,9 @@
 		  	<if test="companyId != null">
         		COMPANY_ID_ = #{companyId} ,
       		</if>
+			<if test="unitName != null">
+				UNIT_NAME_ = #{unitName},
+			</if>
 		  	<if test="productName != null">
         		PRODUCT_NAME_ = #{productName} ,
       		</if>
@@ -311,12 +328,12 @@
 		  	<if test="crtTme != null">
         		CRT_TME_ = #{crtTme} ,
       		</if>
-			<if test="writePerson != null">
+			<!--<if test="writePerson != null">
 				WRITE_PERSON_ = #{writePerson} ,
 			</if>
 			<if test="writeTime != null">
 				WRITE_TIME_ = #{writeTime} ,
-			</if>
+			</if>-->
 		  	<if test="updTime != null">
         		UPD_TIME_ = #{updTime} 
       		</if>

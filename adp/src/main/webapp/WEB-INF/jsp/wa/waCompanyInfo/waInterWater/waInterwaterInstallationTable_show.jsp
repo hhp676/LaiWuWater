@@ -21,7 +21,8 @@
             <tr>
 				<th data-options="field:'interwaterId',width:0, hidden:true" editor="{type:'hidden'}"><b></b></th>
                 <th data-options="field:'companyCode',width:150" editor="{type:'textbox'}"><b>节水代码</b></th>
-				<th data-options="field:'companyName',width:150" editor="{type:'textbox'}"><b>单位名称</b></th>
+				<th data-options="field:'companyName',width:150" editor="{type:'textbox'}"><b>节水单位</b></th>
+				<th data-options="field:'unitName',width:150" editor="{type:'textbox'}"><b>单位名称</b></th>
                 <th data-options="field:'productName',width:150" editor="{type:'textbox'}"><b>项目名称</b></th>
                 <th data-options="field:'handleTech',width:150" editor="{type:'textbox'}"><b>处理工艺</b></th>
                 <th data-options="field:'recoverWaterCount',width:150" editor="{type:'textbox'}"><b>设计回用量水</b></th>

@@ -44,6 +44,10 @@ public class WaRainSurfaceConditionTable extends BaseEntity {
      */
     private String companyId;
     /**
+     * 单位名称
+     */
+    private String unitName;
+    /**
      * RAIN_WATER_VOLUME_ : 雨水储水容量m3。
      */
     private String rainWaterVolume;
@@ -145,7 +149,14 @@ public class WaRainSurfaceConditionTable extends BaseEntity {
         this.rainSurfaceId = rainSurfaceId;
     }
 
-        
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
+
     public String getCompanyId() {
         return companyId;
     }
@@ -154,7 +165,6 @@ public class WaRainSurfaceConditionTable extends BaseEntity {
         this.companyId = companyId;
     }
 
-        
     public String getRainWaterVolume() {
         return rainWaterVolume;
     }

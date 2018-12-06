@@ -61,7 +61,7 @@
        		</form>
 			</div>
 			<shiro:hasPermission name="<%= Auths.WA_COMPANY_INFO_TOTAL %>">
-				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="m-icon-list" plain="true" tag="statisticsView">用水情况统计</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="m-icon-list" plain="true" tag="statisticsView">节水情况统计</a>
 			</shiro:hasPermission>
 
 			</div>

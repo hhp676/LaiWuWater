@@ -14,7 +14,7 @@
 				<thead>
 				<input type="hidden"   name="interwaterId" value="${interwaterId}" id="interwaterId"></input>
 				<tr>
-					<td width="130px;">单位名称<font>*</font>:</td>
+					<td width="130px;">节水单位<font>*</font>:</td>
 					<td>
 						<select name="companyId" style="width: 170px">
 							<c:forEach var="companyDataItem" items="${companyData}">
@@ -23,6 +23,11 @@
 						</select>
 					</td>
 				</tr>
+				<tr>
+                    <td width="130px;">单位名称<font>*</font>:</td>
+                    <td><input type="text" name="unitName" value="${waInterWaterData.unitName}" id="unitName"></input></td>
+                </tr>
+
 				<tr>
 					<td width="130px;">项目名称<font>*</font>:</td>
 					<td><input type="text"   name="productName" value="${waInterWaterData.productName}" id="productName"></input></td>
@@ -57,12 +62,6 @@
 				</tr><tr>
 					<td width="130px;">备注<font>*</font>:</td>
 					<td><input type="text"   name="flag" value="${waInterWaterData.flag}" id="flag"></input></td>
-				</tr><tr>
-					<td width="130px;">填报人<font>*</font>:</td>
-					<td><input type="text"   name="writePerson" value="${waInterWaterData.writePerson}" id="writePerson"></input></td>
-				</tr><tr>
-					<td width="130px;">填报时间<font>*</font>:</td>
-					<td><input type="text"   name="writeTime" value="${waInterWaterData.writeTime}" id="writeTime"></input></td>
 				</tr>
 				</thead>
 			</table>

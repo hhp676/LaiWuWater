@@ -92,6 +92,14 @@ public class WaCompanyInfo extends BaseEntity {
      */
     private Integer isDelete;
     /**
+     * 填报人
+     */
+    private String writePerson;
+    /**
+     * 填报时间
+     */
+    private String writeTime;
+    /**
      * DESCR_ : 描述。
      */
     private String descr;
@@ -103,6 +111,22 @@ public class WaCompanyInfo extends BaseEntity {
      * UPD_TIME_ : 更新时间。
      */
     private Date updTime;
+
+    public String getWritePerson() {
+        return writePerson;
+    }
+
+    public void setWritePerson(String writePerson) {
+        this.writePerson = writePerson;
+    }
+
+    public String getWriteTime() {
+        return writeTime;
+    }
+
+    public void setWriteTime(String writeTime) {
+        this.writeTime = writeTime;
+    }
 
     public Integer getCompanyId() {
         return companyId;

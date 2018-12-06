@@ -14,7 +14,7 @@
 				<thead>
 				<input type="hidden"   name="rainSurfaceId" value="${rainSurfaceId}" id="rainSurfaceId"></input>
 				<tr>
-					<td width="130px;">单位名称<font>*</font>:</td>
+					<td width="130px;">节水单位<font>*</font>:</td>
 					<td>
 						<select name="companyId" style="width: 170px">
 							<c:forEach var="companyDataItem" items="${companyData}">
@@ -22,6 +22,10 @@
 							</c:forEach>
 						</select>
 					</td>
+				</tr>
+				<tr>
+					<td width="130px;">单位名称<font>*</font>:</td>
+					<td><input type="text" name="unitName" value="${waRainSurfaceData.unitName}" id="unitName"></input></td>
 				</tr>
 				<tr>
 					<td width="130px;">雨水储水容量m3<font>*</font>:</td>
@@ -54,13 +58,13 @@
 				</tr><tr>
 					<td width="130px;">备注<font>*</font>:</td>
 					<td><input type="text"   name="flag" value="${waRainSurfaceData.flag}" id="flag"></input></td>
-				</tr><tr>
+				</tr><%--<tr>
 					<td width="130px;">填报人<font>*</font>:</td>
 					<td><input type="text"   name="writePerson" value="${waRainSurfaceData.writePerson}" id="writePerson"></input></td>
 				</tr><tr>
 					<td width="130px;">填报时间<font>*</font>:</td>
 					<td><input type="text"   name="writeTime" value="${waRainSurfaceData.writeTime}" id="writeTime"></input></td>
-				</tr>
+				</tr>--%>
 				</thead>
 			</table>
 		</form>

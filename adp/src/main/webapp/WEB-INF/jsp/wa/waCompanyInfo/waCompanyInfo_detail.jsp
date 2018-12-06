@@ -97,29 +97,34 @@
                     <td><input type="text" name="descr" id="descr" value = "${waCompanyInfo.descr}"></input></td>
                 </tr>
 
-                <c:forEach var="uploadFileListItem" items="${uploadFileList}">
-                    <%--<option value="${isImportItem.value}" <c:if test="${waCompanyInfo.isImport==isImportItem.value}">selected</c:if>>${isImportItem.key}</option>--%>
+                <tr>
+                    <td>填报人:</td>
+                    <td><input type="text" name="writePerson" id="writePerson" value = "${waCompanyInfo.writePerson}"></input></td>
+                </tr>
+                <tr>
+                    <td>填报时间:</td>
+                    <td><input type="text" name="writeTime" id="writeTime" value = "${waCompanyInfo.writeTime}"></input></td>
+                </tr>
+
+               <%-- <c:forEach var="uploadFileListItem" items="${uploadFileList}">
+                    &lt;%&ndash;<option value="${isImportItem.value}" <c:if test="${waCompanyInfo.isImport==isImportItem.value}">selected</c:if>>${isImportItem.key}</option>&ndash;%&gt;
                     <tr id="file${uploadFileListItem.fileid}">
                         <td> 附件：</td>
                         <td> <a href='#' onclick=downFile("${uploadFileListItem.fileName}")> ${uploadFileListItem.fileName} </a></td>
                         <td><a href="#" onclick=delFile("${uploadFileListItem.fileid}")>删除</a></td>
                     </tr>
-                </c:forEach>
+                </c:forEach>--%>
             </table>
         </form>
 
-        <div >
+       <%-- <div >
             <table id="uploadFileTab">
                 <tr>
                     <td>添加附件: <input type="file" name="fileImg" id="uploadFile"/></td>
                     <td><a class="easyui-linkbutton" tag="uploadFile">保存</a></td>
                 </tr>
             </table>
-
-
-
-        </div>
-
+        </div>--%>
     </div>
     <div data-options="region:'south',border:false" style="text-align: right; padding: 5px 5px 5px; background-color: #e0e0e0;">
     <shiro:hasPermission name="<%= Auths.WA_COMPANY_INFO_IMPORT %>">

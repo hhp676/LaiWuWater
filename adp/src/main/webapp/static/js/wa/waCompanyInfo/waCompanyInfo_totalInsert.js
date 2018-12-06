@@ -10,7 +10,6 @@ waCompanyInfoDatagrid.initTotal = function(companyId, commFacWaterWaterId,interW
 
         // var resultBol1, resultBol12,resultBol13,resultBol14,resultBol15,resultBol16;
         if(commFacWaterAdd){
-            debugger
             _savecommFacWaterData(true);
         }else{
             _savecommFacWaterData(false);
