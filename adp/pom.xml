@@ -516,7 +516,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<warName>${project.build.finalName}</warName>
+					<!--<warName>${project.build.finalName}</warName>-->
 					<!-- 排除掉未压缩js、css -->
 					<warSourceExcludes>**/*.js,**/*.css,**/*.jsp</warSourceExcludes>
 					<archive>
@@ -535,19 +535,19 @@
 							<Url>${project.url}</Url>
 							<Project-Version>${project.version}</Project-Version>
 							<Project-name>${project.name}</Project-name>
-							<Build-Timestamp>${build.timestamp}</Build-Timestamp>
+						<!--	<Build-Timestamp>${build.timestamp}</Build-Timestamp>-->
 							<Build-directory>${project.build.directory}</Build-directory>
 							<Build-java-home>${java.home}</Build-java-home>
 							<Build-basedir>${basedir}</Build-basedir>
 							<Build-localRepository>${settings.localRepository}
 							</Build-localRepository>
-							<Build-M2_HOME>${env.M2_HOME}</Build-M2_HOME>
+							<!--<Build-M2_HOME>${env.M2_HOME}</Build-M2_HOME>-->
 
 							<Build-os-arch>${os.arch}</Build-os-arch>
 							<Build-os-name>${os.name}</Build-os-name>
 							<Build-os-version>${os.version}</Build-os-version>
 
-							<svn-Revision>${svn.revision}</svn-Revision>
+							<!--<svn-Revision>${svn.revision}</svn-Revision>
 							<svn-repository>${svn.repository}</svn-repository>
 							<svn-mixedRevisions>${svn.mixedRevisions}
 							</svn-mixedRevisions>
@@ -557,7 +557,7 @@
 							<svn-status>${svn.status}</svn-status>
 							<svn-specialStatus>${svn.specialStatus}</svn-specialStatus>
 
-							<SCM-Revision>${buildNumber}</SCM-Revision>
+							<SCM-Revision>${buildNumber}</SCM-Revision>-->
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -685,9 +685,9 @@
 					<configuration>
 						<type>runtime</type>
 						<properties>
-							<cargo.remote.username>${deploy.username}</cargo.remote.username>
+						<!--	<cargo.remote.username>${deploy.username}</cargo.remote.username>
 							<cargo.remote.password>${deploy.password}</cargo.remote.password>
-							<cargo.remote.uri>${deploy.url}</cargo.remote.uri>
+							<cargo.remote.uri>${deploy.url}</cargo.remote.uri>-->
 						</properties>
 					</configuration>
 					<deployables>
@@ -706,7 +706,7 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<configuration>
-					<url>${deploy.tomcat7.url}</url>
+					<!--<url>${deploy.tomcat7.url}</url>-->
 					<server>cargo-server</server>
 					<update>true</update>
 				</configuration>
@@ -774,7 +774,7 @@
 								<property name="web.source.output.directory"
 									value="${project.build.directory}/${project.build.finalName}" />
 								<echo message="formula.js 文件！" />
-								<copy
+								<!--<copy
 									file="${web.source.directory}/plugins/umeditor/dialogs/formula/formula.js"
 									todir="${web.source.output.directory}/plugins/umeditor/dialogs/formula/" />
 								<echo message="link.js 文件！" />
@@ -786,14 +786,14 @@
 									todir="${web.source.output.directory}/plugins/activiti/trace-viewer">
 									<fileset
 										dir="${web.source.directory}/plugins/activiti/trace-viewer" />
-								</copy>
+								</copy>-->
 								<echo message="成功处理压缩失败的js文件!" />
 
-									<copy
+									<!--<copy
 										todir="${web.source.output.directory}/plugins/umeditor/jsp">
 										<fileset
 											dir="${web.source.directory}/plugins/umeditor/jsp" />
-									</copy>
+									</copy>-->
 								<!-- 流程打包 -->
 								<!--  
 								<echo message="开始打包流程文件. 请耐心等待！" />
@@ -816,20 +816,20 @@
 								<property name="jsp.compress.out.directory"
 									value="${project.build.directory}/${project.build.finalName}/WEB-INF" />
 								<property name="jsp.compress.directory" value="src/main/webapp/WEB-INF" />
-								<apply executable="node" parallel="false" failonerror="true"
+								<!--<apply executable="node" parallel="false" failonerror="true"
 									dest="${jsp.compress.directory}">
 									<fileset dir="${jsp.compress.directory}" includes="**/*.jsp" />
 									<arg line=" ${uglifyjs}" />
-									<arg line=" --ascii" />
+									<arg line=" &#45;&#45;ascii" />
 									<arg line=" -o" />
 									<targetfile />
 									<srcfile />
 									<mapper type="regexp" from="^(.*)\.(jsp)$" to="\1-min.\2" />
-								</apply>
-								<move todir="${jsp.compress.out.directory}">
+								</apply>-->
+								<!--<move todir="${jsp.compress.out.directory}">
 									<fileset dir="${jsp.compress.directory}" includes="**/*.jsp" />
 									<mapper type="regexp" from="^(.*)-min\.(jsp)$" to="\1.\2" />
-								</move>
+								</move>-->
 								<echo message="成功用uglifyjs压缩 JSP文件中的js代码!" />
 							</target>
 						</configuration>
