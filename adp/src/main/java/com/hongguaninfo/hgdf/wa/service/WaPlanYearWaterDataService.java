@@ -20,6 +20,7 @@ import com.hongguaninfo.hgdf.wa.dao.WaPlanYearWaterDataDao;
 import com.hongguaninfo.hgdf.wa.entity.WaCompanyInfo;
 import com.hongguaninfo.hgdf.wa.entity.WaPlanYearWaterData;
 import com.hongguaninfo.hgdf.wa.utils.ExcelUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -66,6 +67,18 @@ public class WaPlanYearWaterDataService {
         basePage.setFilters(vo);
         Page<WaPlanYearWaterData> page = waPlanYearWaterDataDao.pageQuery(basePage);
         List<WaPlanYearWaterData> list = page.getResult();
+		for(WaPlanYearWaterData water : list) {
+			try {
+				float planYearResidentWater = StringUtils.isEmpty(water.getPlanYearResidentWwater()) ? 0 : Float.valueOf(water.getPlanYearResidentWwater());
+				float planYearNoResidentWater = StringUtils.isEmpty(water.getPlanYearNoResidentWater()) ? 0 : Float.valueOf(water.getPlanYearNoResidentWater());
+				float planYearEducationWater = StringUtils.isEmpty(water.getPlanYearEducationWater()) ? 0 : Float.valueOf(water.getPlanYearEducationWater());
+				float planYearSpecialTradeWater = StringUtils.isEmpty(water.getPlanYearSpecialTradeWater()) ? 0 : Float.valueOf(water.getPlanYearSpecialTradeWater());
+				float planYearWaterTotal = planYearResidentWater + planYearNoResidentWater + planYearEducationWater + planYearSpecialTradeWater;
+				water.setPlanYearWaterTotal(String.valueOf(planYearWaterTotal));
+			} catch (Exception e) {
+				LOG.info("error:" + e + "/" + water.getPlanWaterId());
+			}
+		}
         map.put("rows", list);
         map.put("total", page.getTotalCount());
         return list;

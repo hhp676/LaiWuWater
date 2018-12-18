@@ -10,8 +10,6 @@ package com.hongguaninfo.hgdf.wa.mapper;
 import com.hongguaninfo.hgdf.adp.core.base.BaseSqlMapper;
 import com.hongguaninfo.hgdf.wa.entity.WaCompanyInfo;
 
-import java.util.List;
-
 /**
  * : wa_company_info。 <br />
  * mapper 层 <br />
@@ -23,4 +21,6 @@ import java.util.List;
 public interface WaCompanyInfoMapper extends BaseSqlMapper {
 
     WaCompanyInfo getEntityByCode(WaCompanyInfo entity);
+
+    WaCompanyInfo checkOneList(WaCompanyInfo entity);
 }

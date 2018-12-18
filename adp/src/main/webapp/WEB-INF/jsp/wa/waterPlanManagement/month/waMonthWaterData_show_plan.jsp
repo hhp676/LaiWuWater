@@ -24,6 +24,7 @@
 				<th data-options="field:'planNoResidentWater',width:150" editor="{type:'textbox'}"><b>非居民用水</b></th>
 				<th data-options="field:'planEducationWater',width:150" editor="{type:'textbox'}"><b>教育用水</b></th>
 				<th data-options="field:'planSpecialTradeWater',width:150" editor="{type:'textbox'}"><b>特殊行业用水</b></th>
+				<th data-options="field:'planWaterTotal',width:150" editor="{type:'textbox'}"><b>合计</b></th>
 			</tr>
             </thead>
         </table>

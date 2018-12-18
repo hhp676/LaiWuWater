@@ -191,6 +191,32 @@ public class WaMonthWaterData extends BaseEntity {
      */
     private String indexBeyondAmount;
 
+    /**
+     * 计划用水合计
+     */
+    private String planWaterTotal;
+
+    /**
+     * 实际用水合计
+     */
+    private String actWaterTotal;
+
+    public String getPlanWaterTotal() {
+        return planWaterTotal;
+    }
+
+    public void setPlanWaterTotal(String planWaterTotal) {
+        this.planWaterTotal = planWaterTotal;
+    }
+
+    public String getActWaterTotal() {
+        return actWaterTotal;
+    }
+
+    public void setActWaterTotal(String actWaterTotal) {
+        this.actWaterTotal = actWaterTotal;
+    }
+
     public String getIndexName() {
         return indexName;
     }

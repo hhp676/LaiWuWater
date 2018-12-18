@@ -141,6 +141,13 @@
         </if>
     </select>
 
+	<!-- Query All  -->
+	<select id="checkOneList" parameterType="WaCompanyInfo" resultType="WaCompanyInfo">
+		select <include  refid="SQL_WA_COMPANY_INFO_COLUMN"/>
+		from WA_COMPANY_INFO wci
+		WHERE wci.COMPANY_NAME_ = #{companyName} AND wci.COMPANY_CODE_ = #{companyCode}
+	</select>
+
     <!-- Statistical line   -->
     <select id="getListCount" parameterType="WaCompanyInfo" resultType="int">
         select count(

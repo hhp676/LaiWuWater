@@ -228,8 +228,9 @@ public class WaCompanyInfoService {
 					companyEntity.setCompanyName(ExcelUtil.getCellValue(row.getCell(1)));
 					WaCompanyInfo checkEntity = new WaCompanyInfo();
 					checkEntity.setCompanyName(companyEntity.getCompanyName());
+					checkEntity.setCompanyCode(companyEntity.getCompanyCode());
 					//判断是否已存在单位信息
-					if(waCompanyInfoDao.getList(checkEntity).size() > 0 ){
+					if(waCompanyInfoDao.checkOneList(checkEntity) != null ){
 						return  "单位名称 ["+companyEntity.getCompanyName()+"]已经存在，请重新操作";
 					}
 

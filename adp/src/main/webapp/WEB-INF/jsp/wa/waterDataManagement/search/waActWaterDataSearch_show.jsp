@@ -23,6 +23,7 @@
 				<th data-options="field:'actNoResidentWater',width:150" editor="{type:'textbox'}"><b>实际非居民用水</b></th>
 				<th data-options="field:'actEducationWater',width:150" editor="{type:'textbox'}"><b>实际教育用水</b></th>
 				<th data-options="field:'actSpecialTradeWater',width:150" editor="{type:'textbox'}"><b>实际特殊行业用水</b></th>
+				<th data-options="field:'actWaterTotal',width:150" editor="{type:'textbox'}"><b>合计</b></th>
             </tr>
             </thead>
         </table>

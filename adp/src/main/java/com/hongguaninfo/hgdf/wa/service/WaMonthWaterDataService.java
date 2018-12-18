@@ -97,6 +97,19 @@ public class WaMonthWaterDataService {
 		basePage.setFilters(vo);
 		Page<WaMonthWaterData> page = waMonthWaterDataDao.pagePlanDataQuery(basePage);
 		List<WaMonthWaterData> list = getDataList(page);
+		for(WaMonthWaterData water : list){
+			try {
+				float planResidentWater = StringUtils.isEmpty(water.getPlanResidentWater()) ? 0 : Float.valueOf(water.getPlanResidentWater());
+				float planNoResidentWater = StringUtils.isEmpty(water.getPlanNoResidentWater()) ? 0 : Float.valueOf(water.getPlanNoResidentWater());
+				float planEducationWater = StringUtils.isEmpty(water.getPlanEducationWater()) ? 0 : Float.valueOf(water.getPlanEducationWater());
+				float planSpecialTradeWater = StringUtils.isEmpty(water.getPlanSpecialTradeWater()) ? 0 : Float.valueOf(water.getPlanSpecialTradeWater());
+				float planWaterTotal = planResidentWater + planNoResidentWater + planEducationWater + planSpecialTradeWater;
+				water.setPlanWaterTotal(String.valueOf(planWaterTotal));
+			}catch (Exception e){
+				LOG.info("error:" + e+ "/"+water.getMonthWaterId());
+			}
+
+		}
 		map.put("rows", list);
 		map.put("total", page.getTotalCount());
 		return list;
@@ -117,6 +130,20 @@ public class WaMonthWaterDataService {
 		basePage.setFilters(vo);
 		Page<WaMonthWaterData> page = waMonthWaterDataDao.pageActDataQuery(basePage);
 		List<WaMonthWaterData> list = getDataList(page);
+		for(WaMonthWaterData water : list){
+			try {
+				float actResidentWater = StringUtils.isEmpty(water.getActResidentWater()) ? 0 : Float.valueOf(water.getActResidentWater());
+				float actNoResidentWater = StringUtils.isEmpty(water.getActNoResidentWater()) ? 0 : Float.valueOf(water.getActNoResidentWater());
+				float actEducationWater = StringUtils.isEmpty(water.getActEducationWater()) ? 0 : Float.valueOf(water.getActEducationWater());
+				float actSpecialTradeWater = StringUtils.isEmpty(water.getActSpecialTradeWater()) ? 0 : Float.valueOf(water.getActSpecialTradeWater());
+				float actWaterTotal = actResidentWater + actNoResidentWater + actEducationWater + actSpecialTradeWater;
+				water.setActWaterTotal(String.valueOf(actWaterTotal));
+			}catch (Exception e){
+				LOG.info("error:" + e+ "/"+water.getMonthWaterId());
+			}
+
+		}
+
 		map.put("rows", list);
 		map.put("total", page.getTotalCount());
 		return list;
@@ -454,7 +481,6 @@ public class WaMonthWaterDataService {
 
         waMonthWaterDataDao.update(waMonthWaterData);
 	}	
-	
 
 	/**
 	 * REMARK

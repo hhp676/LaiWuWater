@@ -90,8 +90,21 @@ public class WaPlanYearWaterData extends BaseEntity {
      */
     private String planYearSpecialTradeWater;
 
+    /**
+     * 年计划用水合计
+     */
+    private String planYearWaterTotal;
+
     public String getPlanYearResidentWwater() {
         return planYearResidentWwater;
+    }
+
+    public String getPlanYearWaterTotal() {
+        return planYearWaterTotal;
+    }
+
+    public void setPlanYearWaterTotal(String planYearWaterTotal) {
+        this.planYearWaterTotal = planYearWaterTotal;
     }
 
     public void setPlanYearResidentWwater(String planYearResidentWwater) {

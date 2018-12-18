@@ -14,6 +14,7 @@
 			pageList="${defaultPageList}">
        	 	<thead>
             <tr>
+				<th data-options="field:'ck',checkbox:true"></th>
 				<th data-options="field:'monthWaterId',width:0, hidden:true"><b></b></th>
 				<th data-options="field:'companyCode',width:80" editor="{type:'textbox'}"><b>节水代码</b></th>
 				<th data-options="field:'companyName',width:150" editor="{type:'textbox'}"><b>单位名称</b></th>
@@ -23,6 +24,7 @@
 				<th data-options="field:'actNoResidentWater',width:150" editor="{type:'textbox'}"><b>实际非居民用水</b></th>
 				<th data-options="field:'actEducationWater',width:150" editor="{type:'textbox'}"><b>实际教育用水</b></th>
 				<th data-options="field:'actSpecialTradeWater',width:150" editor="{type:'textbox'}"><b>实际特殊行业用水</b></th>
+				<th data-options="field:'actWaterTotal',width:150" editor="{type:'textbox'}"><b>合计</b></th>
 			</tr>
             </thead>
         </table>
